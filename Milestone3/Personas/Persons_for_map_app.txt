@@ -1,0 +1,37 @@
+Personas for Map App
+
+Name: Samantha
+Age: 19
+Gender: Female
+Location: Monmouth, OR
+Occupation: Full-time college student
+Income: Low-income, living off of financial aid and part-time jobs
+Education: Attending a public university, majoring in education
+Hobbies: Reading, volunteering at local schools and community organizations
+Living situation: Shares a small apartment with roommates, struggles to make ends meet
+Goals: To graduate with a teaching degree and secure a stable job to support herself and her family
+Challenges: Balancing schoolwork with a part-time job, affording basic necessities such as food and textbooks, and navigating the challenges of being a first-generation college student.
+
+Name: John
+Age: 42
+Gender: Male
+Occupation: Unemployed
+Income: None, homeless
+Education: High school diploma
+Hobbies: None
+Living situation: Homeless, sleeps on the streets or in shelters
+Goals: To find stable housing and employment, to rebuild relationships with his family
+Challenges: Lack of stable housing, lack of steady income, mental health issues, dealing with the stigma associated with being homeless, and access to basic necessities such as food, clothing and medical care
+Family: Has a estranged family, he lost contact with them when he became homeless.
+
+Name: Rachel
+Age: 30
+Gender: Female
+Occupation: Charity worker
+Income: Middle class
+Education: Bachelor's degree in social work
+Hobbies: Volunteering at local community organizations, reading about social issues, hiking
+Living situation: Lives alone in a small apartment, but often works long hours and travels for her job
+Goals: To make a positive impact on the lives of people in need and to raise awareness about social issues
+Challenges: Balancing the emotional demands of her job with her own well-being, navigating the bureaucracy of charity organizations, and fundraising to support the charity's programs
+Family: Single, but has a close network of friends who also work in the charity sector.
