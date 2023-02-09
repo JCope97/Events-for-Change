@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewData["Title"] = "FAQ";
+}
+
+<div class="faq">Frequently Asked Questions</div>
+
+<br />
+
+@*Used https://getbootstrap.com/docs/5.0/components/accordion/ as a template.*@
+
+<div class="category1" id="category1">
+    Getting Started
+</div>
+<br />
+<div class="accordion1" id="accordionCategory1">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="questionOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                What is this website used for?
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="questionOne" data-bs-parent="#accordionCategory1">
+            <div class="accordion-body">
+                This website is to be used as a way for people within our communities to have a
+                centralized location to find out more information about various events and places of
+                necessity near them. It will provide people with information about local events, places,
+                and organizations to help deal with problems that people struggle with on a daily basis.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="questionTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                How do I view events near me?
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="questionTwo" data-bs-parent="#accordionCategory1">
+            <div class="accordion-body">
+                To view events near you, first, navigate to the event page. You will then be taken
+                to a page that will list all the events near you based on your location. In order to
+                narrow down the events showing, there are various filters such as type of event or place or
+                the organization that is holding the event that can be used to filter.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="questionSix">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                How do I add an event?
+            </button>
+        </h2>
+        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="questionSix" data-bs-parent="#accordionCategory1">
+            <div class="accordion-body">
+                For the Map App, only organizations are able to add events to the website. If you
+                are an organization, to create an event, begin by logging in to your account. Then, under the 
+                profile page for the organization, there will be a button to create an event.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="questionThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                What is the map used for?
+            </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="questionThree" data-bs-parent="#accordionCategory1">
+            <div class="accordion-body">
+                The map is for a user to better understand the location of an event or place of interest
+                and is a tool for them to gain more information about the location compared to their own by being able
+                to visualize the location.
+            </div>
+        </div>
+    </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="questionFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    How do I navigate on the map?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="questionFour" data-bs-parent="#accordionCategory1">
+                <div class="accordion-body">
+                    This website uses GoogleMaps for their map feature. So, the basic controls for navigating
+                    on the map are the same as on GoogleMaps itself. 
+                    <br />
+                    To look for events on the map, the map will focus and be centralized on your
+                    location. Events and places will then be visible on the map for you to 
+                    view and look into further.
+                </div>
+            </div>
+        </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="questionFive">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                I am a part of an organization. How do I create a profile for the organization?
+            </button>
+        </h2>
+        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="questionFive" data-bs-parent="#accordionCategory1">
+            <div class="accordion-body">
+                To create a profile as an organization, first go to the create account page.
+                Then create an account and make sure to sign up as an organization and not a user.
+                After this, the account will be looked over by the admins or community leaders.
+                Once approved, you will then be registered as an organization and have the ability to 
+                log in as an organization and create events.
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+<div class="category2" id="category2">
+    Account Information
+</div>
+<br />
+
+<div class="accordion2" id="accordionCategory2">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="a2questionOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2collapseOne" aria-expanded="false" aria-controls="a2collapseOne">
+                How do I create an account or login?
+            </button>
+        </h2>
+        <div id="a2collapseOne" class="accordion-collapse collapse" aria-labelledby="a2questionOne" data-bs-parent="#accordionCategory2">
+            <div class="accordion-body">
+                To create an account, click on the create account button located in the header above. Then fill out the forms as needed and register for an account.
+                <br />
+                To login to an already existing account, click on the login button located in the header above. Then fill out the required forms and submit to sign in.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="a2questionTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2collapseTwo" aria-expanded="false" aria-controls="a2collapseTwo">
+                Why should I create an account?
+            </button>
+        </h2>
+        <div id="a2collapseTwo" class="accordion-collapse collapse" aria-labelledby="a2questionTwo" data-bs-parent="#accordionCategory2">
+            <div class="accordion-body">
+                While it is not required to have an account to use the main features of the Map App, if you do register for an account, there is an opportunity to save events that 
+                you are interested in for future reference to maintain organization. Without an account, saving information about places or events occurring in the future will
+                not be available.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="a2questionThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2collapseThree" aria-expanded="false" aria-controls="a2collapseThree">
+                What do I do if I forgot my login information?
+            </button>
+        </h2>
+        <div id="a2collapseThree" class="accordion-collapse collapse" aria-labelledby="a2questionThree" data-bs-parent="#accordionCategory2">
+            <div class="accordion-body">
+                If you do not remember your login information, click on the Forgot my username or password link located below the login forms on the login page and follow
+                the instructions.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br />
+<br />
+
+<div class="category4" id="category4">
+    About Us
+</div>
+
+<br />
+
+<div class="accordion4" id="accordionCategory4">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="a4questionOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a4collapseOne" aria-expanded="false" aria-controls="a4collapseOne">
+                Who are the creators?
+            </button>
+        </h2>
+        <div id="a4collapseOne" class="accordion-collapse collapse" aria-labelledby="a4questionOne" data-bs-parent="#accordionCategory4">
+            <div class="accordion-body">
+                 This website was created by Western Oregon University computer science students Antonia Morales, Cooper Bodman, Justin Cope, and Jacob Limas.
+                 They are all seniors completing their senior capstone project for Computer Science.
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="a4questionTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a4collapseTwo" aria-expanded="false" aria-controls="a4collapseTwo">
+                Why was this website created?
+            </button>
+        </h2>
+        <div id="a4collapseTwo" class="accordion-collapse collapse" aria-labelledby="a4questionTwo" data-bs-parent="#accordionCategory4">
+            <div class="accordion-body">
+                This website was developed for the Western Oregon University Computer Science senior capstone project.
+                The website was created to aid those within our communities that do not have access to various necessities
+                and to inform users about where to find various necessities and events within their area.
+                <br />
+                <br />
+                Our website will focus on giving people more
+                access to places of need, show events with free or discounted items of necessity, and work to improve users'
+                lives by solving problems related to common struggles.
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+</div>
