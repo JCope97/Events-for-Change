@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using OtterProductions_CapstoneProject.Models;
 using Microsoft.AspNetCore.Identity;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
+using OtterProductions_CapstoneProject.Data;
 
 namespace OtterProductions_CapstoneProject;
 
@@ -10,10 +10,13 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
+        var connectionString = builder.Configuration.GetConnectionString("AuthenticationConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
         builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
+        builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer(
+            builder.Configuration.GetConnectionString("MapAppConnection")
+           ));
         builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
         // Add services to the container.
