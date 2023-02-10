@@ -33,3 +33,16 @@ body {
     width: 75%;
 }
 
+.contactUsTitle, .whatInfoTitle, .useInfoTitle {
+    font-size: x-large;
+}
+
+.privacyHeader {
+    font-size: xx-large;
+    font-weight: bold;
+
+}
+
+.whatInfoStatement, .useInfoStatement, .contactUsStatement {
+    width: 70%;
+}
