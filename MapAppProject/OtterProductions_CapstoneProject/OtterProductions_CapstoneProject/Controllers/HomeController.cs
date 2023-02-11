@@ -32,6 +32,11 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult FAQ()
+    {
+        return View();
+    }
+
     public IActionResult Greeting()
     {
         //bool isAdmin = User.IsInRole("Admin");

@@ -9,7 +9,7 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #D3D3D3;
 }
 
 html {
@@ -21,3 +21,28 @@ body {
   margin-bottom: 60px;
 }
 
+.faq {
+    font-size:xx-large;
+}
+
+.category1, .category2, .category3, .category4 {
+    font-size:large;
+}
+
+.accordion2, .accordion1, .accordion4 {
+    width: 75%;
+}
+
+.contactUsTitle, .whatInfoTitle, .useInfoTitle {
+    font-size: x-large;
+}
+
+.privacyHeader {
+    font-size: xx-large;
+    font-weight: bold;
+
+}
+
+.whatInfoStatement, .useInfoStatement, .contactUsStatement {
+    width: 70%;
+}
