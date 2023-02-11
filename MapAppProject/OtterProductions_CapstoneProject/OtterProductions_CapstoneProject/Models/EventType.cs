@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OtterProductions_CapstoneProject.Models;
 
+[Table("EventType")]
 public partial class EventType
 {
     [Key]
@@ -15,4 +16,7 @@ public partial class EventType
     [Column("EventType")]
     [StringLength(255)]
     public string? EventType1 { get; set; }
+
+    [InverseProperty("Organzation")]
+    public virtual ICollection<Event> Events { get; } = new List<Event>();
 }

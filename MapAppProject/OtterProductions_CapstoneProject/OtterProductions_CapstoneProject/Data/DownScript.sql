@@ -1,12 +1,12 @@
-ALTER TABLE [Events] DROP CONSTRAINT [Fk Organzation ID];
-ALTER TABLE [Events] DROP CONSTRAINT [Fk EventTypes ID];
-ALTER TABLE [UserEventList] DROP CONSTRAINT [Fk User ID];
+ALTER TABLE [Event] DROP CONSTRAINT [Fk Organzation ID];
+ALTER TABLE [Event] DROP CONSTRAINT [Fk EventType ID];
+ALTER TABLE [UserEventList] DROP CONSTRAINT [Fk MapAppUser ID];
 ALTER TABLE [UserEventList] DROP CONSTRAINT [Fk Event ID];
 
 
 
-DROP TABLE [Events];
+DROP TABLE [Event];
 DROP TABLE [UserEventList];
 DROP TABLE [Organzation];
-DROP TABLE [Users];
-DROP TABLE [EventTypes];
+DROP TABLE [MapAppUser];
+DROP TABLE [EventType];

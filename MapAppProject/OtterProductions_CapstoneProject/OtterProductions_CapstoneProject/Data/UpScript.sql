@@ -1,10 +1,10 @@
-CREATE TABLE [Events] (
+CREATE TABLE [Event] (
   [ID] int PRIMARY KEY IDENTITY(1, 1),
   [OrganzationID] int NOT NULL,
   [EventName] nvarchar(255) NOT NULL,
   [EventLocation] nvarchar(255) NOT NULL,
-  [EventTypesID] int NOT NULL,
-  [EventDiscreption] nvarchar(255) NOT NULL
+  [EventTypeID] int NOT NULL,
+  [EventDescription] nvarchar(255) NOT NULL
 );
 
 
@@ -16,35 +16,35 @@ CREATE TABLE [Organzation] (
   [OrganzationPicture] VARBINARY(MAX)
 );
 
-CREATE TABLE [EventTypes] (
+CREATE TABLE [EventType] (
   [ID] int PRIMARY KEY IDENTITY(1, 1),
   [EventType] nvarchar(255)
 );
 
-CREATE TABLE [Users] (
+CREATE TABLE [MapAppUser] (
   [ID] int PRIMARY KEY IDENTITY(1, 1)
 );
 
 CREATE TABLE [UserEventList] (
   [ID] int PRIMARY KEY IDENTITY(1, 1),
-  [UserID] int NOT NULL,
+  [MapAppUserID] int NOT NULL,
   [EventID] int NOT NULL
 );
 
-ALTER TABLE [Events] ADD CONSTRAINT [Fk Organzation ID]
+ALTER TABLE [Event] ADD CONSTRAINT [Fk Organzation ID]
   FOREIGN KEY ([OrganzationID]) REFERENCES [Organzation] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
---ALTER TABLE [Events] ADD CONSTRAINT ([EventTypesID]) REFERENCES [EventTypes] ([ID]);
+--ALTER TABLE [Events] ADD CONSTRAINT ([EventTypeID]) REFERENCES [EventType] ([ID]);
 
-ALTER TABLE [Event] ADD CONSTRAINT [Fk EventTypes ID]
-  FOREIGN KEY ([OrganzationID]) REFERENCES [EventTypes] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [Event] ADD CONSTRAINT [Fk EventType ID]
+  FOREIGN KEY ([OrganzationID]) REFERENCES [EventType] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
---ALTER TABLE [UserEventList] ADD CONSTRAINT ([UserID]) REFERENCES [Users] ([ID]);
+--ALTER TABLE [UserEventList] ADD CONSTRAINT ([MapAppUserID]) REFERENCES [MapAppUsers] ([ID]);
 
-ALTER TABLE [UserEventList] ADD CONSTRAINT [Fk User ID]
-  FOREIGN KEY ([UserID]) REFERENCES [Users] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [UserEventList] ADD CONSTRAINT [Fk MapAppUser ID]
+  FOREIGN KEY ([MapAppUserID]) REFERENCES [MapAppUser] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --ALTER TABLE [UserEventList] ADD CONSTRAINT ([EventID]) REFERENCES [Events] ([ID]);
 
 ALTER TABLE [UserEventList] ADD CONSTRAINT [Fk Event ID]
-  FOREIGN KEY ([EventID]) REFERENCES [Events] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  FOREIGN KEY ([EventID]) REFERENCES [Event] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;

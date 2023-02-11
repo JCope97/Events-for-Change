@@ -20,9 +20,9 @@ public partial class MapAppDbContext : DbContext
 
     public virtual DbSet<EventType> EventTypes { get; set; }
 
-    public virtual DbSet<Organzation> Organzations { get; set; }
+    public virtual DbSet<MapAppUser> MapAppUsers { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<Organzation> Organzations { get; set; }
 
     public virtual DbSet<UserEventList> UserEventLists { get; set; }
 
@@ -33,31 +33,43 @@ public partial class MapAppDbContext : DbContext
     {
         modelBuilder.Entity<Event>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Events__3214EC2754C62FC4");
+            entity.HasKey(e => e.Id).HasName("PK__Event__3214EC2726B95BDA");
 
             entity.HasOne(d => d.Organzation).WithMany(p => p.Events)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk EventType ID");
+
+            entity.HasOne(d => d.OrganzationNavigation).WithMany(p => p.Events)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fk Organzation ID");
         });
 
         modelBuilder.Entity<EventType>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__EventTyp__3214EC27BCBCF9E3");
+            entity.HasKey(e => e.Id).HasName("PK__EventTyp__3214EC27C715A1DA");
+        });
+
+        modelBuilder.Entity<MapAppUser>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__MapAppUs__3214EC27085551E5");
         });
 
         modelBuilder.Entity<Organzation>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Organzat__3214EC27C1074F9F");
-        });
-
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC27C1068E42");
+            entity.HasKey(e => e.Id).HasName("PK__Organzat__3214EC27E4991DB4");
         });
 
         modelBuilder.Entity<UserEventList>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UserEven__3214EC27CA176C9E");
+            entity.HasKey(e => e.Id).HasName("PK__UserEven__3214EC27DEE07ADF");
+
+            entity.HasOne(d => d.Event).WithMany(p => p.UserEventLists)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk Event ID");
+
+            entity.HasOne(d => d.MapAppUser).WithMany(p => p.UserEventLists)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk MapAppUser ID");
         });
 
         OnModelCreatingPartial(modelBuilder);

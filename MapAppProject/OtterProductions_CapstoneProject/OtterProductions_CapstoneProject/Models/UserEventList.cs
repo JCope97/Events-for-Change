@@ -13,9 +13,17 @@ public partial class UserEventList
     [Column("ID")]
     public int Id { get; set; }
 
-    [Column("UserID")]
-    public int UserId { get; set; }
+    [Column("MapAppUserID")]
+    public int MapAppUserId { get; set; }
 
     [Column("EventID")]
     public int EventId { get; set; }
+
+    [ForeignKey("EventId")]
+    [InverseProperty("UserEventLists")]
+    public virtual Event Event { get; set; } = null!;
+
+    [ForeignKey("MapAppUserId")]
+    [InverseProperty("UserEventLists")]
+    public virtual MapAppUser MapAppUser { get; set; } = null!;
 }

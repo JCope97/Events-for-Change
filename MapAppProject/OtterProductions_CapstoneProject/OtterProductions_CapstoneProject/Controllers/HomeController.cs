@@ -39,13 +39,13 @@ public class HomeController : Controller
 
     public IActionResult Greeting()
     {
-        //bool isAdmin = User.IsInRole("Admin");
-        //bool isAuthenticated = User.Identity.IsAuthenticated;
-        //string name = User.Identity.Name;
-        //string authType = User.Identity.AuthenticationType;
-        //string id = _userManager.GetUserId(User);
+        bool isAdmin = User.IsInRole("Admin");
+        bool isAuthenticated = User.Identity.IsAuthenticated;
+        string name = User.Identity.Name;
+        string authType = User.Identity.AuthenticationType;
+        string id = _userManager.GetUserId(User);
 
-        //ViewBag.Message = $"User {name} is authenticated? {isAuthenticated} using type {authType} and is an Admin? {isAdmin} ID from Identity {id}";
+        ViewBag.Message = $"User {name} is authenticated? {isAuthenticated} using type {authType} and is an Admin? {isAdmin} ID from Identity {id}";
         return View();
     }
 

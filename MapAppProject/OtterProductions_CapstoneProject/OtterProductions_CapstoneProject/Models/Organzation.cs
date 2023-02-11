@@ -24,6 +24,6 @@ public partial class Organzation
 
     public byte[]? OrganzationPicture { get; set; }
 
-    [InverseProperty("Organzation")]
+    [InverseProperty("OrganzationNavigation")]
     public virtual ICollection<Event> Events { get; } = new List<Event>();
 }
