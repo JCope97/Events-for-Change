@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Event>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Featured Event Of The Day</h1>
+</div>
+
+<table class="table table-bordered" style="padding:70%">
+    <tr>
+        <th>
+            Event Name
+        </th>
+        <th>
+            Event Location
+        </th>
+        <th>
+            Event Description
+        </th>
+    </tr>
+    @foreach (var e in Model)
+    {
+        <tr>
+            <td>
+                @e.EventName
+            </td>
+            <td>
+                @e.EventLocation
+            </td>
+            <td>
+                @e.EventDescription
+            </td>
+        </tr>
+    }
+</table>

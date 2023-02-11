@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using OtterProductions_CapstoneProject.Areas.Identity.Data;
+using OtterProductions_CapstoneProject.Data;
+
 namespace OtterProductions_CapstoneProject;
 
 public class Program
@@ -5,9 +10,18 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        var connectionString = builder.Configuration.GetConnectionString("AuthenticationConnection") ?? throw new InvalidOperationException("Connection string 'AuthenticationConnection' not found.");
+
+        builder.Services.AddDbContext<AuthenticationDbContext>(options => options.UseSqlServer(connectionString));
+
+        builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer(
+            builder.Configuration.GetConnectionString("MapAppConnection")
+           ));
+        builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AuthenticationDbContext>();
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+        builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
         var app = builder.Build();
 
@@ -23,12 +37,14 @@ public class Program
         app.UseStaticFiles();
 
         app.UseRouting();
-
+     
+        app.UseAuthentication();    
         app.UseAuthorization();
 
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
+        app.MapRazorPages();
 
         app.Run();
     }
