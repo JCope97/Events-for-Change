@@ -55,7 +55,11 @@ public class HomeController : Controller
         return View(events);
     }
 
-
+    public IActionResult Eventpage()
+    {
+        IEnumerable<Event> events = _context.Events.ToList();
+        return View(events);
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
