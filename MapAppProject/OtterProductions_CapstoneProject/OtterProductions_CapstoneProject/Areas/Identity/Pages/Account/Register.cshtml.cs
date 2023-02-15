@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
+using OtterProductions_CapstoneProject.Data;
+using OtterProductions_CapstoneProject.Models;
 
 namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
 {
@@ -30,13 +32,16 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly MapAppDbContext _mapAppDbContext;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            MapAppDbContext context)
+          
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +49,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _mapAppDbContext = context;
         }
 
         /// <summary>
@@ -71,6 +77,16 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            // user added fields
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "First name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Last name")]
+            public string LastName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -114,7 +130,8 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -122,6 +139,15 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                    
+                    // create our own user
+                    MapAppUser ma = new MapAppUser
+                    {
+                        AspnetIdentityId = user.Id
+                   
+                    };
+                    _mapAppDbContext.Add(ma);   
+                    await _mapAppDbContext.SaveChangesAsync();
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

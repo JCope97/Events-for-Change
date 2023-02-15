@@ -12,8 +12,8 @@ using OtterProductions_CapstoneProject.Areas.Identity.Data;
 namespace OtterProductionsCapstoneProject.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    [Migration("20230215005911_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230215072459_AddedFirstAndLastNameToAuthentication")]
+    partial class AddedFirstAndLastNameToAuthentication
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -180,6 +180,14 @@ namespace OtterProductionsCapstoneProject.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
