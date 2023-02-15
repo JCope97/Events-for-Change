@@ -22,7 +22,8 @@ CREATE TABLE [EventType] (
 );
 
 CREATE TABLE [MapAppUser] (
-  [ID] int PRIMARY KEY IDENTITY(1, 1)
+  [ID] int PRIMARY KEY IDENTITY(1, 1),
+  [ASPNetIdentityId] NVARCHAR(450)
 );
 
 CREATE TABLE [UserEventList] (
