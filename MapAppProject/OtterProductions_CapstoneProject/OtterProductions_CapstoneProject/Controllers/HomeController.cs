@@ -39,23 +39,8 @@ public class HomeController : Controller
 
     public IActionResult Greeting()
     {
-        bool isAdmin = User.IsInRole("Admin");
-        bool isAuthenticated = User.Identity.IsAuthenticated;
-        string name = User.Identity.Name;
-        string authType = User.Identity.AuthenticationType;
-        string id = _userManager.GetUserId(User);
-
-        ViewBag.Message = $"User {name} is authenticated? {isAuthenticated} using type {authType} and is an Admin? {isAdmin} ID from Identity {id}";
         return View();
     }
-
-    public IActionResult Event()
-    {
-        IEnumerable<Event> events = _context.Events.ToList();
-        return View(events);
-    }
-
-
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
