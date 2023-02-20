@@ -14,12 +14,33 @@ namespace OtterProductions_CapstoneProject.Controllers
         private readonly MapAppDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
+<<<<<<< HEAD
         public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _context = ctx;
             _userManager = userManager;
         }
+=======
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Index(Location mapLocation)
+    {
+
+        return RedirectToAction("Mappage", "Map", mapLocation);
+
+    }
+   
+    [Authorize]
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+>>>>>>> dev
 
         public IActionResult Index()
         {
