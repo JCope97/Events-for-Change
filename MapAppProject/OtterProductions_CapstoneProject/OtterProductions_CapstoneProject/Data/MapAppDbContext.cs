@@ -15,6 +15,7 @@ public partial class MapAppDbContext : DbContext
         : base(options)
     {
     }
+    //Get information
 
     public virtual DbSet<Event> Events { get; set; }
 

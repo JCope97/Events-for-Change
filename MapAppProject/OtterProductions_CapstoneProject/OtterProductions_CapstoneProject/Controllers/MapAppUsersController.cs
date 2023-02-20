@@ -9,20 +9,19 @@ using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
 using Microsoft.AspNetCore.Authorization;
 
+//Controller for MapAppUsers
 namespace OtterProductions_CapstoneProject.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class MapAppUsersController : Controller
     {
         private readonly MapAppDbContext _context;
-
         public MapAppUsersController(MapAppDbContext context)
         {
             _context = context;
         }
 
         // GET: MapAppUsers (class example)
-
         public async Task<IActionResult> Index()
         {
             return View(await _context.MapAppUsers.ToListAsync());
@@ -133,9 +132,8 @@ namespace OtterProductions_CapstoneProject.Controllers
             {
                 return NotFound();
             }
-
             return View(mapAppUser);
-        }
+      }
 
         // POST: MapAppUsers/Delete/5 (class example)
         [HttpPost, ActionName("Delete")]
