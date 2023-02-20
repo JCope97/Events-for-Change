@@ -14,10 +14,19 @@ namespace OtterProductions_CapstoneProject.Models
     {
         [Key]
         [Column("ID")]
+        [Required]
         public int Id { get; set; }
 
-        public string AspnetIdentityId { get; set; }  
+        
+        [StringLength(50)]
+        public string AspnetIdentityId { get; set; }
+
+        
+        [StringLength(50)]
         public string FirstName { get; set; }
+
+        
+        [StringLength(50)]
         public string LastName { get; set; }
 
         [InverseProperty("MapAppUser")]

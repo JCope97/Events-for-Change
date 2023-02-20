@@ -9,6 +9,7 @@
 <table class="table table-striped table-sm">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.AspnetIdentityId)
             </th>
@@ -25,6 +26,7 @@
         @foreach (var item in Model)
         {
             <tr>
+                @* Got this line for checkboxes from https://www.c-sharpcorner.com/article/how-to-delete-multiple-rows-using-checkbox-in-mvc-5/*@
                 <td><input type="checkbox" name="ID" value="@item.AspnetIdentityId" class="custom-checkbox chkCheckBoxId" /></td>
                 <td>
                     @Html.DisplayFor(modelItem => item.AspnetIdentityId)

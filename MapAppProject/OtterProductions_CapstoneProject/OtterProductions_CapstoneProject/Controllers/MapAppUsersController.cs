@@ -119,6 +119,8 @@ namespace OtterProductions_CapstoneProject.Controllers
         //}
 
         // GET: MapAppUsers/Delete/5 (class example)
+
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
