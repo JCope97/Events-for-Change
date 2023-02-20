@@ -87,7 +87,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
-            [DataType(DataType.Text)]
+            [DataType(DataType.PhoneNumber)]
             [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
             /// <summary>
