@@ -1,8 +1,15 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.ModelBinding
+@using Microsoft.CodeAnalysis.VisualBasic.Syntax
+@model Location
+@{
     ViewData["Title"] = "Map Page";
 }
 
-<h3>My Google Maps Demo</h3>
+
+<input id="location" type="text" placeholder="@Model.location" value="@Model.location">
+
+
+<input id="submit" type="button" value="Submit" class="btn btn-primary"></>
 <!--The div element for the map -->
 <div id="map"></div>
 

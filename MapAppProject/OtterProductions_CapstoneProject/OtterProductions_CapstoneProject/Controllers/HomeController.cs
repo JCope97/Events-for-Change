@@ -25,6 +25,14 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    [HttpPost]
+    public IActionResult Index(Location mapLocation)
+    {
+
+        return RedirectToAction("Mappage", "Map", mapLocation);
+
+    }
    
     [Authorize]
     public IActionResult Privacy()

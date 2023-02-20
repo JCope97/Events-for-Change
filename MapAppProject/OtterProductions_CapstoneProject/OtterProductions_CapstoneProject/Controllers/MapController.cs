@@ -10,9 +10,16 @@ namespace OtterProductions_CapstoneProject.Controllers
 {
     public class MapController : Controller
     {
-        public IActionResult Mappage()
+
+        //public IActionResult Mappage()
+        //{
+        //    return View();
+        //}
+
+        public IActionResult Mappage(Location mapLocation)
         {
-            return View();
+            return View(mapLocation);
+            
         }
     }
 }
