@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OtterProductionsCapstoneProject.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedFirstAndLastNameToAuthentication : Migration
+    public partial class AddFirstAndLastNameToDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

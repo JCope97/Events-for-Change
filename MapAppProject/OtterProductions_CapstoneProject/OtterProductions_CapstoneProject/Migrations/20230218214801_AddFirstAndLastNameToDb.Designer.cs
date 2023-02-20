@@ -12,8 +12,8 @@ using OtterProductions_CapstoneProject.Areas.Identity.Data;
 namespace OtterProductionsCapstoneProject.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    [Migration("20230215072459_AddedFirstAndLastNameToAuthentication")]
-    partial class AddedFirstAndLastNameToAuthentication
+    [Migration("20230218214801_AddFirstAndLastNameToDb")]
+    partial class AddFirstAndLastNameToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

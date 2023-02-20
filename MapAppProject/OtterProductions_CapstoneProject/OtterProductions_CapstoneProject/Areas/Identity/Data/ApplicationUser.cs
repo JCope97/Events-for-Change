@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace OtterProductions_CapstoneProject.Areas.Identity.Data;
-
-// Add profile data for application users by adding properties to the ApplicationUser class
-public class ApplicationUser : IdentityUser
+namespace OtterProductions_CapstoneProject.Areas.Identity.Data
 {
-    [PersonalData]
-    [Column(TypeName = "nvarchar(50)")]
-    public string FirstName { get; set; }
+    public class ApplicationUser : IdentityUser
+    {
+        [PersonalData]
+        [Column(TypeName = "nvarchar(50)")]
+        public string FirstName { get; set; }
 
-    [PersonalData]
-    [Column(TypeName = "nvarchar(50)")]
-    public string LastName { get; set; }
+        [PersonalData]
+        [Column(TypeName = "nvarchar(50)")]
+        public string LastName { get; set; }
+    }
 }
-
