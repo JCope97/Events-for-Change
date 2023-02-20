@@ -22,7 +22,11 @@ CREATE TABLE [EventType] (
 );
 
 CREATE TABLE [MapAppUser] (
-  [ID] int PRIMARY KEY IDENTITY(1, 1)
+  [ID] int PRIMARY KEY IDENTITY(1, 1),
+  [AspnetIdentityId] nvarchar(50),
+  [FirstName] nvarchar(50),
+  [LastName] nvarchar(50)
+
 );
 
 CREATE TABLE [UserEventList] (
