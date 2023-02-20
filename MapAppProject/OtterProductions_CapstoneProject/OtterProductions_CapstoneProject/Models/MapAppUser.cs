@@ -16,9 +16,9 @@ namespace OtterProductions_CapstoneProject.Models
         [Column("ID")]
         public int Id { get; set; }
 
-        //public string AspnetIdentityId { get; set; }  
-        //public string FirstName { get; set; }
-        //public string LastName { get; set; }
+        public string AspnetIdentityId { get; set; }  
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         [InverseProperty("MapAppUser")]
         public virtual ICollection<UserEventList> UserEventLists { get; } = new List<UserEventList>();
