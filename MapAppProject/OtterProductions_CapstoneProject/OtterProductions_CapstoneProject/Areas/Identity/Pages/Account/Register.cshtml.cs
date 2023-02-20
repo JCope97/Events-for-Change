@@ -1,6 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-#nullable disable
+﻿#nullable disable
 
 using System;
 using System.Collections.Generic;
@@ -41,7 +39,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             MapAppDbContext context)
-          
+
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -145,14 +143,14 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    
+
                     // create our own user
                     MapAppUser ma = new MapAppUser
                     {
                         AspnetIdentityId = user.Id
-                   
+
                     };
-                    _mapAppDbContext.Add(ma);   
+                    _mapAppDbContext.Add(ma);
                     await _mapAppDbContext.SaveChangesAsync();
 
                     var userId = await _userManager.GetUserIdAsync(user);

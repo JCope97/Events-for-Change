@@ -46,3 +46,14 @@ body {
 .whatInfoStatement, .useInfoStatement, .contactUsStatement {
     width: 70%;
 }
+
+<<<<<<< Updated upstream
+#map {
+    height: 400px; /* The height is 400 pixels */
+    width: 100%; /* The width is the width of the web page */
+=======
+.thead, .tbody {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+>>>>>>> Stashed changes
+}

@@ -17,7 +17,7 @@ public class Program
         builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer(
             builder.Configuration.GetConnectionString("MapAppConnection")
            ));
-        builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AuthenticationDbContext>();
+        builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<AuthenticationDbContext>();
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
@@ -37,10 +37,9 @@ public class Program
         app.UseStaticFiles();
 
         app.UseRouting();
-     
+
         app.UseAuthentication();    
         app.UseAuthorization();
-
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");

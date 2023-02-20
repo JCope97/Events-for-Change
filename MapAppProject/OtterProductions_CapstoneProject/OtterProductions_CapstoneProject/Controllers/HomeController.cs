@@ -6,45 +6,53 @@ using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
 
-namespace OtterProductions_CapstoneProject.Controllers;
-
-public class HomeController : Controller
+namespace OtterProductions_CapstoneProject.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly MapAppDbContext _context;
-    private readonly UserManager<ApplicationUser> _userManager;
-
-    public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager)
+    public class HomeController : Controller
     {
-        _logger = logger;
-        _context = ctx;
-        _userManager = userManager;
-    }
+        private readonly ILogger<HomeController> _logger;
+        private readonly MapAppDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager)
+        {
+            _logger = logger;
+            _context = ctx;
+            _userManager = userManager;
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(Location mapLocation)
+        {
+
+            return RedirectToAction("Mappage", "Map", mapLocation);
+
+        }
    
-    [Authorize]
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        [Authorize]
+        public IActionResult Privacy()
+        {
+            return View();
+        }
 
-    public IActionResult FAQ()
-    {
-        return View();
-    }
+        public IActionResult FAQ()
+        {
+            return View();
+        }
 
-    public IActionResult Greeting()
-    {
-        return View();
-    }
+        public IActionResult Greeting()
+        {
+            return View();
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
