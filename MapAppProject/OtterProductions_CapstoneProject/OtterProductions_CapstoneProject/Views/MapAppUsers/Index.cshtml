@@ -13,12 +13,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.AspnetIdentityId)
             </th>
-            <th>
+           @* <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastName)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -31,12 +31,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.AspnetIdentityId)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LastName)
-                </td>
+                </td>*@
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

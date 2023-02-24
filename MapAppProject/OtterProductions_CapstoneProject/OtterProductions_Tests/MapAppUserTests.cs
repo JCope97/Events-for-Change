@@ -17,8 +17,8 @@ namespace OtterProductions_Tests
             {
                 user.Id = 1;
                 user.AspnetIdentityId = "1234";
-                user.FirstName = "John";
-                user.LastName = "Doe";
+                //user.FirstName = "John";
+                //user.LastName = "Doe";
 
             };
 
@@ -43,7 +43,7 @@ namespace OtterProductions_Tests
         {
             //Arrange
             MapAppUser user = ValidTestingItems();
-            user.LastName = "John";
+           // user.LastName = "John";
 
             //Act
             ModelValidator modelValidator = new ModelValidator(user);
@@ -59,7 +59,7 @@ namespace OtterProductions_Tests
         {
             //Arrange
             MapAppUser user = ValidTestingItems();
-            user.LastName = "Doe";
+           // user.LastName = "Doe";
 
             //Act
             ModelValidator modelValidator = new ModelValidator(user);
@@ -75,7 +75,7 @@ namespace OtterProductions_Tests
         {
             // Arrange
             MapAppUser user = ValidTestingItems();
-            user.FirstName = "Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Infactitisover100characters";
+            //user.FirstName = "Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Infactitisover100characters";
 
             // Act
             ModelValidator modelValidator = new ModelValidator(user);
@@ -93,7 +93,7 @@ namespace OtterProductions_Tests
         {
             // Arrange
             MapAppUser user = ValidTestingItems();
-            user.LastName = "Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Infactitisover100characters";
+           // user.LastName = "Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Infactitisover100characters";
 
             // Act
             ModelValidator modelValidator = new ModelValidator(user);
