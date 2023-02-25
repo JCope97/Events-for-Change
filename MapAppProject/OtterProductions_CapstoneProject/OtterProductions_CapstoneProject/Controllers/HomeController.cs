@@ -33,7 +33,7 @@ namespace OtterProductions_CapstoneProject.Controllers
 
         }
    
-        [Authorize]
+        
         public IActionResult Privacy()
         {
             return View();
@@ -44,6 +44,7 @@ namespace OtterProductions_CapstoneProject.Controllers
             return View();
         }
 
+        
         public IActionResult Greeting()
         {
             return View();
