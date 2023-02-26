@@ -1,0 +1,42 @@
+﻿@page
+@model OrganizationModel
+@{
+    ViewData["Title"] = "Organization";
+}
+
+<div class="text-center">
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="row">
+        <div class="col-md-4, text-center">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h2>Create a new account.</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.OrganizationName" class="form-control" autocomplete="username" aria-required="true" placeholder="Organization Name" />
+                    <label asp-for="Input.OrganizationName">Organization Name</label>
+                    <span asp-validation-for="Input.OrganizationName" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.OrganizationDescription" class="form-control" autocomplete="username" aria-required="true" placeholder="Organization Description" />
+                    <label asp-for="Input.OrganizationDescription">Organization Description</label>
+                    <span asp-validation-for="Input.OrganizationDescription" class="text-danger"></span>
+                </div>
+                   <div class="form-floating mb-3">
+                    <input asp-for="Input.Location" class="form-control" autocomplete="username" aria-required="true" placeholder="Organization Location" />
+                    <label asp-for="Input.OrganizationDescription">Organization Location</label>
+                    <span asp-validation-for="Input.Location" class="text-danger"></span>
+                </div>
+
+                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

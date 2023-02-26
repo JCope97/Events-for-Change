@@ -185,6 +185,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+
             }
 
             // If we got this far, something failed, redisplay form
