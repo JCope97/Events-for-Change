@@ -5,7 +5,7 @@
 namespace OtterProductionsCapstoneProject.Migrations
 {
     /// <inheritdoc />
-    public partial class AddFirstNameAndLastname2 : Migration
+    public partial class ValidationMessagesUpdated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
