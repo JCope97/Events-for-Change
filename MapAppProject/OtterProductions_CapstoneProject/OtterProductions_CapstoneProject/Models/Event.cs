@@ -28,6 +28,9 @@ public partial class Event
     [StringLength(255)]
     public string EventDescription { get; set; } = null!;
 
+    [Column(TypeName = "datetime")]
+    public DateTime EventDate { get; set; }
+
     [ForeignKey("OrganzationId")]
     [InverseProperty("Events")]
     public virtual EventType Organzation { get; set; } = null!;

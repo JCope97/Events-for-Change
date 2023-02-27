@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
+using OtterProductions_CapstoneProject.DAL.Abstract;
 using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
 
@@ -13,6 +14,7 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly MapAppDbContext _context;
     private readonly UserManager<ApplicationUser> _userManager;
+    private IBrowseEventRepository _eventRepository;
 
     public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager)
     {
@@ -25,7 +27,7 @@ public class HomeController : Controller
     {
         return View();
     }
-   
+
     [Authorize]
     public IActionResult Privacy()
     {
@@ -55,10 +57,21 @@ public class HomeController : Controller
         return View(events);
     }
 
-    public IActionResult Eventpage()
+    [HttpGet]
+    public IActionResult Browsing()
     {
-        IEnumerable<Event> events = _context.Events.ToList();
-        return View(events);
+        BrowseViewModel browseView = new BrowseViewModel();
+        browseView.Events = _context.Events.ToList();
+        return View(browseView);
+
+        //browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
+
+        //if (eventList == null)
+        //{
+        //    return NotFound();
+        //}
+
+        //return Ok(eventList);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
