@@ -1,0 +1,31 @@
+{
+    "PROJECT_DIR": "C:\\Users\\justi\\Github\\Otter-Productions\\MapAppProject\\OtterProductions_CapstoneProject\\OtterProductions_CapstoneProject",
+    "WEB_APP_NAME": "OtterProductionsCapstoneProjectTestdeploy",
+    "LOCATION": "westus",
+    "APP_SKU": "F1",
+    "OS": "Linux",
+    "RUNTIME": "DOTNETCORE:7.0",
+    "APPLICATION_SETTINGS": {
+        "SeedAdminPW": "Free#l33tsp3ch!",
+        "SeedUserPW": "Hello123#"
+    },
+    "CONNECTION_STRINGS": [
+        { "name": "AuthenticationConnection", "db_name": "AuthenticationOtterProductions_CapstoneProject" },
+        { "name": "MapAppConnection", "db_name": "ApplicationOtterProductions_CapstoneProject" }
+    ],
+    "CONNECTION_STRING_TEMPLATE": "{connection_name}=\"Server=tcp:{server_name}.database.windows.net,1433;Initial Catalog={db_name};Persist Security Info=False;User ID={username};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;\"",
+    "SQL_SERVER_NAME": "OtterProductionsTestserver",
+    "DB_USERNAME": "testAdmin",
+    "DB_PASSWORD": "#RCute8364!",
+    "DB_INSTANCES": [{
+            "name": "AuthenticationConnection",
+            "up": "C:\\Users\\justi\\Github\\Otter-Productions\\MapAppProject\\OtterProductions_CapstoneProject\\OtterProductions_CapstoneProject\\Data\\IdentityUp.sql",
+            "seed": null
+        },
+        {
+            "name": "MapAppConnection",
+            "up": "C:\\Users\\justi\\Github\\Otter-Productions\\MapAppProject\\OtterProductions_CapstoneProject\\OtterProductions_CapstoneProject\\Data\\UpScript.sql",
+            "seed": "C:\\Users\\justi\\Github\\Otter-Productions\\MapAppProject\\OtterProductions_CapstoneProject\\OtterProductions_CapstoneProject\\Data\\SeedScript.sql"
+        }
+    ]
+}
