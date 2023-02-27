@@ -34,7 +34,7 @@ public partial class Event
 
     [ForeignKey("OrganzationId")]
     [InverseProperty("Events")]
-    public virtual Organzation OrganzationNavigation { get; set; } = null!;
+    public virtual Organization OrganizationNavigation { get; set; } = null!;
 
     [InverseProperty("Event")]
     public virtual ICollection<UserEventList> UserEventLists { get; } = new List<UserEventList>();

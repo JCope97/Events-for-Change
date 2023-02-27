@@ -12,8 +12,8 @@ using OtterProductions_CapstoneProject.Areas.Identity.Data;
 namespace OtterProductionsCapstoneProject.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    [Migration("20230226030642_ValidationMessagesUpdated")]
-    partial class ValidationMessagesUpdated
+    [Migration("20230227052057_init_authdbcontext")]
+    partial class initauthdbcontext
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -235,6 +235,29 @@ namespace OtterProductionsCapstoneProject.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("OtterProductions_CapstoneProject.Areas.Identity.Data.IdentityOrganization", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("OrganizationLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Organizations");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -284,6 +307,17 @@ namespace OtterProductionsCapstoneProject.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("OtterProductions_CapstoneProject.Areas.Identity.Data.IdentityOrganization", b =>
+                {
+                    b.HasOne("OtterProductions_CapstoneProject.Areas.Identity.Data.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

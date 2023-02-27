@@ -36,7 +36,6 @@
 
   <ItemGroup>
     <Folder Include="bin\Debug\net7.0\" />
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 

@@ -17,5 +17,20 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Data
         [PersonalData]
         [Column(TypeName = "nvarchar(50)")]
         public string LastName { get; set; }
+
+        //public bool IsOrganization { get; set; }
+        //[PersonalData]
+        //[Column(TypeName = "nvarchar(50)")]
+        //public string OrganizationName { get; set; }
+
+        //[PersonalData]
+        //[Column(TypeName = "nvarchar(50)")]
+        //public string OrganizationDescription { get; set; }
+        //[PersonalData]
+        //[Column(TypeName = "nvarchar(50)")]
+        //public string OrganizationLocation { get; set; }
     }
+
+   
+
 }

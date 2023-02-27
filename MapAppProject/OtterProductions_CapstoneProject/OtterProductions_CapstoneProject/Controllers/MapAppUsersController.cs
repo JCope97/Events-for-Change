@@ -8,11 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
 using Microsoft.AspNetCore.Authorization;
+using OtterProductions_CapstoneProject.Areas.Identity.Data;
 
 //Controller for MapAppUsers
 namespace OtterProductions_CapstoneProject.Controllers
 {
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = RoleConstants.USER)]
     public class MapAppUsersController : Controller
     {
         private readonly MapAppDbContext _context;

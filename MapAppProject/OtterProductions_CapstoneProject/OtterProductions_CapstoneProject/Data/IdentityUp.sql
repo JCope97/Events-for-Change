@@ -38,6 +38,11 @@ CREATE TABLE [AspNetUsers] (
     [LockoutEnd] datetimeoffset NULL,
     [LockoutEnabled] bit NOT NULL,
     [AccessFailedCount] int NOT NULL,
+    [IsOrganization] bool NOT NULL,
+    [OrganizationName] nvarchar(256) NULL,
+    [OrganizationDescription] nvarchar(256) NULL,
+    [OrganizationLocation] nvarchar(256) NULL,
+    [OrganzationPicture] VARBINARY(MAX)
     CONSTRAINT [PK_AspNetUsers] PRIMARY KEY ([Id])
 );
 GO

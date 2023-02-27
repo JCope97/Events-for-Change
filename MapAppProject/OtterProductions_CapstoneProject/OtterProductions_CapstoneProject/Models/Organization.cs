@@ -7,23 +7,15 @@ using Microsoft.EntityFrameworkCore;
 namespace OtterProductions_CapstoneProject.Models;
 
 [Table("Organzation")]
-public partial class Organzation
+public class Organization
 {
     [Key]
     [Column("ID")]
     public int Id { get; set; }
 
-    [Column("OrganzationLoginID")]
-    public int OrganzationLoginId { get; set; }
+    [StringLength(50)]
+    public string? AspnetIdentityId { get; set; }
 
-    [StringLength(255)]
-    public string OrganzationDescription { get; set; } = null!;
-
-    [StringLength(255)]
-    public string OrganzationLocation { get; set; } = null!;
-
-    public byte[]? OrganzationPicture { get; set; }
-
-    [InverseProperty("OrganzationNavigation")]
+    [InverseProperty("OrganizationNavigation")]
     public virtual ICollection<Event> Events { get; } = new List<Event>();
 }
