@@ -11,7 +11,6 @@ public partial class MapAppUser
 {
     [Key]
     [Column("ID")]
-    [Required]
     public int Id { get; set; }
 
     [StringLength(50)]

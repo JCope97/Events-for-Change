@@ -36,7 +36,7 @@ public partial class MapAppDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Event__3214EC2726B95BDA");
 
-            entity.HasOne(d => d.Organzation).WithMany(p => p.Events)
+            entity.HasOne(d => d.Organization).WithMany(p => p.Events)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fk EventType ID");
 

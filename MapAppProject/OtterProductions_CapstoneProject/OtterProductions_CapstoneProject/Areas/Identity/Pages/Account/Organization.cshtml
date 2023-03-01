@@ -10,7 +10,12 @@
     <div class="row">
         <div class="col-md-4, text-center">
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <h2>Create a new account.</h2>
+                <h2>Create a new Organization Account.</h2>
+                 <div class="form-floating mb-3">
+                    <input type="checkbox" asp-for="Input.IsOrganization" required />
+                   <label asp-for="Input.IsOrganization">Verify this is a organization account</label>
+                  <span asp-validation-for="Input.IsOrganization" class="text-danger"></span>
+                  </div>
                 <hr />
                  <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                   <div class="form-floating mb-3">
@@ -40,11 +45,6 @@
                     <label asp-for="Input.PhoneNumber">Phone Number</label>
                     <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                 </div>
-               @* <div class="form-floating mb-3">
-                    <input type="checkbox" asp-for="Input.IsOrganization" required />
-                    <label asp-for="Input.IsOrganization">Is Organization</label>
-                    <span asp-validation-for="Input.IsOrganization" class="text-danger"></span>
-                </div>*@
 
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password123!" />

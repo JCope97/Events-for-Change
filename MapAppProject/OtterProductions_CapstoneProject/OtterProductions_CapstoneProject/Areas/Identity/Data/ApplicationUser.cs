@@ -18,9 +18,10 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Data
         [Column(TypeName = "nvarchar(50)")]
         public string LastName { get; set; }
 
-        //public bool IsOrganization { get; set; }
-        //[PersonalData]
-        //[Column(TypeName = "nvarchar(50)")]
+     
+        [PersonalData]
+        [Column(TypeName = "bit")]
+        public bool IsOrganization { get; set; }
         //public string OrganizationName { get; set; }
 
         //[PersonalData]
@@ -31,6 +32,6 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Data
         //public string OrganizationLocation { get; set; }
     }
 
-   
+
 
 }

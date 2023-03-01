@@ -17,6 +17,6 @@ public partial class EventType
     [StringLength(255)]
     public string? EventType1 { get; set; }
 
-    [InverseProperty("Organzation")]
+    [InverseProperty("Organization")]
     public virtual ICollection<Event> Events { get; } = new List<Event>();
 }

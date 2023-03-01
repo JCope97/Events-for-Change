@@ -37,12 +37,17 @@ namespace OtterProductionsCapstoneProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Organzation",
+                name: "Organization",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AspnetIdentityId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    AspnetIdentityId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    OrganizationName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    OrganizationDescription = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    OrganizationLocation = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -55,7 +60,7 @@ namespace OtterProductionsCapstoneProject.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrganzationID = table.Column<int>(type: "int", nullable: false),
+                    OrganizationID = table.Column<int>(type: "int", nullable: false),
                     EventName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     EventLocation = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     EventTypeID = table.Column<int>(type: "int", nullable: false),
@@ -66,13 +71,13 @@ namespace OtterProductionsCapstoneProject.Migrations
                     table.PrimaryKey("PK__Event__3214EC2726B95BDA", x => x.ID);
                     table.ForeignKey(
                         name: "Fk EventType ID",
-                        column: x => x.OrganzationID,
+                        column: x => x.OrganizationID,
                         principalTable: "EventType",
                         principalColumn: "ID");
                     table.ForeignKey(
-                        name: "Fk Organzation ID",
-                        column: x => x.OrganzationID,
-                        principalTable: "Organzation",
+                        name: "Fk Organization ID",
+                        column: x => x.OrganizationID,
+                        principalTable: "Organization",
                         principalColumn: "ID");
                 });
 
@@ -101,9 +106,9 @@ namespace OtterProductionsCapstoneProject.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Event_OrganzationID",
+                name: "IX_Event_OrganizationID",
                 table: "Event",
-                column: "OrganzationID");
+                column: "OrganizationID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserEventList_EventID",
@@ -132,7 +137,7 @@ namespace OtterProductionsCapstoneProject.Migrations
                 name: "EventType");
 
             migrationBuilder.DropTable(
-                name: "Organzation");
+                name: "Organization");
         }
     }
 }

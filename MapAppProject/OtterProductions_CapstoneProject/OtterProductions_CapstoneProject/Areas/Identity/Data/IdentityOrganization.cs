@@ -10,6 +10,12 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Data
 
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
+        [PersonalData]
+        [Column(TypeName = "nvarchar(50)")]
+        public string OrganizationName { get; set; }
+        [PersonalData]
+        [Column(TypeName = "nvarchar(50)")]
+        public string OrganizationDescription { get; set; }
 
         [PersonalData]
         [Column(TypeName = "nvarchar(50)")]

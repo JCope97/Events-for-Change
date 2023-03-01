@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.Data;
@@ -78,6 +80,12 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [Display(Name = "Email")]
+            [DataType(DataType.EmailAddress)]
+            [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid, Needs to have an email prefix and an email domain, such as example@mail.com")]
+            public string Email { get; set; }
+         
             // user added fields
             [Required]
             [DataType(DataType.Text)]
@@ -98,15 +106,11 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             [DataType(DataType.PhoneNumber)]
             [RegularExpression(@"^(\d{10})$", ErrorMessage = "Not a valid phone number, Needs to be digits only")]
             public string PhoneNumber { get; set; }
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
-            [Required]
-            [Display(Name = "Email")]
-            [DataType(DataType.EmailAddress)]
-            [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid, Needs to have an email prefix and an email domain, such as example@mail.com")]
-            public string Email { get; set; }
+
+
+            [PersonalData]
+            [Column(TypeName = "bit")]
+            public bool IsOrganization { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -141,6 +145,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+
                 var user = new ApplicationUser
                 {
                     FirstName = Input.OrganizationName,
@@ -148,36 +153,41 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     PhoneNumber = Input.PhoneNumber,
                     Email = Input.Email,
                     UserName = Input.Email,
+                    IsOrganization = Input.IsOrganization
                 };
 
                 var identityOrganization = new IdentityOrganization
                 {
-                    OrganizationLocation = Input.OrganizationLocation,
                     User = user,
                     UserId = user.Id
                 };
 
-                //await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                //await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                    //await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                    //await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                    var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _authDbContext.Organizations.AddAsync(identityOrganization);
-                    await _authDbContext.SaveChangesAsync();
-
+               
                     // create our own user
                     Organization ma = new Organization
                     {
-                        AspnetIdentityId = user.Id
-                    };
-                    _mapAppDbContext.Add(ma);
-                    await _mapAppDbContext.SaveChangesAsync();
+                        AspnetIdentityId = user.Id,
+                        Email = Input.Email,
+                        OrganizationName = Input.OrganizationName,
+                        OrganizationDescription = Input.OrganizationDescription,
+                        OrganizationLocation = Input.OrganizationLocation,
+                        PhoneNumber = Input.PhoneNumber
 
-                    // assign organization role
-                    await _userManager.AddToRoleAsync(user, RoleConstants.ORGANIZATION);
+                    };
+                      await _mapAppDbContext.Organizations.AddAsync(ma);
+                      await _mapAppDbContext.SaveChangesAsync();
+                       
+
+                        // assign organization role
+                     await _userManager.AddToRoleAsync(user, RoleConstants.ORGANIZATION);
 
                     //var userId = await _userManager.GetUserIdAsync(user);
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
