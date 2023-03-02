@@ -93,7 +93,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "You must provide a phone number")]
             [Display(Name = "Phone Number")]
             [DataType(DataType.PhoneNumber)]
-            [RegularExpression(@"^(\d{10})$", ErrorMessage = "Not a valid phone number, Needs to be digits only")]
+            [RegularExpression(@"^(\d{10})$", ErrorMessage = "Not a valid phone number, Needs to be 10 digits long and be digits only")]
             public string PhoneNumber { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used

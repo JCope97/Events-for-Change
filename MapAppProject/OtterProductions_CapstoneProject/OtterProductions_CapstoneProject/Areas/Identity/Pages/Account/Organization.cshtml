@@ -11,12 +11,12 @@
         <div class="col-md-4, text-center">
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <h2>Create a new Organization Account.</h2>
-                 <div class="form-floating mb-3">
-                    <input type="checkbox" asp-for="Input.IsOrganization" required />
-                   <label asp-for="Input.IsOrganization">Verify this is a organization account</label>
+                <hr />
+                 <div class="form-control mb-3">
+                    <input type="checkbox" class="form-check-input" asp-for="Input.IsOrganization" required />
+                   <label class="form-check-label, text-start" asp-for="Input.IsOrganization">Verify this is a organization account</label>
                   <span asp-validation-for="Input.IsOrganization" class="text-danger"></span>
                   </div>
-                <hr />
                  <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                   <div class="form-floating mb-3">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />

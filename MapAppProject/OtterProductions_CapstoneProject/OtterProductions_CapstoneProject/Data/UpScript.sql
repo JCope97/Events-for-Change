@@ -10,7 +10,12 @@ CREATE TABLE [Event] (
 
 CREATE TABLE [Organzation] (
   [ID] int PRIMARY KEY IDENTITY(1, 1),
-  [AspnetIdentityId] nvarchar(50)
+  [AspnetIdentityId] nvarchar(50),
+  [Email] nvarchar(256) NULL,
+  [OrganizationName] nvarchar(256) NULL,
+  [OrganizationDescription] nvarchar(256) NULL,
+  [OrganizationLocation] nvarchar(256) NULL,
+  [PhoneNumber] varchar(15) NULL,
 );
 
 CREATE TABLE [EventType] (
