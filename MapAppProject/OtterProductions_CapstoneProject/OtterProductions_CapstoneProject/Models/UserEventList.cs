@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 namespace OtterProductions_CapstoneProject.Models;
 
 [Table("UserEventList")]
+[Index("EventId", Name = "IX_UserEventList_EventID")]
+[Index("MapAppUserId", Name = "IX_UserEventList_MapAppUserID")]
 public partial class UserEventList
 {
     [Key]

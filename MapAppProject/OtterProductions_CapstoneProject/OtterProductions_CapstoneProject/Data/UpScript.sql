@@ -10,10 +10,12 @@ CREATE TABLE [Event] (
 
 CREATE TABLE [Organzation] (
   [ID] int PRIMARY KEY IDENTITY(1, 1),
-  [OrganzationLoginID] int NOT NULL,
-  [OrganzationDescription] nvarchar(255) NOT NULL,
-  [OrganzationLocation] nvarchar(255) NOT NULL,
-  [OrganzationPicture] VARBINARY(MAX)
+  [AspnetIdentityId] nvarchar(50),
+  [Email] nvarchar(256) NULL,
+  [OrganizationName] nvarchar(256) NULL,
+  [OrganizationDescription] nvarchar(256) NULL,
+  [OrganizationLocation] nvarchar(256) NULL,
+  [PhoneNumber] varchar(15) NULL,
 );
 
 CREATE TABLE [EventType] (
@@ -23,10 +25,7 @@ CREATE TABLE [EventType] (
 
 CREATE TABLE [MapAppUser] (
   [ID] int PRIMARY KEY IDENTITY(1, 1),
-  [AspnetIdentityId] nvarchar(50),
-  [FirstName] nvarchar(50),
-  [LastName] nvarchar(50)
-
+  [AspnetIdentityId] nvarchar(50)
 );
 
 CREATE TABLE [UserEventList] (
