@@ -6,124 +6,70 @@
 
 <div class="container">
     <div class="row">
-        <div class="col"  style="padding-top: 35px">
+        <div class="col" style="padding-top: 35px">
             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-           
+
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="form-floating mb-3" >
+                <div class="form-floating mb-3">
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                     <label asp-for="Input.Email">Email (Ex: name@example.com)</label>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
-                    <div class="form-floating mb-3" >
-                     <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="first" />
-                      <label asp-for="Input.FirstName">First Name</label>
-                      <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-                 </div>
-                    <div class="form-floating mb-3">
-                      <input asp-for="Input.LastName" class="form-control"  aria-required="true" placeholder="last" />
-                      <label asp-for="Input.LastName">Last Name</label>
-                      <span asp-validation-for="Input.Email" class="text-danger"></span>
-                 </div>
-                    <div class="form-floating mb-3">
-                      <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="000-000-0000" />
-                      <label asp-for="Input.PhoneNumber">Phone Number</label>
-                      <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                 </div>
-                    <div class="form-floating mb-3">
-                     <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                     <label asp-for="Input.Password">Password</label>
-                     <span asp-validation-for="Input.Password" class="text-danger"></span>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="first" />
+                    <label asp-for="Input.FirstName">First Name</label>
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                 </div>
-                    <div class="form-floating mb-3">
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="last" />
+                    <label asp-for="Input.LastName">Last Name</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="000-000-0000" />
+                    <label asp-for="Input.PhoneNumber">Phone Number</label>
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Password">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
                     <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                     <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
-                
+
                 <br />
                 <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary" style="width: 75%; background-color: rgb(0,129,0)">Create Account</button>
             </form>
             <div class="haveAccount" style="padding-top: 3px;"><a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Do you already have an account? Login here!</a></div>
+            <div class="orgRegister" style="padding-top: 6px;"><a asp-page="/Account/Organization" asp-route-returnUrl="@Model.ReturnUrl">Do you want to register as an Organization? Click here</a></div>
+
+        
+
         </div>
         <div class="col" style="padding-top: 65px; padding-left: 40px;">
             <h1>Welcome to Map App!</h1>
             <br />
             @*<img src="/Images/logo.png" alt="LOGO" id="loginpageLogo" style="width:250px; height:150px; padding-left:10px;" />*@
             <br />
-                <h3>By creating a free account with us, you will be able to:</h3>
-                <div class="bulletPoints" style="padding-left: 13px;"> - Have your own profile page</div>
-                <div class="bulletPoints" style="padding-left: 13px;"> - Save events you are interested in</div>
-                <div class="bulletPoints" style="padding-left: 13px;"> - View your saved events later</div>
-               
-                 <br />      
-                  <br />       
+            <h3>By creating a free account with us, you will be able to:</h3>
+            <div class="bulletPoints" style="padding-left: 13px;"> - Have your own profile page</div>
+            <div class="bulletPoints" style="padding-left: 13px;"> - Save events you are interested in</div>
+            <div class="bulletPoints" style="padding-left: 13px;"> - View your saved events later</div>
+
+            <br />
+            <br />
             <div class="agreeTerms"> By creating an account with Map App, you agree to accept our <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a> </div>
             <br />
             <br />
 
         </div>
     </div>
-    
+
 </div>
-
-
-@*<div class="container">
-    <div class="row">
-        <div class="col, text-center">
-            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-           
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="form-floating mb-3" style="width: 50%;">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.Email">Email</label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                    <div class="form-floating mb-3" style="width: 50%;">
-                     <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="first" />
-                      <label asp-for="Input.FirstName">First Name</label>
-                      <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-                 </div>
-                    <div class="form-floating mb-3" style="width: 50%;">
-                      <input asp-for="Input.LastName" class="form-control"  aria-required="true" placeholder="last" />
-                      <label asp-for="Input.LastName">Last Name</label>
-                      <span asp-validation-for="Input.Email" class="text-danger"></span>
-                 </div>
-                    <div class="form-floating mb-3" style="width: 50%;">
-                      <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="000-000-0000" />
-                      <label asp-for="Input.PhoneNumber">Phone Number</label>
-                      <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                 </div>
-                    <div class="form-floating mb-3" style="width: 50%;">
-                     <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                     <label asp-for="Input.Password">Password</label>
-                     <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                    <div class="form-floating mb-3" style="width: 50%;">
-                    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div
-                
-                <br />
-                @*<button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Create Account</button>*@
- @*           </form>
-
-        </div>
-        <div class="col, text-center">
-                <p>Welcome to the Map App!</p>
-                <p>Create an account here!</p>
-        </div>
-    </div>
-    <div class="row">
-        
-        <br />        
-        <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an account? Login here!</a>
-        <br />
-        <div class="agreeTerms"> By creating an account with Map App, you agree to accept our <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a> </div>
-        <br />
-    </div>
-</div>*@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

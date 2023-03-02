@@ -7,14 +7,15 @@ using Microsoft.EntityFrameworkCore;
 namespace OtterProductions_CapstoneProject.Models;
 
 [Table("Event")]
+[Index("OrganizationId", Name = "IX_Event_OrganizationID")]
 public partial class Event
 {
     [Key]
     [Column("ID")]
     public int Id { get; set; }
 
-    [Column("OrganzationID")]
-    public int OrganzationId { get; set; }
+    [Column("OrganizationID")]
+    public int OrganizationId { get; set; }
 
     [StringLength(255)]
     public string EventName { get; set; } = null!;
@@ -28,13 +29,13 @@ public partial class Event
     [StringLength(255)]
     public string EventDescription { get; set; } = null!;
 
-    [ForeignKey("OrganzationId")]
+    [ForeignKey("OrganizationId")]
     [InverseProperty("Events")]
-    public virtual EventType Organzation { get; set; } = null!;
+    public virtual EventType Organization { get; set; } = null!;
 
-    [ForeignKey("OrganzationId")]
+    [ForeignKey("OrganizationId")]
     [InverseProperty("Events")]
-    public virtual Organzation OrganzationNavigation { get; set; } = null!;
+    public virtual Organization OrganizationNavigation { get; set; } = null!;
 
     [InverseProperty("Event")]
     public virtual ICollection<UserEventList> UserEventLists { get; } = new List<UserEventList>();

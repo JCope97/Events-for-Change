@@ -26,15 +26,15 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IUserStore<ApplicationUser> _userStore;
-        private readonly IUserEmailStore<ApplicationUser> _emailStore;
+        //private readonly IUserStore<ApplicationUser> _userStore;
+        //private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly MapAppDbContext _mapAppDbContext;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
-            IUserStore<ApplicationUser> userStore,
+            //IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
@@ -42,8 +42,8 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
 
         {
             _userManager = userManager;
-            _userStore = userStore;
-            _emailStore = GetEmailStore();
+            //_userStore = userStore;
+            //_emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
@@ -79,24 +79,30 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "First name")]
+            [RegularExpression("^[\\w'\\-,.][^0-9_!¡?÷?¿/\\\\+=@#$%ˆ&*(){}|~<>;:[\\]]{1,}$", ErrorMessage = "Not a valid input, We do support most languages characters, " +
+                "also special characters such as hyphens, spaces, apostrophes and periods.")]
             public string FirstName { get; set; }
 
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Last name")]
+            [RegularExpression("^[\\w'\\-,.][^0-9_!¡?÷?¿/\\\\+=@#$%ˆ&*(){}|~<>;:[\\]]{1,}$", ErrorMessage = "Not a valid input, We do support most languages characters, " +
+                "also special characters such as hyphens, spaces and apostrophes and periods.")]
             public string LastName { get; set; }
 
-            [Required]
-            [DataType(DataType.Text)]
+            [Required(ErrorMessage = "You must provide a phone number")]
             [Display(Name = "Phone Number")]
+            [DataType(DataType.PhoneNumber)]
+            [RegularExpression(@"^(\d{10})$", ErrorMessage = "Not a valid phone number, Needs to be 10 digits long and be digits only")]
             public string PhoneNumber { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
             [Display(Name = "Email")]
+            [DataType(DataType.EmailAddress)]
+            [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid, Needs to have an email prefix and an email domain, such as example@mail.com")]
             public string Email { get; set; }
 
             /// <summary>
@@ -104,7 +110,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -132,12 +138,17 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
-                user.FirstName = Input.FirstName;
-                user.LastName = Input.LastName;
-                user.PhoneNumber = Input.PhoneNumber;
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                var user = new ApplicationUser
+                {
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    PhoneNumber = Input.PhoneNumber,
+                    Email = Input.Email,
+                    UserName = Input.Email,
+                };
+
+                //await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                //await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
@@ -148,26 +159,28 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     MapAppUser ma = new MapAppUser
                     {
                         AspnetIdentityId = user.Id
-
                     };
-                    _mapAppDbContext.Add(ma);
+                    await _mapAppDbContext.MapAppUsers.AddAsync(ma);
                     await _mapAppDbContext.SaveChangesAsync();
 
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                    // assign organization role
+                    await _userManager.AddToRoleAsync(user, RoleConstants.USER);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //var userId = await _userManager.GetUserIdAsync(user);
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    //var callbackUrl = Url.Page(
+                    //    "/Account/ConfirmEmail",
+                    //    pageHandler: null,
+                    //    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                    //    protocol: Request.Scheme);
+
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        return RedirectToPage("ConfirmationPage"); //, new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
                     {
@@ -177,35 +190,36 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    //ModelState.AddModelError(string.Empty, error.Description);
                 }
+
             }
 
             // If we got this far, something failed, redisplay form
             return Page();
         }
 
-        private ApplicationUser CreateUser()
-        {
-            try
-            {
-                return Activator.CreateInstance<ApplicationUser>();
-            }
-            catch
-            {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
-                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
-            }
-        }
+        //private ApplicationUser CreateUser()
+        //{
+        //    try
+        //    {
+        //        return Activator.CreateInstance<ApplicationUser>();
+        //    }
+        //    catch
+        //    {
+        //        throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
+        //            $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+        //            $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+        //    }
+        //}
 
-        private IUserEmailStore<ApplicationUser> GetEmailStore()
-        {
-            if (!_userManager.SupportsUserEmail)
-            {
-                throw new NotSupportedException("The default UI requires a user store with email support.");
-            }
-            return (IUserEmailStore<ApplicationUser>)_userStore;
-        }
+        //private IUserEmailStore<ApplicationUser> GetEmailStore()
+        //{
+        //    if (!_userManager.SupportsUserEmail)
+        //    {
+        //        throw new NotSupportedException("The default UI requires a user store with email support.");
+        //    }
+        //    return (IUserEmailStore<ApplicationUser>)_userStore;
+        //}
     }
 }

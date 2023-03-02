@@ -2,6 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.Data;
+using System;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace OtterProductions_CapstoneProject;
 
@@ -17,13 +22,27 @@ public class Program
         builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer(
             builder.Configuration.GetConnectionString("MapAppConnection")
            ));
-        builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<AuthenticationDbContext>();
+
+        builder.Services
+            .AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<AuthenticationDbContext>();
+
+        builder.Services.Configure<IdentityOptions>(config =>
+        {
+            config.User.RequireUniqueEmail = true;
+            config.SignIn.RequireConfirmedPhoneNumber = false;
+            config.SignIn.RequireConfirmedEmail = false;
+            config.SignIn.RequireConfirmedAccount = false;
+        });
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
         var app = builder.Build();
+
+        app.SeedData();
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
