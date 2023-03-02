@@ -16,7 +16,7 @@ let response;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 8,
+        zoom: 13,
         center: { lat: -34.397, lng: 150.644 },
         mapTypeControl: false,
     });
@@ -89,10 +89,15 @@ function geocode(request) {
         });
 }
 
-window.initMap = initMap;
+/*window.initMap = initMap;*/
 
 const firstLocation = document.getElementById("location");
 
-document.addEventListener("DOMContentLoaded", () => {
-    geocode({ address: firstLocation.value });
-});
+if (firstLocation.value ){
+
+    document.addEventListener("DOMContentLoaded", () => {
+        geocode({ address: firstLocation.value });
+    });
+} else {
+    window.initMap = initMap;
+}
