@@ -41,6 +41,11 @@
                     <span asp-validation-for="Input.OrganizationLocation" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
+                    <input asp-for="Input.Address" class="form-control" autocomplete="username" aria-required="true" placeholder="Organization Address" />
+                    <label asp-for="Input.Address">Organization Address</label>
+                    <span asp-validation-for="Input.Address" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
                     <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="000-000-0000" />
                     <label asp-for="Input.PhoneNumber">Phone Number</label>
                     <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>

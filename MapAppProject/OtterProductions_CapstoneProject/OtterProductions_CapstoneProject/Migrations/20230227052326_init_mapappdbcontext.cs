@@ -44,9 +44,10 @@ namespace OtterProductionsCapstoneProject.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AspnetIdentityId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     OrganizationName = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    OrganizationDescription = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    OrganizationLocation = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    OrganizationDescription = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    OrganizationLocation = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                 },
                 constraints: table =>
