@@ -28,6 +28,8 @@ public partial class Organization
     [StringLength(50)]
     public string OrganizationLocation { get; set; } = null!;
 
+    public string? Address { get; set; }
+
     public string? PhoneNumber { get; set; }
 
     [InverseProperty("OrganizationNavigation")]

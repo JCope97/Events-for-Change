@@ -183,6 +183,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                         OrganizationName = Input.OrganizationName,
                         OrganizationDescription = Input.OrganizationDescription,
                         OrganizationLocation = Input.OrganizationLocation,
+                        Address = Input.Address,
                         PhoneNumber = Input.PhoneNumber
 
                     };
@@ -190,7 +191,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                       await _mapAppDbContext.SaveChangesAsync();
                        
 
-                        // assign organization role
+                        // assign organization to identity role 'organization'
                      await _userManager.AddToRoleAsync(user, RoleConstants.ORGANIZATION);
 
                     //var userId = await _userManager.GetUserIdAsync(user);

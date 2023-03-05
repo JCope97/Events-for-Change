@@ -163,7 +163,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     await _mapAppDbContext.MapAppUsers.AddAsync(ma);
                     await _mapAppDbContext.SaveChangesAsync();
 
-                    // assign organization role
+                    // assign user to identity role 'user'
                     await _userManager.AddToRoleAsync(user, RoleConstants.USER);
 
                     //var userId = await _userManager.GetUserIdAsync(user);
