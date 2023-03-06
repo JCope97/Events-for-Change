@@ -62,7 +62,7 @@ namespace OtterProductions_CapstoneProject.Controllers
             //Creates a viewmodel and grabs the events and organizations
             BrowseViewModel browseView = new BrowseViewModel();
             browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
-            browseView.Organzations = _context.Organzations.ToList();
+            browseView.Organizations = _context.Organizations.ToList();
 
             if (browseView.Events == null)
             {

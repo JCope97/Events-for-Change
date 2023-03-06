@@ -21,7 +21,7 @@ public partial class SampleDbContext : DbContext
 
     public virtual DbSet<MapAppUser> MapAppUsers { get; set; }
 
-    public virtual DbSet<Organzation> Organzations { get; set; }
+    public virtual DbSet<Organization> Organzations { get; set; }
 
     public virtual DbSet<UserEventList> UserEventLists { get; set; }
 
@@ -34,11 +34,11 @@ public partial class SampleDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Event__3214EC27F20A5B4D");
 
-            entity.HasOne(d => d.Organzation).WithMany(p => p.Events)
+            entity.HasOne(d => d.Organization).WithMany(p => p.Events)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fk EventType ID");
 
-            entity.HasOne(d => d.OrganzationNavigation).WithMany(p => p.Events)
+            entity.HasOne(d => d.OrganizationNavigation).WithMany(p => p.Events)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("Fk Organzation ID");
         });
@@ -53,7 +53,7 @@ public partial class SampleDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__MapAppUs__3214EC272BA05FE5");
         });
 
-        modelBuilder.Entity<Organzation>(entity =>
+        modelBuilder.Entity<Organization>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Organzat__3214EC2713547959");
         });

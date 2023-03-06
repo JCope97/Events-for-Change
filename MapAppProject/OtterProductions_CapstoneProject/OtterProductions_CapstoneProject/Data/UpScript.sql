@@ -3,7 +3,7 @@
 
 CREATE TABLE [Event] (
   [ID] int PRIMARY KEY IDENTITY(1, 1),
-  [OrganzationID] int NOT NULL,
+  [OrganizationID] int NOT NULL,
   [EventName] nvarchar(255) NOT NULL,
   [EventLocation] nvarchar(255) NOT NULL,
   [EventTypeID] int NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE [Event] (
 );
 
 
-CREATE TABLE [Organzation] (
+CREATE TABLE [Organization] (
   [ID] int PRIMARY KEY IDENTITY(1, 1),
   [AspnetIdentityId] nvarchar(50),
   [Email] nvarchar(256) NULL,
@@ -20,6 +20,7 @@ CREATE TABLE [Organzation] (
   [OrganizationDescription] nvarchar(256) NULL,
   [OrganizationLocation] nvarchar(256) NULL,
   [PhoneNumber] varchar(15) NULL,
+  [OrganizationLoginID] int NULL,
 );
 
 CREATE TABLE [EventType] (
@@ -38,13 +39,13 @@ CREATE TABLE [UserEventList] (
   [EventID] int NOT NULL
 );
 
-ALTER TABLE [Event] ADD CONSTRAINT [Fk Organzation ID]
-  FOREIGN KEY ([OrganzationID]) REFERENCES [Organzation] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE [Event] ADD CONSTRAINT [Fk Organization ID]
+  FOREIGN KEY ([OrganizationID]) REFERENCES [Organization] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --ALTER TABLE [Events] ADD CONSTRAINT ([EventTypeID]) REFERENCES [EventType] ([ID]);
 
 ALTER TABLE [Event] ADD CONSTRAINT [Fk EventType ID]
-  FOREIGN KEY ([OrganzationID]) REFERENCES [EventType] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  FOREIGN KEY ([OrganizationID]) REFERENCES [EventType] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --ALTER TABLE [UserEventList] ADD CONSTRAINT ([MapAppUserID]) REFERENCES [MapAppUsers] ([ID]);
 

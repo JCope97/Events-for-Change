@@ -32,10 +32,10 @@ namespace OtterProductions_Tests
             _zeroTime = new TimeOnly(0, 0, 0);
             _event = new List<Event>
             {
-                new Event {OrganzationId = 5, EventName = "Cloudy with a chance of free food", EventLocation = "Salem OR", EventTypeId = 1, EventDescription = "Come and enjoy a warm meal", EventDate = _today.AddDays(11).ToDateTime(_zeroTime)},
-                new Event {OrganzationId = 4, EventName = "Lifeline", EventLocation = "Corvallis OR", EventTypeId = 1, EventDescription = "Come and enjoy a warm meal", EventDate = _today.AddDays(12).ToDateTime(_zeroTime)},
-                new Event {OrganzationId = 5, EventName = "Operation Sandwich", EventLocation = "Monmouth OR", EventTypeId = 1, EventDescription = "Free lunch meals", EventDate = _today.AddDays(12).ToDateTime(_zeroTime)},
-                new Event {OrganzationId = 4, EventName = "Summer Heat Rest", EventLocation = "Corvallis OR", EventTypeId = 2, EventDescription = "Come visit if you are thirsty and need water bottles", EventDate = _today.AddDays(65).ToDateTime(_zeroTime)},
+                new Event {OrganizationId = 5, EventName = "Cloudy with a chance of free food", EventLocation = "Salem OR", EventTypeId = 1, EventDescription = "Come and enjoy a warm meal", EventDate = _today.AddDays(11).ToDateTime(_zeroTime)},
+                new Event {OrganizationId = 4, EventName = "Lifeline", EventLocation = "Corvallis OR", EventTypeId = 1, EventDescription = "Come and enjoy a warm meal", EventDate = _today.AddDays(12).ToDateTime(_zeroTime)},
+                new Event {OrganizationId = 5, EventName = "Operation Sandwich", EventLocation = "Monmouth OR", EventTypeId = 1, EventDescription = "Free lunch meals", EventDate = _today.AddDays(12).ToDateTime(_zeroTime)},
+                new Event {OrganizationId = 4, EventName = "Summer Heat Rest", EventLocation = "Corvallis OR", EventTypeId = 2, EventDescription = "Come visit if you are thirsty and need water bottles", EventDate = _today.AddDays(65).ToDateTime(_zeroTime)},
             };
 
 

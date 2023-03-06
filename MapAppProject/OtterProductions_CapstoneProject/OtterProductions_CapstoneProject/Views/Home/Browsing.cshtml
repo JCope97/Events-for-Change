@@ -34,8 +34,9 @@
                                 <td>@events.EventDescription</td>
                                 @*Grabs the organization info based on the event organization ID*@
                                 @*if the organization ID is equal to the location of organziations - 1 then post the organization information*@
-                                @if(events.OrganzationId == Model.Organzations.ElementAt(events.OrganzationId - 1).OrganzationLoginId){
-                                    <td>@Model.Organzations.ElementAt(events.OrganzationId - 1).OrganzationDescription</td>
+                                @if (events.OrganizationId == Model.Organizations.ElementAt(events.OrganizationId - 1).OrganizationLoginId)
+                                {
+                                    <td>@Model.Organizations.ElementAt(events.OrganizationId - 1).OrganizationDescription</td>
                                 }
                             </tr>
                         }
