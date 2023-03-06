@@ -24,7 +24,6 @@ public class HomeController : Controller
         _context = ctx;
         _userManager = userManager;
         _eventRepository = new BrowseEventRepository(_context);
-        //_eventRepository = eventRepository;
 
     }
 
@@ -67,7 +66,6 @@ public class HomeController : Controller
     {
         //Creates a viewmodel and grabs the events and organizations
         BrowseViewModel browseView = new BrowseViewModel();
-        //browseView.Events = _context.Events.ToList();
         browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
         browseView.Organzations = _context.Organzations.ToList();
 

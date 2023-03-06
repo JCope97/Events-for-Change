@@ -80,7 +80,7 @@ namespace OtterProductions_Tests
         }
 
         [Test]
-        public void GetAllTasksTodoWithinTimeWindow_ShouldReturnMultipleIdenticalTasksForShortIntervalWithCorrectCalculatedDates()
+        public void GetAllEventsWithinTwoWeeks_ShouldReturnMultipleEventsWithinTheTwoWeekTimeFrame()
         {
             // Arrange
             IBrowseEventRepository browseEventRepository = new BrowseEventRepository(_mockContext.Object);
