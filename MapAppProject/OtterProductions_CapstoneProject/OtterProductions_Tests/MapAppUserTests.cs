@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using NUnit.Framework;
 using OtterProductions_CapstoneProject.Models;
+using OtterProductions_CapstoneProject.Areas.Identity.Data;
 
 namespace OtterProductions_Tests
 {
@@ -25,6 +26,8 @@ namespace OtterProductions_Tests
             return user;
         }
 
+
+
         [Test]
         public void ValidUser_IsValid()
         {
@@ -43,7 +46,7 @@ namespace OtterProductions_Tests
         {
             //Arrange
             MapAppUser user = ValidTestingItems();
-           // user.LastName = "John";
+            //user.LastName = "John";
 
             //Act
             ModelValidator modelValidator = new ModelValidator(user);
@@ -59,7 +62,7 @@ namespace OtterProductions_Tests
         {
             //Arrange
             MapAppUser user = ValidTestingItems();
-           // user.LastName = "Doe";
+            //user.LastName = "Doe";
 
             //Act
             ModelValidator modelValidator = new ModelValidator(user);
@@ -93,7 +96,7 @@ namespace OtterProductions_Tests
         {
             // Arrange
             MapAppUser user = ValidTestingItems();
-           // user.LastName = "Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Infactitisover100characters";
+            //user.LastName = "Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Thisitemnameiswaytoolongtobeconsideredvalid.Infactitisover100characters";
 
             // Act
             ModelValidator modelValidator = new ModelValidator(user);
