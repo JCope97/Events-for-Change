@@ -14,6 +14,7 @@ public partial class MapAppDbContext : DbContext
     public MapAppDbContext(DbContextOptions<MapAppDbContext> options)
         : base(options)
     {
+
     }
     //Get information
 

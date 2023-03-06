@@ -20,13 +20,13 @@ public partial class Organization
     public string Email { get; set; } = null!;
 
     [Required]
-    [StringLength(50, MinimumLength = 2, ErrorMessage = "Part {0} must be between {2} and {1} character(s) in length.")]
+    [StringLength(50, MinimumLength = 2, ErrorMessage = "Name {0} must be between {2} and {1} character(s) in length.")]
     public string OrganizationName { get; set; } = null!;
 
-    [StringLength(50, MinimumLength = 2, ErrorMessage = "Part {0} must be between {2} and {1} character(s) in length.")]
+    [StringLength(50, MinimumLength = 2, ErrorMessage = "Description {0} must be between {2} and {1} character(s) in length.")]
     public string OrganizationDescription { get; set; } = null!;
 
-    [StringLength(50, MinimumLength = 2, ErrorMessage = "Part {0} must be between {2} and {1} character(s) in length.")]
+    [StringLength(50, MinimumLength = 2, ErrorMessage = "Location {0} must be between {2} and {1} character(s) in length.")]
     public string OrganizationLocation { get; set; } = null!;
 
     public string? Address { get; set; }
