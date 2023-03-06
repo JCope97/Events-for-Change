@@ -1,9 +1,11 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.DAL.Abstract;
+using OtterProductions_CapstoneProject.DAL.Concrete;
 using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
 
@@ -21,6 +23,9 @@ public class HomeController : Controller
         _logger = logger;
         _context = ctx;
         _userManager = userManager;
+        _eventRepository = new BrowseEventRepository(_context);
+        //_eventRepository = eventRepository;
+
     }
 
     public IActionResult Index()
@@ -60,18 +65,18 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Browsing()
     {
+        //Creates a viewmodel and grabs the events and organizations
         BrowseViewModel browseView = new BrowseViewModel();
-        browseView.Events = _context.Events.ToList();
+        //browseView.Events = _context.Events.ToList();
+        browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
+        browseView.Organzations = _context.Organzations.ToList();
+
+        if (browseView.Events == null)
+        {
+            return NotFound();
+        }
+
         return View(browseView);
-
-        //browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
-
-        //if (eventList == null)
-        //{
-        //    return NotFound();
-        //}
-
-        //return Ok(eventList);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

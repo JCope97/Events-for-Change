@@ -16,7 +16,7 @@
         </dd>
     }else
     {
-        <table class="table table-sm">
+        <table class="table table-sm" id="logTable">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
@@ -32,10 +32,30 @@
                                 <td>@events.EventName</td>
                                 <td>@events.EventLocation</td>
                                 <td>@events.EventDescription</td>
-                                <td>@events.OrganzationId</td>
+                                @*Grabs the organization info based on the event organization ID*@
+                                @*if the organization ID is equal to the location of organziations - 1 then post the organization information*@
+                                @if(events.OrganzationId == Model.Organzations.ElementAt(events.OrganzationId - 1).OrganzationLoginId){
+                                    <td>@Model.Organzations.ElementAt(events.OrganzationId - 1).OrganzationDescription</td>
+                                }
                             </tr>
                         }
                 </tbody>
         </table>
     }
 </div>
+
+@section Scripts
+    {
+    <script src="~/js/fancyTable.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#logTable").fancyTable({
+                sortColumn: 0,
+                sortOrder: 'descending',
+                pagination: true,
+                perPage: 10,
+                globalSearch: true
+            });
+        });
+    </script>
+}

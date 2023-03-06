@@ -7,6 +7,6 @@ namespace OtterProductions_CapstoneProject.Models
     public class BrowseViewModel
     {
         public IEnumerable<Event> Events { get; set; }
-        public Organzation Organzation { get; set; }
+        public IEnumerable<Organzation> Organzations { get; set; }
     }
 }
