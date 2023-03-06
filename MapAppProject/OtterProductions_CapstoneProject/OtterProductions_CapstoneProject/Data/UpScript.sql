@@ -1,3 +1,6 @@
+--CREATE DATABASE[ApplicationOtterProductions_CapstoneProject]
+
+
 CREATE TABLE [Event] (
   [ID] int PRIMARY KEY IDENTITY(1, 1),
   [OrganizationID] int NOT NULL,

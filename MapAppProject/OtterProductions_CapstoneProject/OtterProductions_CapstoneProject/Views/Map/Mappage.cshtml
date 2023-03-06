@@ -5,11 +5,25 @@
     ViewData["Title"] = "Map Page";
 }
 
-
+<div>
+    <p>Type in an Address or City</p>
+</div>
 <input id="location" type="text" placeholder="@Model.location" value="@Model.location">
 
 
 <input id="submit" type="button" value="Submit" class="btn btn-primary"></>
+
+<br/>
+<div>
+    <button id ="restroom" type="button" class="btn btn-info" value="Public Restroom">Restroom</button>
+
+    <button id="Food Bank" type="button" class="btn btn-success" value="Food Bank">Food Bank</button>
+
+    <button id="Shelter" type="button" class="btn btn-warning" value="Shelter">Shelter</button>
+
+</div>
+
+<br />
 <!--The div element for the map -->
 <div id="map"></div>
 
@@ -19,6 +33,6 @@ document has been parsed. For non-blocking uses, avoiding race conditions,
 and consistent behavior across browsers, consider loading using Promises
 with https://www.npmjs.com/package/@googlemaps/js-api-loader.
 -->*@
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCIiPJAz4KApQsWr71OlZXjZczcaRQitk&callback=initMap&v=weekly"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCIiPJAz4KApQsWr71OlZXjZczcaRQitk&callback=initMap&libraries=places&v=weekly"
         defer
 ></script>

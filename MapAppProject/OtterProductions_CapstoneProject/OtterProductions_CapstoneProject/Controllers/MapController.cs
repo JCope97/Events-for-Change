@@ -16,6 +16,8 @@ namespace OtterProductions_CapstoneProject.Controllers
         //    return View();
         //}
 
+
+
         public IActionResult Mappage(Location mapLocation)
         {
             return View(mapLocation);
