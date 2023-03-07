@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.Data;
 
 #nullable disable
 
 namespace OtterProductionsCapstoneProject.Migrations
 {
-    [DbContext(typeof(MapAppDbContext))]
+    [DbContext(typeof(AuthenticationDbContext))]
     [Migration("20230227052326_init_mapappdbcontext")]
     partial class initmapappdbcontext
     {

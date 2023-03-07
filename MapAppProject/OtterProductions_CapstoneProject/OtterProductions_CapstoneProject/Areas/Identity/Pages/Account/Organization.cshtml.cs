@@ -87,6 +87,8 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             public string Email { get; set; }
          
             // user added fields
+
+
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Organization Name")]
@@ -99,6 +101,10 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             
             [Display(Name = "Organization Location")]
             public string OrganizationLocation { get; set; }
+
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+         
 
 
             [Required(ErrorMessage = "You must provide a phone number")]
@@ -148,8 +154,6 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
 
                 var user = new ApplicationUser
                 {
-                    FirstName = Input.OrganizationName,
-                    LastName = Input.OrganizationDescription,
                     PhoneNumber = Input.PhoneNumber,
                     Email = Input.Email,
                     UserName = Input.Email,
@@ -179,6 +183,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                         OrganizationName = Input.OrganizationName,
                         OrganizationDescription = Input.OrganizationDescription,
                         OrganizationLocation = Input.OrganizationLocation,
+                        Address = Input.Address,
                         PhoneNumber = Input.PhoneNumber
 
                     };
@@ -186,7 +191,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                       await _mapAppDbContext.SaveChangesAsync();
                        
 
-                        // assign organization role
+                        // assign organization to identity role 'ORGANIZATION'
                      await _userManager.AddToRoleAsync(user, RoleConstants.ORGANIZATION);
 
                     //var userId = await _userManager.GetUserIdAsync(user);
