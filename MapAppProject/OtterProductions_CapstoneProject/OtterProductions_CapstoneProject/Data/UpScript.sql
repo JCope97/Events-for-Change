@@ -7,7 +7,8 @@ CREATE TABLE [Event] (
   [EventName] nvarchar(255) NOT NULL,
   [EventLocation] nvarchar(255) NOT NULL,
   [EventTypeID] int NOT NULL,
-  [EventDescription] nvarchar(255) NOT NULL
+  [EventDescription] nvarchar(255) NOT NULL,
+  [EventDate] datetime NOT NULL
 );
 
 
@@ -20,6 +21,7 @@ CREATE TABLE [Organization] (
   [OrganizationDescription] nvarchar(256) NULL,
   [OrganizationLocation] nvarchar(256) NULL,
   [PhoneNumber] varchar(15) NULL,
+  [OrganizationLoginID] int NULL,
 );
 
 CREATE TABLE [EventType] (

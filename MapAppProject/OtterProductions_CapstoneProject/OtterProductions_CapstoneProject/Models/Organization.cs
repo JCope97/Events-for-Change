@@ -17,7 +17,7 @@ public partial class Organization
     public string? AspnetIdentityId { get; set; }
 
     [StringLength(50)]
-    public string Email { get; set; } = null!;
+    public string? Email { get; set; }
 
     [Required]
     [StringLength(50, MinimumLength = 2, ErrorMessage = "Name {0} must be between {2} and {1} character(s) in length.")]
@@ -32,6 +32,8 @@ public partial class Organization
     public string? Address { get; set; }
 
     public string? PhoneNumber { get; set; }
+
+    public int? OrganizationLoginId { get; set; }
 
     [InverseProperty("OrganizationNavigation")]
     public virtual ICollection<Event> Events { get; } = new List<Event>();
