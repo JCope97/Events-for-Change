@@ -1,0 +1,64 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+<div class="card w-50 m-xl-auto">
+    <div class="card-bodyhover" id="cardBody" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
+        
+        <div class="text-center">
+   
+            <img src="/Images/logo.png" alt="LOGO" id="loginpageLogo" style="width:250px; height:150px" />
+            <br />
+            <h3>Welcome! Please Login Below</h3>
+        <div class="row">
+            <div class="col-md-4, text-center">
+                <section>
+                    <form id="account" method="post">
+                    
+                        <br />
+                        <hr />
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                        <div class="form-floating mb-3" id="emailLogin" style="padding-left: 15px; padding-right:15px; text-indent:5px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                                <input asp-for="Input.Email" class="form-control" id="emailLogin" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                                <label asp-for="Input.Email" id="emailLogin" class="form-label">Email (Ex: name@example.com)</label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                            <div class="form-floating mb-3" id="passwordLogin" style="padding-left: 15px; padding-right:15px; text-indent:5px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.Password" class="form-label">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="checkbox mb-3">
+                            <label asp-for="Input.RememberMe" class="form-label">
+                                <input class="form-check-input" asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                        <div>
+                                <button id="buttonLogin" type="submit" class="buttonLogin" style="border-radius: 4px; width: 100px; color: white; background-color: rgb(0,129,0); font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Log in</button>
+                        </div>
+                        <div>
+                            @*<p>
+                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            </p>*@
+                            <br />
+                                <div class="registrationLink" sstyle="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Don't have an account? Create one here!</a>
+                            </div>
+                            @*<p>
+                                <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                            </p>*@
+                            <br>
+                        </div>
+                    </form>
+                </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,116 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #D3D3D3;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 50px;
+}
+
+
+#homepageLogo {
+    height: 300px;
+    width: 600px;
+}
+
+
+/*FAQ Page*/
+.faq {
+    font-size: xx-large;
+}
+
+.category1, .category2, .category3, .category4 {
+    font-size:large;
+}
+
+.accordion2, .accordion1, .accordion4 {
+    width: 75%;
+}
+
+.contactUsTitle, .whatInfoTitle, .useInfoTitle {
+    font-size: x-large;
+}
+
+/*Privacy Page*/
+
+.privacyHeader {
+    font-size: xx-large;
+    font-weight: bold;
+
+}
+
+.whatInfoStatement, .useInfoStatement, .contactUsStatement {
+    width: 70%;
+}
+
+/*Map*/
+
+#map {
+    height: 700px; /* The height is 400 pixels */
+    width: 100%; /* The width is the width of the web page */
+}
+
+.thead, .tbody {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+}
+
+
+/*User Login*/
+
+.registrationLink {
+    color: lightblue
+}
+
+#emailLogin {
+
+}
+
+
+#passwordLogin {
+
+}
+
+#passwordLogin:focus {
+    background-color: lightblue;
+}
+
+
+#cardBody {
+    background-color: lightblue;
+}
+
+.buttonLogin {
+    border-radius: 4px;
+    width: 100px;
+}
+
+#buttonLogin {
+    border-radius: 4px;
+    width: 100px;
+}
+
+h3 {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.form-floating mb-3 {
+    width: 50%;
+}
+
+/*User Registration*/
