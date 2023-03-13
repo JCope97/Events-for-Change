@@ -29,11 +29,16 @@ public partial class Organization
     public string? OrganizationLocation { get; set; } 
 
     public string? Address { get; set; }
+    public string ImageUrl { get; set; }
 
     public string? PhoneNumber { get; set; }
 
     public int? OrganizationLoginId { get; set; }
 
+    public string OrganizationPicture { get; set; }
+   
+
     [InverseProperty("OrganizationNavigation")]
     public virtual ICollection<Event> Events { get; } = new List<Event>();
+
 }

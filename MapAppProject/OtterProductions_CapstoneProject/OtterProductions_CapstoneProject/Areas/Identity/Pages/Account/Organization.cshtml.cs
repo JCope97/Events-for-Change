@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.Data;
@@ -34,6 +35,8 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly AuthenticationDbContext _authDbContext;
         private readonly MapAppDbContext _mapAppDbContext;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public OrganizationModel(
             UserManager<ApplicationUser> userManager,
@@ -42,7 +45,9 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             AuthenticationDbContext authDbContext,
-            MapAppDbContext context)
+            MapAppDbContext context,
+            IHttpContextAccessor httpContextAccessor,
+            IWebHostEnvironment webHostEnvironment)
 
         {
             _userManager = userManager;
@@ -53,6 +58,8 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _authDbContext = authDbContext;
             _mapAppDbContext = context;
+            _hostEnvironment = webHostEnvironment;
+            _httpContextAccessor = httpContextAccessor; 
         }
 
         /// <summary>
@@ -112,11 +119,16 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             [DataType(DataType.PhoneNumber)]
             [RegularExpression(@"^(\d{10})$", ErrorMessage = "Not a valid phone number, Needs to be digits only")]
             public string PhoneNumber { get; set; }
-
+             public IFormFile ProfileImage { get; set; }
+            public string ImageUrl { get; set; }
 
             [PersonalData]
             [Column(TypeName = "bit")]
             public bool IsOrganization { get; set; }
+
+            //[PersonalData]
+            //[Column(TypeName = "varbinary")]
+            //public byte[] OrganizationPicture { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -145,12 +157,29 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(IFormFile fileUpload,string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
+
+            try
             {
+
+                dynamic urlPic = null;
+            if (ModelState.IsValid)
+            {                
+                if (fileUpload != null)
+                {           
+                    string profilefolder = "images/ProfilePics/";
+                    profilefolder +=Guid.NewGuid() + "_" + fileUpload.FileName;
+                    
+                    Input.ImageUrl = profilefolder;
+                    string ProfileServerFolder = Path.Combine(_hostEnvironment.WebRootPath, profilefolder);
+                    await fileUpload.CopyToAsync(new FileStream(ProfileServerFolder, FileMode.Create));
+                    urlPic = string.Concat(_httpContextAccessor.HttpContext.Request.Scheme, "//", _httpContextAccessor.HttpContext.Request.Host,"/"+ profilefolder);//https//localhost:7196/images/ProfilePics/204aab4e-9310-4850-81c2-9ab1395e737f_Untitled.jpg
+
+                    }
+                 
 
                 var user = new ApplicationUser
                 {
@@ -158,6 +187,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     UserName = Input.Email,
                     IsOrganization = Input.IsOrganization
+                   
                 };
 
                 var identityOrganization = new IdentityOrganization
@@ -184,7 +214,10 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                         OrganizationDescription = Input.OrganizationDescription,
                         OrganizationLocation = Input.OrganizationLocation,
                         Address = Input.Address,
-                        PhoneNumber = Input.PhoneNumber
+                        PhoneNumber = Input.PhoneNumber,
+                        OrganizationPicture = Input.ImageUrl,
+                        ImageUrl = urlPic,
+
 
                     };
                       await _mapAppDbContext.Organizations.AddAsync(ma);
@@ -222,7 +255,12 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                 }
 
             }
+            }
+            catch (Exception ex)
+            {
 
+                throw;
+            }
             // If we got this far, something failed, redisplay form
             return Page();
         }
