@@ -72,6 +72,29 @@ namespace OtterProductions_CapstoneProject.Controllers
             return View(browseView);
         }
 
+        [HttpGet]
+        public IActionResult BrowsingSearch(){
+            return View();
+        }
+
+        //[HttpPost]
+
+        //Takes in the BrowseViewModel or a different browse model?
+        //public IActionResult BrowsingSearch()
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
+
+
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
