@@ -19,8 +19,7 @@ public class Program
 
         builder.Services.AddDbContext<AuthenticationDbContext>(options => options.UseSqlServer(connectionString));
 
-        builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer(
-            builder.Configuration.GetConnectionString("MapAppConnection")
+        builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationOtterProductions_CapstoneProject;Trusted_Connection=True;MultipleActiveResultSets=true"
            ));
 
         builder.Services

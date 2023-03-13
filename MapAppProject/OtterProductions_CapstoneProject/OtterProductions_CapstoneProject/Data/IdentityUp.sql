@@ -1,4 +1,3 @@
-
 --CREATE DATABASE [AuthenticationOtterProductions_CapstoneProject];
 
 CREATE TABLE [__EFMigrationsHistory] (
@@ -21,8 +20,8 @@ CREATE TABLE [AspNetRoles] (
 CREATE TABLE [AspNetUsers] (
     [Id] nvarchar(450) NOT NULL,
     [UserName] nvarchar(256) NULL,
-	[FirstName] nvarchar(256) NULL,
-	[LastName] nvarchar(256) NULL,
+[FirstName] nvarchar(256) NULL,
+[LastName] nvarchar(256) NULL,
     [NormalizedUserName] nvarchar(256) NULL,
     [Email] nvarchar(256) NULL,
     [NormalizedEmail] nvarchar(256) NULL,
@@ -36,7 +35,7 @@ CREATE TABLE [AspNetUsers] (
     [LockoutEnd] datetimeoffset NULL,
     [LockoutEnabled] bit NOT NULL,
     [AccessFailedCount] int NOT NULL,
-    [IsOrganization] bool NOT NULL,
+    [IsOrganization] bit NOT NULL,
     CONSTRAINT [PK_AspNetUsers] PRIMARY KEY ([Id])
 );
 
@@ -110,5 +109,3 @@ CREATE UNIQUE INDEX [UserNameIndex] ON [AspNetUsers] ([NormalizedUserName]) WHER
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
 VALUES (N'20230215005911_InitialMigration', N'7.0.2');
-
-
