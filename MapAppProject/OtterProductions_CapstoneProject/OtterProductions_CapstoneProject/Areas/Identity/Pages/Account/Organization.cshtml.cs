@@ -186,11 +186,14 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     PhoneNumber = Input.PhoneNumber,
                     Email = Input.Email,
                     UserName = Input.Email,
-                    IsOrganization = Input.IsOrganization
-                   
-                };
+                    IsOrganization = Input.IsOrganization,
+                    FirstName = Input.OrganizationName,
+                    LastName= Input.OrganizationName,
 
-                var identityOrganization = new IdentityOrganization
+                };
+                  
+
+                    var identityOrganization = new IdentityOrganization
                 {
                     User = user,
                     UserId = user.Id

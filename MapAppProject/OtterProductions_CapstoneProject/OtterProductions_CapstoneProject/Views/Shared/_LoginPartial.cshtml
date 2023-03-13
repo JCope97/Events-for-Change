@@ -15,6 +15,18 @@
             <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
         </form>
     </li>
+        @*<li class="nav-item">
+            <form id="profile" class="form-inline" asp-page="/Organization/OrganizationDetails">
+                <button id="profile" type="submit" class="nav-link btn btn-link text-dark border-0">Profile</button>
+            </form>
+        </li>*@
+     
+    <li class="nav-item">
+        @{
+                var name = User.Identity.Name;
+                <text>  &nbsp;&nbsp;&nbsp; @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile" }) </text>
+        }
+    </li>
 }
 else
 {

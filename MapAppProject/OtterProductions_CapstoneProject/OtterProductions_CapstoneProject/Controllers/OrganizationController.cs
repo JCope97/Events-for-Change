@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging.Signing;
 using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
 
@@ -28,6 +30,13 @@ namespace OtterProductions_CapstoneProject.Controllers
         }
 
         // GET: Organization/Details/5
+
+        public async Task<IActionResult> OrganizationDetails( string? id)
+        {
+            var userDtaeils = _context.Organizations.Where(x =>x.Email == id).FirstOrDefault();
+
+            return View(userDtaeils);
+        }
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Organizations == null)
