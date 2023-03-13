@@ -32,12 +32,19 @@
                                 <td>@events.EventName</td>
                                 <td>@events.EventLocation</td>
                                 <td>@events.EventDescription</td>
+                                <td>@events.EventDate</td>
                                 @*Grabs the organization info based on the event organization ID*@
                                 @*if the organization ID is equal to the location of organziations - 1 then post the organization information*@
                                 @if (events.OrganizationId == Model.Organizations.ElementAt(events.OrganizationId - 1).OrganizationLoginId)
                                 {
                                     <td>@Model.Organizations.ElementAt(events.OrganizationId - 1).OrganizationDescription</td>
                                 }
+                                <td>@events.EventTypeId</td>
+                                @if (events.OrganizationId == Model.Organizations.ElementAt(events.OrganizationId - 1).OrganizationLoginId)
+                                {
+                                    <td>@Model.ElementAt(events.OrganizationId - 1).OrganizationDescription</td>
+                                }
+                                <td> EventType1</td>
                             </tr>
                         }
                 </tbody>
