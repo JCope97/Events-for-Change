@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtterProductions_CapstonePr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtterProductions_Tests", "OtterProductions_Tests\OtterProductions_Tests.csproj", "{5CB0EDF2-1E41-4B04-AA5C-1423DF777783}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "JavaScript_Tests", "JavaScript_Tests\JavaScript_Tests.esproj", "{71974B87-71CA-421C-9B78-E8AB7C83CBBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{5CB0EDF2-1E41-4B04-AA5C-1423DF777783}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CB0EDF2-1E41-4B04-AA5C-1423DF777783}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CB0EDF2-1E41-4B04-AA5C-1423DF777783}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71974B87-71CA-421C-9B78-E8AB7C83CBBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71974B87-71CA-421C-9B78-E8AB7C83CBBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71974B87-71CA-421C-9B78-E8AB7C83CBBE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{71974B87-71CA-421C-9B78-E8AB7C83CBBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71974B87-71CA-421C-9B78-E8AB7C83CBBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71974B87-71CA-421C-9B78-E8AB7C83CBBE}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

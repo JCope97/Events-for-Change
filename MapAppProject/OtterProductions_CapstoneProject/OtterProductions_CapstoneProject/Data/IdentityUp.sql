@@ -20,8 +20,8 @@ CREATE TABLE [AspNetRoles] (
 CREATE TABLE [AspNetUsers] (
     [Id] nvarchar(450) NOT NULL,
     [UserName] nvarchar(256) NULL,
-[FirstName] nvarchar(256) NULL,
-[LastName] nvarchar(256) NULL,
+    [FirstName] nvarchar(256) NULL,
+    [LastName] nvarchar(256) NULL,
     [NormalizedUserName] nvarchar(256) NULL,
     [Email] nvarchar(256) NULL,
     [NormalizedEmail] nvarchar(256) NULL,
