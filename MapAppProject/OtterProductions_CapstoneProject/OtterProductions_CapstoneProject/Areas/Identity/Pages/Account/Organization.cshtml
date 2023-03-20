@@ -7,13 +7,18 @@
 <div class="container">
     <div class="row">
         <div class="col" style="padding-top: 35px">
-            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
 
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-control mb-3">
                     <input type="checkbox" class="form-check-input" asp-for="Input.IsOrganization" required />
                     <label class="form-check-label, text-start" asp-for="Input.IsOrganization">Verify this is a organization account</label>
                     <span asp-validation-for="Input.IsOrganization" class="text-danger"></span>
+                </div>
+                <div class="form-control mb-3">
+                    <input type="file" class="form-check-input" name="fileUpload" required placeholder="Upload Image" />
+                   @* <label>Upload Image</label>*@
+                    <span asp-validation-for="Input.ProfileImage" class="text-danger"></span>
                 </div>
                 <div class="form-floating mb-3">
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
