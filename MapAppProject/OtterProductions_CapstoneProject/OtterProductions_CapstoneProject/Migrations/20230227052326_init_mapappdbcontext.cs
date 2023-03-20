@@ -43,11 +43,12 @@ namespace OtterProductionsCapstoneProject.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AspnetIdentityId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    OrganizationName = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    OrganizationDescription = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    OrganizationLocation = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 255, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 255, nullable: true),
+                    OrganizationName = table.Column<string>(type: "nvarchar(50)", maxLength: 255, nullable: false),
+                    OrganizationDescription = table.Column<string>(type: "nvarchar(50)", maxLength: 255,  nullable: true),
+                    OrganizationLocation = table.Column<string>(type: "nvarchar(50)", maxLength: 255, nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)",nullable: true),
                 },
                 constraints: table =>
                 {

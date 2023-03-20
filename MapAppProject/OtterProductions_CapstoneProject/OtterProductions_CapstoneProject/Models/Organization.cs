@@ -20,13 +20,15 @@ public partial class Organization
     public string? Email { get; set; }
 
     [StringLength(50)]
-    public string? OrganizationName { get; set; }
+    public string? OrganizationName { get; set; } 
 
     [StringLength(50)]
-    public string? OrganizationDescription { get; set; }
+    public string? OrganizationDescription { get; set; } 
 
     [StringLength(50)]
-    public string? OrganizationLocation { get; set; }
+    public string? OrganizationLocation { get; set; } 
+
+    public string? Address { get; set; }
 
     public string? PhoneNumber { get; set; }
 

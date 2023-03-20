@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.Data;
 
 #nullable disable
 
 namespace OtterProductionsCapstoneProject.Migrations
 {
-    [DbContext(typeof(MapAppDbContext))]
+    [DbContext(typeof(AuthenticationDbContext))]
     partial class MapAppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -49,14 +50,14 @@ namespace OtterProductionsCapstoneProject.Migrations
                         .HasColumnType("int")
                         .HasColumnName("EventTypeID");
 
-                    b.Property<int>("OrganzationId")
+                    b.Property<int>("OrganizationId")
                         .HasColumnType("int")
-                        .HasColumnName("OrganzationID");
+                        .HasColumnName("OrganizationID");
 
                     b.HasKey("Id")
                         .HasName("PK__Event__3214EC2726B95BDA");
 
-                    b.HasIndex("OrganzationId");
+                    b.HasIndex(new[] { "OrganizationId" }, "IX_Event_OrganizationID");
 
                     b.ToTable("Event");
                 });
@@ -109,14 +110,40 @@ namespace OtterProductionsCapstoneProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AspnetIdentityId")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("OrganizationDescription")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("OrganizationLocation")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("OrganizationName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id")
                         .HasName("PK__Organzat__3214EC27E4991DB4");
 
-                    b.ToTable("Organzation");
+                    b.ToTable("Organization");
                 });
 
             modelBuilder.Entity("OtterProductions_CapstoneProject.Models.UserEventList", b =>
@@ -139,30 +166,30 @@ namespace OtterProductionsCapstoneProject.Migrations
                     b.HasKey("Id")
                         .HasName("PK__UserEven__3214EC27DEE07ADF");
 
-                    b.HasIndex("EventId");
+                    b.HasIndex(new[] { "EventId" }, "IX_UserEventList_EventID");
 
-                    b.HasIndex("MapAppUserId");
+                    b.HasIndex(new[] { "MapAppUserId" }, "IX_UserEventList_MapAppUserID");
 
                     b.ToTable("UserEventList");
                 });
 
             modelBuilder.Entity("OtterProductions_CapstoneProject.Models.Event", b =>
                 {
-                    b.HasOne("OtterProductions_CapstoneProject.Models.EventType", "Organzation")
+                    b.HasOne("OtterProductions_CapstoneProject.Models.EventType", "Organization")
                         .WithMany("Events")
-                        .HasForeignKey("OrganzationId")
+                        .HasForeignKey("OrganizationId")
                         .IsRequired()
                         .HasConstraintName("Fk EventType ID");
 
                     b.HasOne("OtterProductions_CapstoneProject.Models.Organization", "OrganizationNavigation")
                         .WithMany("Events")
-                        .HasForeignKey("OrganzationId")
+                        .HasForeignKey("OrganizationId")
                         .IsRequired()
                         .HasConstraintName("Fk Organzation ID");
 
-                    b.Navigation("OrganizationNavigation");
+                    b.Navigation("Organization");
 
-                    b.Navigation("Organzation");
+                    b.Navigation("OrganizationNavigation");
                 });
 
             modelBuilder.Entity("OtterProductions_CapstoneProject.Models.UserEventList", b =>
