@@ -74,25 +74,24 @@ namespace OtterProductions_CapstoneProject.Controllers
 
         [HttpGet]
         public IActionResult BrowsingSearch(){
-            return View();
+            BrowsingSearchViewModel browseSearchView = new BrowsingSearchViewModel();
+            return View(browseSearchView);
         }
 
-        //[HttpPost]
-
-        //Takes in the BrowseViewModel or a different browse model?
-        //public IActionResult BrowsingSearch()
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    else
-        //    {
-        //        return View();
-        //    }
-        //}
-
-
+        [HttpPost]
+        public IActionResult BrowsingSearch(BrowsingSearchViewModel browseSearchView)
+        {
+            browseSearchView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
+            browseSearchView.Organizations = _context.Organizations.ToList();
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View();
+            }
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
