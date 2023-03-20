@@ -22,6 +22,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Data
         [PersonalData]
         [Column(TypeName = "bit")]
         public bool IsOrganization { get; set; }
+       
         //public string OrganizationName { get; set; }
 
         //[PersonalData]
