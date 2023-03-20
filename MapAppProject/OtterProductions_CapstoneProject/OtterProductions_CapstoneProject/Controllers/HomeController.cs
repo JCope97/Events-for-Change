@@ -64,11 +64,6 @@ namespace OtterProductions_CapstoneProject.Controllers
             browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
             browseView.Organizations = _context.Organizations.ToList();
 
-            //if (browseView.Events == null)
-            //{
-            //    return NotFound();
-            //}
-
             return View(browseView);
         }
 

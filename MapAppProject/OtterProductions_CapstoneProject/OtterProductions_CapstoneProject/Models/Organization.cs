@@ -26,7 +26,7 @@ public partial class Organization
     public string? OrganizationDescription { get; set; } 
 
     [StringLength(50)]
-    public string? OrganizationLocation { get; set; } 
+    public string? OrganizationLocation { get; set; }
 
     public string? Address { get; set; }
 
