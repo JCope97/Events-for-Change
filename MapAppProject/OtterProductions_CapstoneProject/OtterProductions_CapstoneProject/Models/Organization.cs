@@ -20,10 +20,10 @@ public partial class Organization
     public string? Email { get; set; }
 
     [StringLength(50)]
-    public string? OrganizationName { get; set; } 
+    public string? OrganizationName { get; set; }
 
     [StringLength(50)]
-    public string? OrganizationDescription { get; set; } 
+    public string? OrganizationDescription { get; set; }
 
     [StringLength(50)]
     public string? OrganizationLocation { get; set; }
@@ -36,7 +36,7 @@ public partial class Organization
     public int? OrganizationLoginId { get; set; }
 
     public string OrganizationPicture { get; set; }
-   
+
 
     [InverseProperty("OrganizationNavigation")]
     public virtual ICollection<Event> Events { get; } = new List<Event>();

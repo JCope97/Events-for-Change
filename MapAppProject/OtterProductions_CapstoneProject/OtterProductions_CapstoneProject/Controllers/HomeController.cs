@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -62,10 +63,17 @@ namespace OtterProductions_CapstoneProject.Controllers
             //Creates a viewmodel and grabs the events and organizations
             BrowseViewModel browseView = new BrowseViewModel();
             browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
+            //try{
+            //    browseView.Organizations = _context.Organizations.ToList();
+            //}
+            //catch{
+            //    browseView.Organizations = null;
+            //    return View(browseView);
+            //}
             browseView.Organizations = _context.Organizations.ToList();
 
             return View(browseView);
-        }
+            }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
