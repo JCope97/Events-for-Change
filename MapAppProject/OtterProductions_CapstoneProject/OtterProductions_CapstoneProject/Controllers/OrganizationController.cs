@@ -171,10 +171,26 @@ namespace OtterProductions_CapstoneProject.Controllers
         // GET: Organization/Events
         public async Task<IActionResult> Events()
         {
-            var result = await _context.Events.ToListAsync();
+            // will need to pass the org Id.Need to Make it dynamic.
+            var result = await _context.Events.Where(x => x.OrganizationId == 1).ToListAsync();
 
             return View(result);
         }
+        [HttpGet()]
+        public IActionResult CreateEvent()
+        {
+            return View(new Event());
+        }
+        [HttpPost()]
+        public async Task<IActionResult> CreateEvent(Event model)
+        
+        {
+            model.EventDate = DateTime.Now;
+            model.OrganizationId = 1; //Todo: will be dynamic.
+            await _context.Events.AddAsync(model);
+            await _context.SaveChangesAsync();
 
+            return RedirectToAction("Events");
+        }
     }
 }

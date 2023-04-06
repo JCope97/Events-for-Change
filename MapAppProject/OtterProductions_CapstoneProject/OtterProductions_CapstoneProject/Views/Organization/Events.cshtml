@@ -3,13 +3,35 @@
 @{
     ViewData["Title"] = "Events";
 }
+<a class="nav-link text-dark" asp-area="" asp-controller="Organization" asp-action="CreateEvent" role="tab" aria-controls="profile" aria-selected="false">Add New Event</a>
+
 @if (Model != null)
 {
-    @foreach (var item in Model)
-    {
+    <div class="container">
 
-        <h1>EventName: @item.EventName</h1>
-    }
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>@item.EventName</td>
+                        <td>@item.EventLocation</td>
+                        <td>@item.EventDescription</td>
+                        <td>@item.EventDate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 else
 {
