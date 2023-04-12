@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "Events";
 }
-<a class="nav-link text-dark" asp-area="" asp-controller="Organization" asp-action="CreateEvent" role="tab" aria-controls="profile" aria-selected="false">Add New Event</a>
+
+<link href="~/css/events.css" rel="stylesheet" />
+<a class="nav-link" asp-area="" asp-controller="Organization" asp-action="CreateEvent" role="tab" aria-controls="profile" aria-selected="false">Add New Event</a>
 
 @if (Model != null)
 {

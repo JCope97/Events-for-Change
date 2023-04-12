@@ -171,7 +171,7 @@ namespace OtterProductions_CapstoneProject.Controllers
         // GET: Organization/Events
         public async Task<IActionResult> Events()
         {
-            // will need to pass the org Id.Need to Make it dynamic.
+           
             var result = await _context.Events.Where(x => x.OrganizationId == 1).ToListAsync();
 
             return View(result);
@@ -186,7 +186,7 @@ namespace OtterProductions_CapstoneProject.Controllers
         
         {
             model.EventDate = DateTime.Now;
-            model.OrganizationId = 1; //Todo: will be dynamic.
+            model.OrganizationId = 1; 
             await _context.Events.AddAsync(model);
             await _context.SaveChangesAsync();
 
