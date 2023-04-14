@@ -28,21 +28,41 @@ body {
 }
 
 
+
 /*FAQ Page*/
 .faq {
     font-size: xx-large;
+    color: white;
 }
 
 .category1, .category2, .category3, .category4 {
-    font-size:large;
+    font-size: large;
+    color: #EBF5EE;
 }
 
 .accordion2, .accordion1, .accordion4 {
     width: 75%;
+    background-color: #22303c;
 }
+
+.accordion-button collapsed {
+    background-color: #22303c;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #15202b;
+    background-color: #8899a6;
+}
+
 
 .contactUsTitle, .whatInfoTitle, .useInfoTitle {
     font-size: x-large;
+    color: white;
+}
+
+.accordion-item, .accordion-header, .accordion-button {
+    background-color: #22303c;
+    color: white;
 }
 
 /*Privacy Page*/
@@ -50,12 +70,14 @@ body {
 .privacyHeader {
     font-size: xx-large;
     font-weight: bold;
-
+    color: white;
 }
 
 .whatInfoStatement, .useInfoStatement, .contactUsStatement {
     width: 70%;
+    color: white;
 }
+
 
 /*Map*/
 
