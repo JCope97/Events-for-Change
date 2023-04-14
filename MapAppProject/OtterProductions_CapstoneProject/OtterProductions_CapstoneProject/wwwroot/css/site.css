@@ -27,7 +27,14 @@ body {
     width: 600px;
 }
 
-
+footer {
+    position: absolute;
+    left: 0px;
+    height: 50px;
+    bottom: 0px;
+    width: 100%;
+    padding-top: 15px;
+}
 
 /*FAQ Page*/
 .faq {
