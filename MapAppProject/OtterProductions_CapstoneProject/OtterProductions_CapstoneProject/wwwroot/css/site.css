@@ -179,3 +179,32 @@ h3 {
 }
 
 /*User Registration*/
+
+
+/*nav bar*/
+
+.navbar {
+    background-color: #22303c;
+}
+
+.navbar-text, .nav-link, .nav-item {
+    color: white;
+}
+
+.body {
+    background-color: #EBF5EE;
+}
+
+.nav-link:hover {
+    color: #8899a6;
+}
+
+/* links */
+
+a {
+    color: white;
+}
+
+    a:hover {
+        color: #8899a6;
+    }
