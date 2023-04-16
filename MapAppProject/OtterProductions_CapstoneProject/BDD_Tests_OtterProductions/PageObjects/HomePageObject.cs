@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Support.UI;
 using BDD_Tests_OtterProductions.Shared;
 using System.Collections.ObjectModel;
-using Standups_BDD_Tests.PageObjects;
+using BDD_Tests_OtterProductions.PageObjects;
 
 namespace BDD_Tests_OtterProductions.PageObjects
 {

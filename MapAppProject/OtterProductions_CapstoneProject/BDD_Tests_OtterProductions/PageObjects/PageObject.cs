@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Standups_BDD_Tests.PageObjects
+namespace BDD_Tests_OtterProductions.PageObjects
 {
     /// <summary>
     /// Put things here that are shared or needed by all PageObjects
