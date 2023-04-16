@@ -21,7 +21,8 @@ namespace BDD_Tests_OtterProductions.Shared
         {
             { "Home" , "/" },
             { "Login", "/Identity/Account/Login" },
-            { "Register", "/Identity/Account/Register" }
+            { "Register", "/Identity/Account/Register" },
+            { "Map", "/Map/Mappage"}
         };
 
         public static string PathFor(string pathName) => Paths[pathName];
