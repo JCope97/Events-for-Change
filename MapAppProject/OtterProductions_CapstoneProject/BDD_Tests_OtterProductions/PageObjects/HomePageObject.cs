@@ -27,5 +27,7 @@ namespace BDD_Tests_OtterProductions.PageObjects
             IWebElement navbarLogoutButton = _webDriver.FindElement(By.Id("logout-button"));
             navbarLogoutButton.Click();
         }
+
+
     }
 }
