@@ -20,7 +20,8 @@ namespace BDD_Tests_OtterProductions.Shared
         public static readonly Dictionary<string, string> Paths = new()
         {
             { "Home" , "/" },
-            { "Login", "/Identity/Account/Login" }
+            { "Login", "/Identity/Account/Login" },
+            { "Register", "/Identity/Account/Register" }
         };
 
         public static string PathFor(string pathName) => Paths[pathName];
