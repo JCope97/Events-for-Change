@@ -4,6 +4,12 @@
 @{
     ViewData["Title"] = "Map Page";
 }
+@section AddToHead
+{
+    <script type="module" src="/js/MapScript.js"></script>
+
+
+}
 
 <div>
     <p>Type in an Address or City</p>
@@ -13,6 +19,10 @@
 
 <input id="submit" type="button" value="Submit" class="btn btn-primary"></>
 
+<br/>
+<div>
+    <button type="button" class="btn btn-secondary" id="locationButton">Click here to get your location</button>
+</div>
 <br/>
 <div>
     <button id ="restroom" type="button" class="btn btn-info" value="Public Restroom">Restroom</button>
@@ -52,4 +62,7 @@ with https://www.npmjs.com/package/@googlemaps/js-api-loader.
 -->*@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCIiPJAz4KApQsWr71OlZXjZczcaRQitk&callback=initMap&libraries=places&v=weekly"
         defer
+
 ></script>
+
+<script src="~/js/MapScript.js" asp-append-version="true"></script>

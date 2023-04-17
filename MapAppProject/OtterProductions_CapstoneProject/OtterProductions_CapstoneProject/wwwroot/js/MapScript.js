@@ -15,6 +15,7 @@ let responseDiv;
 let response;
 let markers = [];
 
+
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"),
         {
@@ -32,7 +33,7 @@ function initMap() {
     const foodBankButton = document.getElementById("Food Bank");
     const shelterButton = document.getElementById("Shelter");
     const listtitle = document.getElementById("list-title");
-    
+    const getLocationButton = document.getElementById("locationButton");
 
     const clearButton = document.createElement("input");
 
@@ -175,7 +176,41 @@ function initMap() {
 
         });
 
+
+    
+
+    getLocationButton.addEventListener("click",
+        () => {
+            getLocationMap(geocoder);
+        });
+
 }
+
+function getLocationMap() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(geocodeLatLongMap);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function geocodeLatLongMap(position) {
+
+    const latlng = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+    };
+    const inputText = document.getElementById("location");
+
+
+    geocoder
+        .geocode({ location: latlng })
+        .then((response) => {
+            if (response.results[0]) {
+                inputText.value = response.results[0].formatted_address;
+            }
+        });
+};
 
 function clear() {
     marker.setMap(null);
@@ -199,6 +234,8 @@ function geocode(request) {
             alert("That was not a valid address. Error:" + e);
         });
 }
+
+
 
 
 
@@ -252,6 +289,9 @@ function deleteMarkers() {
 
 
 }
+
+
+
 
 /*window.initMap = initMap;*/
 
