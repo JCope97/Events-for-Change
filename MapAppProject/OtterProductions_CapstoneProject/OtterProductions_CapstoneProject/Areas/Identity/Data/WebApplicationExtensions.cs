@@ -18,7 +18,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Data
                 var userRole = new IdentityRole(RoleConstants.USER);
                 var organizationRole = new IdentityRole(RoleConstants.ORGANIZATION);
 
-                if(!roleManager.Roles.Any())
+                if (!roleManager.Roles.Any())
                 {
                     roleManager.CreateAsync(userRole).GetAwaiter().GetResult();
                     roleManager.CreateAsync(organizationRole).GetAwaiter().GetResult();

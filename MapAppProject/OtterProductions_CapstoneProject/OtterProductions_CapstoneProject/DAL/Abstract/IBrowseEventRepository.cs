@@ -6,6 +6,8 @@ namespace OtterProductions_CapstoneProject.DAL.Abstract
     public interface IBrowseEventRepository : IRepository<Event>
     {
         IEnumerable<Event> GetAllEventsWithinTwoWeeks(DateOnly today);
+
+        IEnumerable<Event> GetAllEventsWithinTwoWeeksAndTheLocation(CityState cityStateLocation, DateOnly today);
     }
 }
 

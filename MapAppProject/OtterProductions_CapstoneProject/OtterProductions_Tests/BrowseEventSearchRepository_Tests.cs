@@ -16,9 +16,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OtterProductions_Tests
 {
-    public class BrowseEventRepository_Tests
+    public class BrowseEventSearchRepository_Tests
     {
-        //Creating tests for Events to be seen in a window of 2 weeks        
+        //Creating tests to make sure EventLocation takes in the data from the form correctly    
         private Mock<MapAppDbContext> _mockContext;
         private Mock<DbSet<Event>> _mockEventDbSet;
         private List<Event> _event;
@@ -36,6 +36,8 @@ namespace OtterProductions_Tests
                 new Event {OrganizationId = 4, EventName = "Lifeline", EventLocation = "545 SW 2nd Street Corvallis, OR 97333", EventTypeId = 1, EventDescription = "Come and enjoy a warm meal", EventDate = _today.AddDays(12).ToDateTime(_zeroTime)},
                 new Event {OrganizationId = 5, EventName = "Operation Sandwich", EventLocation = "345 Monmouth Ave N, Monmouth, OR 97361", EventTypeId = 1, EventDescription = "Free lunch meals", EventDate = _today.AddDays(12).ToDateTime(_zeroTime)},
                 new Event {OrganizationId = 4, EventName = "Summer Heat Rest", EventLocation = "545 SW 2nd Street Corvallis, OR 97333", EventTypeId = 2, EventDescription = "Come visit if you are thirsty and need water bottles", EventDate = _today.AddDays(65).ToDateTime(_zeroTime)},
+                new Event {OrganizationId = 2, EventName = "Hunger Helpers 2023", EventLocation = "4570 Center Street Salem, OR - 97301", EventTypeId = 1, EventDescription = "A lot of soup is being made for anyone!", EventDate = _today.AddDays(5).ToDateTime(_zeroTime)},
+                new Event {OrganizationId = 2, EventName = "Hunger Helpers day 30 2023", EventLocation = "4570 Center Street Salem, OR - 97301", EventTypeId = 1, EventDescription = "A lot of soup is being made for anyone!", EventDate = _today.AddDays(35).ToDateTime(_zeroTime)},
             };
 
 
@@ -47,54 +49,28 @@ namespace OtterProductions_Tests
         }
 
         [Test]
-        public void GetAllEventsWithinTwoWeeks_ReturnsAllEvents()
+        public void GetAllEventsWithinTwoWeeksAndTheLocation_ReturnsOnlySalemEventsWithinTwoWeeks()
         {
             // Arrange
             IBrowseEventRepository browseEventRepository = new BrowseEventRepository(_mockContext.Object);
 
             // Act
+            CityState cityStateLocation = new CityState();
+            cityStateLocation.address = "Oregon State Capitol 900 Court St NE Salem, OR 97301";
+            cityStateLocation.city = "Salem";
+            cityStateLocation.state = "OR";
+            cityStateLocation.zip = "97301";
+
             DateOnly today = _today;
-            IEnumerable<Event> events = browseEventRepository.GetAllEventsWithinTwoWeeks(today);
+
+            IEnumerable<Event> events = browseEventRepository.GetAllEventsWithinTwoWeeksAndTheLocation(cityStateLocation, today);
 
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(events.Any(en => en.EventName == "Cloudy with a chance of free food"), Is.True);
-                Assert.That(events.Any(en => en.EventName == "Lifeline"), Is.True);
-                Assert.That(events.Any(en => en.EventName == "Operation Sandwich"), Is.True);
-            });
-        }
-
-        [Test]
-        public void GetAllEventsWithinTwoWeeks_ShouldNotReturnTheEventOutOfWindow()
-        {
-            // Arrange
-            IBrowseEventRepository browseEventRepository = new BrowseEventRepository(_mockContext.Object);
-
-            // Act
-            DateOnly today = _today;
-            IEnumerable<Event> events = browseEventRepository.GetAllEventsWithinTwoWeeks(today);
-
-            // Assert
-            Assert.That(events.Any(en => en.EventName == "Summer Heat Rest"), Is.False);
-        }
-
-        [Test]
-        public void GetAllEventsWithinTwoWeeks_ShouldReturnMultipleEventsWithinTheTwoWeekTimeFrame()
-        {
-            // Arrange
-            IBrowseEventRepository browseEventRepository = new BrowseEventRepository(_mockContext.Object);
-
-            // Act
-            DateOnly today = _today;
-            IEnumerable<Event> events = browseEventRepository.GetAllEventsWithinTwoWeeks(today);
-
-            // Assert
-            Assert.Multiple(() =>
-            {
-                Assert.That(events.ElementAt(0).EventDate, Is.EqualTo(_today.AddDays(11).ToDateTime(_zeroTime)));
-                Assert.That(events.ElementAt(1).EventDate, Is.EqualTo(_today.AddDays(12).ToDateTime(_zeroTime)));
-                Assert.That(events.ElementAt(2).EventDate, Is.EqualTo(_today.AddDays(12).ToDateTime(_zeroTime)));
+                Assert.That(events.Any(en => en.EventName == "Hunger Helpers 2023"), Is.True);
+                Assert.That(events.Any(en => en.EventName == "Lifeline"), Is.False);
+                Assert.That(events.Any(en => en.EventName == "Hunger Helpers day 30 2023"), Is.False);
             });
         }
     }

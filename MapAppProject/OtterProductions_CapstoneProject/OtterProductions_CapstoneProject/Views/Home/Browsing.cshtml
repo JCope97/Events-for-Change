@@ -6,7 +6,7 @@
 }
 
 <div>
-    <h4 class="text-center">Upcoming Events in the next two weeks:<h4>
+    <h4 class="text-center">Upcoming Events in the next two weeks:</h4>
     <br />
 
     @if(Model.Events.Count() == 0)
@@ -55,7 +55,8 @@
                 sortOrder: 'descending',
                 pagination: true,
                 perPage: 10,
-                globalSearch: true
+                globalSearch: true,
+                inputPlaceholder: 'Input a location...'
             });
         });
     </script>
