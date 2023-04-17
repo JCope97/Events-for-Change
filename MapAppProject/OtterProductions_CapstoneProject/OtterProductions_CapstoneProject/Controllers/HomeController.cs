@@ -72,26 +72,43 @@ namespace OtterProductions_CapstoneProject.Controllers
             return View(browseView);
         }
 
-        [HttpGet]
-        public IActionResult BrowsingSearch(){
-            BrowsingSearchViewModel browseSearchView = new BrowsingSearchViewModel();
-            return View(browseSearchView);
+        [HttpPost]
+        public IActionResult Browsing(CityState locationForVM)
+        {
+            //Creates a viewmodel and grabs the events and organizations within the city and state radius
+            BrowseViewModel browseView = new BrowseViewModel();
+            browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeksAndTheLocation(locationForVM, DateOnly.FromDateTime(DateTime.Now));
+            browseView.Organizations = _context.Organizations.ToList();
+
+            //if (browseView.Events == null)
+            //{
+            //    return NotFound();
+            //}
+
+            return View(browseView);
         }
 
-        [HttpPost]
-        public IActionResult BrowsingSearch(BrowsingSearchViewModel browseSearchView)
+        [HttpGet]
+        public IActionResult BrowsingSearch(){
+            CityState locationForVM = new CityState();
+            return View(locationForVM);
+        }
+
+/*        [HttpPost]
+        public IActionResult BrowsingSearch(BrowsingSearchViewModel browseSearchVM)
         {
-            browseSearchView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
-            browseSearchView.Organizations = _context.Organizations.ToList();
+            browseSearchVM.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
+            
+            browseSearchVM.Organizations = _context.Organizations.ToList();
             if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return View(browseSearchVM);
             }
             else
             {
                 return View();
             }
-        }
+        }*/
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

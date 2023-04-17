@@ -1,5 +1,5 @@
-﻿@*@model OtterProductions_CapstoneProject.Models.BrowseViewModel
-*@
+﻿@model OtterProductions_CapstoneProject.Models.CityState
+
 @{
     ViewData["Title"] = "Browsing Search Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,24 +10,25 @@
     <p>Enter your location and we can find local events in your city</p>
     <hr />
 
-    <form asp-controller="Home" asp-action="BrowsingSearch" method="post">
+    <form asp-controller="Home" asp-action="Browsing" method="post" style="text-align:left; display:inline-block;">
         <div class="form-group">
             <br />
-            <label for="LocationAddress">Enter your location:</label>
-            <input type="text" id="location" name="Location" value="">
+            <label for="AddressLocation">Enter your address:</label>
+            <input type="text" id="address" name="Address" value="" required>
+            <br />
             <br />
             <label for="CityLocation">Enter your city:</label>
-            <input type="text" id="city " name="City " value="">
+            <input type="text" id="city" name="City" value="" required>
             <br />
-            <label for="StateLocation">Enter your state:</label>
-            <input type="text" id="state" name="State" value="">
+            <br />
+            <label for="StateLocation">Enter your state (Using state abbrivations):</label>
+            <input type="text" id="state" name="State" pattern="^[A-Z]{2}$" value="" required>
+            <br />
             <br />
             <label for="Zipcode">Enter your zip:</label>
-            <input type="text" id="zip" name="Zip" value="">
+            <input type="text" id="zip" name="Zip" value="" required>
             <br />
         </div>
-        <br>
-        <hr />
         <br>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Submit</button>

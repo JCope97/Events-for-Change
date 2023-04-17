@@ -30,5 +30,26 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
             eventsWindow = eventsWindow.ToList();
             return eventsWindow;
         }
+
+        public IEnumerable<Event> GetAllEventsWithinTwoWeeksAndTheLocation(CityState cityStateLocation, DateOnly today)
+        {
+            //We are going to grab all events within the city and state radius and within the two week span
+            DateOnly endWindow = today.AddDays(14);
+            IEnumerable<Event> eventsWindow = new List<Event>();
+
+            foreach (var AnEvent in _context.Events)
+            {
+                if (DateOnly.FromDateTime(AnEvent.EventDate) >= today && DateOnly.FromDateTime(AnEvent.EventDate) <= endWindow)
+                {
+                    if (AnEvent.EventLocation.Contains(cityStateLocation.state) && AnEvent.EventLocation.Contains(cityStateLocation.city))
+                    {
+                        eventsWindow = eventsWindow.Append(AnEvent);
+                    }
+                }
+            }
+  
+            eventsWindow = eventsWindow.ToList();
+            return eventsWindow;
+        }
     }
 }
