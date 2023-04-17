@@ -33,7 +33,7 @@ INSERT INTO [Event](OrganizationID, EventName, EventLocation, EventTypeID, Event
     (5, 'Cloudy with a chance of free food', '1850 45th Ave NE Salem, OR - 97305', 1, 'Come and enjoy a warm meal', '4/24/23'),
     (4, 'Lifeline', '1800 SW 3rd Street Corvallis, OR - 97333', 1, 'Come and enjoy a warm meal', '4/17/23'),
     (5, 'Operation Sandwich', '1850 45th Ave NE Salem, OR - 97305', 1, 'Free lunch meals', '4/29/23'),
-    (7, 'Thrift Store', '885 Commercial Street NE Salem, Oregon - 97301', 2, 'Come thrift shopping! Open 10am - 5pm', '4/28/23'),
+    (7, 'Thrift Store', '885 Commercial Street NE Salem, Oregon - 97301', 5, 'Come thrift shopping! Open 10am - 5pm', '4/28/23'),
     (6, 'Free Dinner', '545 SW 2nd Street Corvallis, OR - 97333', 1, 'Come and enjoy a free warm meal from 5pm - 7pm', '4/27/23'),
     (4, 'Summer Heat Rest', '1800 SW 3rd Street, Corvallis, OR - 97333', 2, 'Come visit if you are thirsty and need water bottles', '4/30/23');
 

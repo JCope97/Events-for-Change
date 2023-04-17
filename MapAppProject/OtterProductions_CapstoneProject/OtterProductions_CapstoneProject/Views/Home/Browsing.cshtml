@@ -17,18 +17,15 @@
         <table class="table table-sm" id="logTable">
                 <thead>
                     <tr>
-                        @if (Model.EventsTypes != null)
-                        {
-                            <th scope="col">Event Type</th>
-                        }
+                        <th scope="col">Event Type</th>
                         <th scope="col">Name</th>
                         <th scope="col">Location</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Date & Time</th>
-                        @if (Model.Organizations != null)
+                        <th scope="col">Date</th>
+@*                      @if (Model.Organizations != null)
                         {
                             <th scope="col">Organization</th>
-                        }
+                        }*@
                     </tr>
                 </thead>
                 <tbody>
@@ -36,25 +33,19 @@
                         {
                             <tr>
                                 @*Grabs the Event type based on the EventTypes ID*@
-                                @if (Model.EventsTypes != null)
-                                {
-                                   @if (events.EventTypeId == Model.EventsTypes.ElementAt(events.EventTypeId - 1).Id)
-                                    {
-                                        <td>@Model.EventsTypes.ElementAt(events.EventTypeId - 1).EventType1</td>
-                                    }
-                                }
+                                <td>@Model.EventsTypes.ElementAt(events.EventTypeId - 1).EventType1</td>
                                 <td>@events.EventName</td>
                                 <td>@events.EventLocation</td>
                                 <td>@events.EventDescription</td>
-                                <td>@events.EventDate</td>
+                                <td>@DateOnly.FromDateTime(events.EventDate)</td>
                                 @*Grabs the organization info based on the event Organizations ID*@
-                                @if (Model.Organizations != null)
+@*                                @if (Model.Organizations != null)
                                 {
                                     @if (events.OrganizationId == Model.Organizations.ElementAt(events.OrganizationId - 1).OrganizationLoginId)
                                     {
                                         <td>@Model.Organizations.ElementAt(events.OrganizationId - 1).OrganizationDescription</td>
                                     }
-                                }
+                                }*@
                             </tr>
                         }
                 </tbody>
