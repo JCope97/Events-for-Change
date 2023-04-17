@@ -17,16 +17,30 @@ public partial class Event
     [Column("OrganizationID")]
     public int OrganizationId { get; set; }
 
-    [StringLength(255)]
+    [DataType(DataType.Text)]
+    [Display(Name = "Event Name")]
+
+
+    [StringLength(50)]
     public string EventName { get; set; } = null!;
 
-    [StringLength(255)]
+    [DataType(DataType.Text)]
+    [Display(Name = "Event Location")]
+
+
+    [StringLength(50)]
+    [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
     public string EventLocation { get; set; } = null!;
 
     [Column("EventTypeID")]
     public int EventTypeId { get; set; }
 
-    [StringLength(255)]
+
+    [DataType(DataType.Text)]
+    [Display(Name = "Event Description")]
+
+
+    [StringLength(50)]
     public string EventDescription { get; set; } = null!;
 
     [Column(TypeName = "datetime")]
