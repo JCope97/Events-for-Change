@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -59,18 +60,35 @@ namespace OtterProductions_CapstoneProject.Controllers
         [HttpGet]
         public IActionResult Browsing()
         {
-            //Creates a viewmodel and grabs the events and organizations
+            //Creates a viewmodel and grabs the events, eventTypes, and organizations
             BrowseViewModel browseView = new BrowseViewModel();
             browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
-            browseView.Organizations = _context.Organizations.ToList();
+            browseView.EventsTypes = _context.EventTypes.ToList();
+/*            //Can't add Organizations until later
+            browseView.Organizations = _context.Organizations.ToList();*/
 
-            if (browseView.Events == null)
-            {
-                return NotFound();
+            return View(browseView);
             }
+
+        [HttpPost]
+        public IActionResult Browsing(CityState locationForVM)
+        {
+            //Creates a viewmodel and grabs the events and organizations within the city and state radius
+            BrowseViewModel browseView = new BrowseViewModel();
+            browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeksAndTheLocation(locationForVM, DateOnly.FromDateTime(DateTime.Now));
+            browseView.EventsTypes = _context.EventTypes.ToList();
+/*            //Can't add Organizations until later
+            browseView.Organizations = _context.Organizations.ToList();*/
 
             return View(browseView);
         }
+
+        [HttpGet]
+        public IActionResult BrowsingSearch(){
+            CityState locationForVM = new CityState();
+            return View(locationForVM);
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
