@@ -4,11 +4,14 @@ body {
 }
 
 .navbar {
-    color black;
+    color: black;
 }
 
 .nav-item {
     color:white;
+}
+.nav-link {
+    color: white;
 }
 .emp-profile {
     padding: 3%;
