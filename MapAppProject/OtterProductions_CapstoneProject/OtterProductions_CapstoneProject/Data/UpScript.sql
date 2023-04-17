@@ -22,6 +22,7 @@ CREATE TABLE [Organization] (
 [OrganizationLocation] nvarchar(256) NULL,
 [PhoneNumber] varchar(15) NULL,
 [OrganizationLoginID] int NULL,
+[OrganizationPicture] VARBINARY(MAX)
 );
 
 CREATE TABLE [EventType] (

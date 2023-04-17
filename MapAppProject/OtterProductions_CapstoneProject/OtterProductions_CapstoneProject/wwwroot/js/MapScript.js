@@ -15,6 +15,7 @@ let responseDiv;
 let response;
 let markers = [];
 
+
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"),
         {
@@ -31,11 +32,23 @@ function initMap() {
     const restroomButton = document.getElementById("restroom");
     const foodBankButton = document.getElementById("Food Bank");
     const shelterButton = document.getElementById("Shelter");
-    
+    const listtitle = document.getElementById("list-title");
+    const getLocationButton = document.getElementById("locationButton");
 
     const clearButton = document.createElement("input");
 
     const service = new google.maps.places.PlacesService(map);
+
+    let getNextPage;
+
+    const moreButton = document.getElementById("more");
+
+    moreButton.onclick = function() {
+        moreButton.disabled = true;
+        if (getNextPage) {
+            getNextPage();
+        }
+    };
 
     clearButton.type = "button";
     clearButton.value = "Clear";
@@ -86,16 +99,18 @@ function initMap() {
                     (results, status, pagination) => {
                         if (status !== "OK" || !results) return;
 
-                        addPlaces(results, map)
-                        //moreButton.disabled = !pagination || !pagination.hasNextPage;
-                        //if (pagination && pagination.hasNextPage) {
-                        //    getNextPage = () => {
-                        //        // Note: nextPage will call the same handler function as the initial call
-                        //        pagination.nextPage();
-                        //        };
-                        //    }
-                        //}
-                    });
+                        addPlaces(results, map);
+                        listtitle.innerHTML = "Restrooms";
+
+                        //new stuff
+                        moreButton.disabled = !pagination || !pagination.hasNextPage;
+                        if (pagination && pagination.hasNextPage) {
+                            getNextPage = () => {
+                                // Note: nextPage will call the same handler function as the initial call
+                                pagination.nextPage();
+                                };
+                            }
+                        });
             } else {
                 alert("Please enter an address or city");
             }
@@ -113,16 +128,19 @@ function initMap() {
                     (results, status, pagination) => {
                         if (status !== "OK" || !results) return;
 
-                        addPlaces(results, map)
-                        //moreButton.disabled = !pagination || !pagination.hasNextPage;
-                        //if (pagination && pagination.hasNextPage) {
-                        //    getNextPage = () => {
-                        //        // Note: nextPage will call the same handler function as the initial call
-                        //        pagination.nextPage();
-                        //        };
-                        //    }
-                        //}
-                    });
+                        addPlaces(results, map);
+                        listtitle.innerHTML = "Food Banks";
+
+
+                        //new stuff
+                        moreButton.disabled = !pagination || !pagination.hasNextPage;
+                        if (pagination && pagination.hasNextPage) {
+                            getNextPage = () => {
+                                // Note: nextPage will call the same handler function as the initial call
+                                pagination.nextPage();
+                                };
+                            }
+                        });
             } else {
                 alert("Please enter an address or city");
             }
@@ -139,23 +157,60 @@ function initMap() {
                     (results, status, pagination) => {
                         if (status !== "OK" || !results) return;
 
-                        addPlaces(results, map)
-                        //moreButton.disabled = !pagination || !pagination.hasNextPage;
-                        //if (pagination && pagination.hasNextPage) {
-                        //    getNextPage = () => {
-                        //        // Note: nextPage will call the same handler function as the initial call
-                        //        pagination.nextPage();
-                        //        };
-                        //    }
-                        //}
-                    });
+                        addPlaces(results, map);
+                        listtitle.innerHTML = "Shelters";
+
+
+                        //new stuff
+                        moreButton.disabled = !pagination || !pagination.hasNextPage;
+                        if (pagination && pagination.hasNextPage) {
+                            getNextPage = () => {
+                                // Note: nextPage will call the same handler function as the initial call
+                                pagination.nextPage();
+                                };
+                            }
+                        });
             } else {
                 alert("Please enter an address or city");
             }
 
         });
 
+
+    
+
+    getLocationButton.addEventListener("click",
+        () => {
+            getLocationMap(geocoder);
+        });
+
 }
+
+function getLocationMap() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(geocodeLatLongMap);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function geocodeLatLongMap(position) {
+
+    const latlng = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+    };
+    const inputText = document.getElementById("location");
+
+
+    geocoder
+        .geocode({ location: latlng })
+        .then((response) => {
+            if (response.results[0]) {
+                inputText.value = response.results[0].formatted_address;
+            }
+        });
+};
 
 function clear() {
     marker.setMap(null);
@@ -182,9 +237,11 @@ function geocode(request) {
 
 
 
+
+
 function addPlaces(places, map) {
     const placesList = document.getElementById("places");
-
+    const getMoreButton = document.getElementById("more");
     for (const place of places) {
         if (place.geometry && place.geometry.location) {
             const image = {
@@ -203,14 +260,16 @@ function addPlaces(places, map) {
             });
 
             markers.push(placeMarker);
+           /* new stuff*/
+            const li = document.createElement("li");
 
-            //const li = document.createElement("li");
-
-            //li.textContent = place.name;
-            //placesList.appendChild(li);
-            //li.addEventListener("click", () => {
-            //    map.setCenter(place.geometry.location);
-            /*});*/
+            li.textContent = place.name;
+            li.id = "placesitem";
+            placesList.appendChild(li);
+            getMoreButton.hidden = "";
+            li.addEventListener("click", () => {
+                map.setCenter(place.geometry.location);
+            });
         }
     }
 }
@@ -218,14 +277,21 @@ function addPlaces(places, map) {
 function hideMarkers() {
     for (let i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
+
     }
 }
 
 function deleteMarkers() {
     hideMarkers();
     markers = [];
-    
+    const placesList = document.getElementById("places");
+    placesList.replaceChildren();
+
+
 }
+
+
+
 
 /*window.initMap = initMap;*/
 

@@ -4,6 +4,12 @@
 @{
     ViewData["Title"] = "Map Page";
 }
+@section AddToHead
+{
+    <script type="module" src="/js/MapScript.js"></script>
+
+
+}
 
 <div>
     <p>Type in an Address or City</p>
@@ -15,6 +21,10 @@
 
 <br/>
 <div>
+    <button type="button" class="btn btn-secondary" id="locationButton">Click here to get your location</button>
+</div>
+<br/>
+<div>
     <button id ="restroom" type="button" class="btn btn-info" value="Public Restroom">Restroom</button>
 
     <button id="Food Bank" type="button" class="btn btn-success" value="Food Bank">Food Bank</button>
@@ -24,9 +34,26 @@
 </div>
 
 <br />
-<!--The div element for the map -->
-<div id="map"></div>
 
+<div class="container">
+    
+    <!--The div element for the map -->
+    <div class="row">
+        <div class="col-8">
+
+            <div id="map"></div>
+        </div>
+         <div class="col-4" id="sidebar">
+             <div>
+                 <h2 id="list-title"></h2>
+                 <ul id="places"></ul>
+                 <button id="more" hidden="hidden">Load more results</button>
+             </div>
+                
+            </div>
+        
+    </div>
+</div>
 @*<!-- 
 The `defer` attribute causes the callback to execute after the full HTML
 document has been parsed. For non-blocking uses, avoiding race conditions,
@@ -35,4 +62,7 @@ with https://www.npmjs.com/package/@googlemaps/js-api-loader.
 -->*@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCIiPJAz4KApQsWr71OlZXjZczcaRQitk&callback=initMap&libraries=places&v=weekly"
         defer
+
 ></script>
+
+<script src="~/js/MapScript.js" asp-append-version="true"></script>

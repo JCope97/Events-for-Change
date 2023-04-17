@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+@section AddToHead
+    {
+    <script type="module" src="/js/HomePage.js"></script>
+}
 
 <div class="text-center">
     <img src="Images/logo.png" alt="LOGO" id="homepageLogo"/>
@@ -14,19 +18,21 @@
     <div class="col">
         <form asp-action="Index" method="post">
             
-                <div asp-validation-summary="All"></div>
+            <div asp-validation-summary="All"></div>
 
                 
             <div class="input-group-text">
 
-                        <label asp-for="location" class="control-label">Address</label>
-                        <input asp-for="location" class="form-control" required/>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+                <label asp-for="location" class="control-label" >Address or City</label>
+                <input asp-for="location" class="form-control" id="address" required />
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
                         
 
             
         </form>
+        <br/>
+        <button type="button" class="btn btn-secondary" id="locationButton">Click here to get your location</button>
     </div>
 </div>
 <br/>
@@ -40,3 +46,8 @@
         expand and get word out. Unlike various applications and websites that display information about all kinds of events such as Facebook or Ticketmaster, our website will focus on giving people more access to places of need,
         show events with free or discounted items of necessity, and work to improve users' lives by solving problems related to common struggles.</p>
 </div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCIiPJAz4KApQsWr71OlZXjZczcaRQitk&callback=initialize&libraries=places&v=weekly"
+        defer
+></script>
+<script src="~/js/HomePage.js" asp-append-version="true"></script>
