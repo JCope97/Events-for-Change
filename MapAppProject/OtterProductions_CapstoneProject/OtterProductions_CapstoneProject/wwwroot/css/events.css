@@ -1,0 +1,17 @@
+﻿body {
+    background-color: #15202b
+}
+
+.pb-3{
+    background-color: #22303c;
+}
+.container th,td{
+    color:white;
+}
+
+.nav-link {
+    color: white;
+}
+.form-floating mb-3 {
+    background-color: black;
+}

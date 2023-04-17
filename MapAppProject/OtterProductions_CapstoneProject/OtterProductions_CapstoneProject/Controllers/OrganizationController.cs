@@ -24,16 +24,16 @@ namespace OtterProductions_CapstoneProject.Controllers
         // GET: Organization
         public async Task<IActionResult> Index()
         {
-              return _context.Organizations != null ? 
-                          View(await _context.Organizations.ToListAsync()) :
-                          Problem("Entity set 'MapAppDbContext.Organizations'  is null.");
+            return _context.Organizations != null ?
+                        View(await _context.Organizations.ToListAsync()) :
+                        Problem("Entity set 'MapAppDbContext.Organizations'  is null.");
         }
 
         // GET: Organization/Details/5
 
-        public async Task<IActionResult> OrganizationDetails( string? id)
+        public async Task<IActionResult> OrganizationDetails(string? id)
         {
-            var userDtaeils = _context.Organizations.Where(x =>x.Email == id).FirstOrDefault();
+            var userDtaeils = _context.Organizations.Where(x => x.Email == id).FirstOrDefault();
 
             return View(userDtaeils);
         }
@@ -159,14 +159,38 @@ namespace OtterProductions_CapstoneProject.Controllers
             {
                 _context.Organizations.Remove(organization);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrganizationExists(int id)
         {
-          return (_context.Organizations?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Organizations?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        // GET: Organization/Events
+        public async Task<IActionResult> Events()
+        {
+           
+            var result = await _context.Events.Where(x => x.OrganizationId == 1).ToListAsync();
+
+            return View(result);
+        }
+        [HttpGet()]
+        public IActionResult CreateEvent()
+        {
+            return View(new Event());
+        }
+        [HttpPost()]
+        public async Task<IActionResult> CreateEvent(Event model)
+        
+        {
+            model.EventDate = DateTime.Now;
+            model.OrganizationId = 1; 
+            await _context.Events.AddAsync(model);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Events");
         }
     }
 }
