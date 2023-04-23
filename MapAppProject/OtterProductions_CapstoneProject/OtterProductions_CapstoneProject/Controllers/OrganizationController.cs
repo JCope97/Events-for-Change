@@ -53,7 +53,67 @@ namespace OtterProductions_CapstoneProject.Controllers
 
             return View(organization);
         }
+        [HttpGet]
+        public async Task<IActionResult>EditOrganization(string ids)
+        {
+            if (ids == null)
+            {
+                return View();
+            }
+            var edit = _context.Organizations.Where(x => x.Email == ids).FirstOrDefault();
+            if (edit == null)
+            {
+                return NotFound();
 
+            }
+            var editOrg = new Organization()
+            {
+                Address = edit.Address,
+                Email = edit.Email,
+                OrganizationDescription = edit.OrganizationDescription,
+                OrganizationName = edit.OrganizationName,
+                OrganizationLocation = edit.OrganizationLocation,
+                PhoneNumber = edit.PhoneNumber,
+                AspnetIdentityId = edit.AspnetIdentityId,
+                Id=edit.Id,
+                OrganizationPicture = edit.OrganizationPicture,
+                ImageUrl = edit.ImageUrl,
+               
+                
+            };
+            return View(editOrg);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditOrganization(Organization organization)
+        {
+            if (organization.Id == 0)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(organization);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!OrganizationExists(organization.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(organization);
+        }
         // GET: Organization/Create
         public IActionResult Create()
         {
