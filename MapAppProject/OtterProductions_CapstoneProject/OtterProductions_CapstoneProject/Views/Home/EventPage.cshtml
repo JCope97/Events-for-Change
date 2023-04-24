@@ -1,0 +1,13 @@
+﻿@model EventViewModel
+@{
+    ViewData["Title"] = "Event";
+}
+
+<div>
+    @Model.EventName
+    @Model.EventDate
+    @Model.EventLocation
+    @Model.EventDescription
+    @*@Model.OrganizationName*@
+    @Model.EventsTypes.ElementAt(Model.EventTypeId - 1).EventType1
+</div>
