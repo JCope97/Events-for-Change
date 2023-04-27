@@ -2,23 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Packaging.Signing;
+using NUnit.Framework;
+using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
+using OtterProductions_CapstoneProject.ViewModel;
 
 namespace OtterProductions_CapstoneProject.Controllers
 {
     public class OrganizationController : Controller
     {
         private readonly MapAppDbContext _context;
+        private readonly AuthenticationDbContext _authenticationDbContext;
 
-        public OrganizationController(MapAppDbContext context)
+        public OrganizationController(MapAppDbContext context, AuthenticationDbContext authenticationDbContext)
         {
             _context = context;
+            _authenticationDbContext = authenticationDbContext;
+
         }
 
         // GET: Organization
@@ -53,9 +61,16 @@ namespace OtterProductions_CapstoneProject.Controllers
 
             return View(organization);
         }
+        [Authorize(Roles = "Organization")]
         [HttpGet]
-        public async Task<IActionResult>EditOrganization(string ids)
+        public async Task<IActionResult> EditOrganization(string ids)
         {
+            //var user = await _userManager.GetUserAsync(User);
+            //// get the user manager from the owin context
+            //// get user roles
+            //var roles = await _userManager.GetRolesAsync(user);
+
+
             if (ids == null)
             {
                 return View();
@@ -66,7 +81,8 @@ namespace OtterProductions_CapstoneProject.Controllers
                 return NotFound();
 
             }
-            var editOrg = new Organization()
+            //toDo: We need to user the Autompper
+            var editOrg = new OrganizationViewModel()
             {
                 Address = edit.Address,
                 Email = edit.Email,
@@ -75,17 +91,16 @@ namespace OtterProductions_CapstoneProject.Controllers
                 OrganizationLocation = edit.OrganizationLocation,
                 PhoneNumber = edit.PhoneNumber,
                 AspnetIdentityId = edit.AspnetIdentityId,
-                Id=edit.Id,
+                Id = edit.Id,
                 OrganizationPicture = edit.OrganizationPicture,
                 ImageUrl = edit.ImageUrl,
-               
-                
+                OldEmail = edit.Email
             };
             return View(editOrg);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditOrganization(Organization organization)
+        public async Task<IActionResult> EditOrganization(OrganizationViewModel organization)
         {
             if (organization.Id == 0)
             {
@@ -96,8 +111,36 @@ namespace OtterProductions_CapstoneProject.Controllers
             {
                 try
                 {
-                    _context.Update(organization);
+                    var editOrg = _context.Organizations.Where(x => x.Id == organization.Id).FirstOrDefault();
+                    if (editOrg == null)
+                        return NotFound();
+
+                    editOrg.Address = organization.Address;
+                    editOrg.Email = organization.Email;
+                    editOrg.OrganizationDescription = organization.OrganizationDescription;
+                    editOrg.OrganizationName = organization.OrganizationName;
+                    editOrg.OrganizationLocation = organization.OrganizationLocation;
+                    editOrg.PhoneNumber = organization.PhoneNumber;
+                    editOrg.AspnetIdentityId = organization.AspnetIdentityId;
+                    editOrg.Id = organization.Id;
+                    editOrg.OrganizationPicture = organization.OrganizationPicture;
+                    editOrg.ImageUrl = organization.ImageUrl;
+
+
+                    _context.Update(editOrg);
                     await _context.SaveChangesAsync();
+
+                   var user= _authenticationDbContext.Users.FirstOrDefault(x=>x.Email == organization.OldEmail);
+                    if(user!=null)
+                    {
+                        user.PhoneNumber = organization.PhoneNumber;
+                        user.Email = organization.Email;
+                        user.UserName = organization.Email;
+                        user.NormalizedEmail = organization.Email.ToUpper();
+                        user.NormalizedUserName = organization.Email.ToUpper();
+                        _authenticationDbContext.Users.Update(user);
+                       await _authenticationDbContext.SaveChangesAsync();
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -231,7 +274,7 @@ namespace OtterProductions_CapstoneProject.Controllers
         // GET: Organization/Events
         public async Task<IActionResult> Events()
         {
-           
+
             var result = await _context.Events.Where(x => x.OrganizationId == 1).ToListAsync();
 
             return View(result);
@@ -243,10 +286,10 @@ namespace OtterProductions_CapstoneProject.Controllers
         }
         [HttpPost()]
         public async Task<IActionResult> CreateEvent(Event model)
-        
+
         {
             model.EventDate = DateTime.Now;
-            model.OrganizationId = 1; 
+            model.OrganizationId = 1;
             await _context.Events.AddAsync(model);
             await _context.SaveChangesAsync();
 

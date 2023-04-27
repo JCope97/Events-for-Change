@@ -1,4 +1,4 @@
-﻿@model OtterProductions_CapstoneProject.Models.Organization
+﻿@model OtterProductions_CapstoneProject.ViewModel.OrganizationViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -11,9 +11,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="AspnetIdentityId" /> 
-            <input type="hidden" asp-for="OrganizationLoginId" />
             <input type="hidden" asp-for="OrganizationPicture" /> 
             <input type="hidden" asp-for="ImageUrl" />
+            <input type="hidden" asp-for="OldEmail" />
         
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
