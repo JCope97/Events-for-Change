@@ -3,11 +3,81 @@
     ViewData["Title"] = "Event";
 }
 
-<div>
-    @Model.EventName
-    @Model.EventDate
-    @Model.EventLocation
-    @Model.EventDescription
-    @*@Model.OrganizationName*@
-    @Model.EventsTypes.ElementAt(Model.EventTypeId - 1).EventType1
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col">
+
+            
+        </div>
+        <div class="col">
+
+            <div class="text-center">
+                <h1>@Model.EventName</h1>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+
+        <div class="col">
+
+            
+        </div>
+        <div class="col">
+
+            <div class="text-center">
+                <h2>Hosted by</h2>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+
+        <div class="col">
+
+            
+        </div>
+        <div class="col">
+
+            <div class="text-center">
+                <h3>This Will be the Organization Name@*@Model.OrganizationName*@</h3>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    
+    <div class="row">
+        <div class="col-8">
+            <h2>Description:</h2></div>
+        <div class="col"> <h2>Location:</h2></div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <h2>@Model.EventDescription </h2></div>
+        <div class="col"><h2>@Model.EventLocation</h2></div>
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+            <h2>Date:</h2></div>
+        <div class="col"></div>
+        <div class="col">
+            <h2>Type of Event</h2></div>
+    </div>
+
+    <div class="row">
+
+        <div class="col">
+            <h2>@Model.EventDate</h2></div>
+        <div class="col"></div>
+        
+        <div class="col"><h2>@Model.EventsTypes.ElementAt(Model.EventTypeId - 1).EventType1</h2></div>
+    </div>
+
+    
 </div>
+
