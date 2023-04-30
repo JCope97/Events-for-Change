@@ -61,7 +61,11 @@ namespace OtterProductions_CapstoneProject.Controllers
             ViewBag.Message = "Email could not be verified";
             return View();
         }
-
+        public async Task<IActionResult> MessageVerifyEmail()
+        {           
+            ViewBag.Message = "Kindly check your email to verify your  account . if  not you can't access the app.";
+            return View();
+        }
         [HttpPost]
         public IActionResult Index(Location mapLocation)
         {

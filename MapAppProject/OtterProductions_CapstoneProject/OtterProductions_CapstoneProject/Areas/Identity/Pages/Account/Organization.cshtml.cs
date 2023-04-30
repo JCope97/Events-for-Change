@@ -255,8 +255,9 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("ConfirmationPage", new { email = Input.Email, returnUrl = returnUrl });
-                    }
+                            return RedirectToAction("MessageVerifyEmail", "Home");
+                            // return RedirectToPage("ConfirmationPage", new { email = Input.Email, returnUrl = returnUrl });
+                        }
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
