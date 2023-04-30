@@ -15,7 +15,7 @@
         <div class="col">
 
             <div class="text-center">
-                <h1>@Model.EventName</h1>
+                <h1 id="EventName">@Model.EventName</h1>
             </div>
         </div>
         <div class="col"></div>
@@ -43,7 +43,7 @@
         <div class="col">
 
             <div class="text-center">
-                <h3>This Will be the Organization Name@*@Model.OrganizationName*@</h3>
+                <h3 id="OrganizationName">This Will be the Organization Name@*@Model.OrganizationName*@</h3>
             </div>
         </div>
         <div class="col"></div>
@@ -56,8 +56,8 @@
     </div>
     <div class="row">
         <div class="col-8">
-            <h2>@Model.EventDescription </h2></div>
-        <div class="col"><h2>@Model.EventLocation</h2></div>
+            <h2 id="EventDiscription">@Model.EventDescription </h2></div>
+        <div class="col"><h2 id="Location">@Model.EventLocation</h2></div>
     </div>
 
     <div class="row">
@@ -72,10 +72,10 @@
     <div class="row">
 
         <div class="col">
-            <h2>@Model.EventDate</h2></div>
+            <h2 id="EventDate">@Model.EventDate</h2></div>
         <div class="col"></div>
         
-        <div class="col"><h2>@Model.EventsTypes.ElementAt(Model.EventTypeId - 1).EventType1</h2></div>
+        <div class="col"><h2 id="EventType">@Model.EventsTypes.ElementAt(Model.EventTypeId - 1).EventType1</h2></div>
     </div>
 
     
