@@ -32,7 +32,10 @@ function initMap() {
     const restroomButton = document.getElementById("restroom");
     const foodBankButton = document.getElementById("Food Bank");
     const shelterButton = document.getElementById("Shelter");
+    const drinkingFountainButton = document.getElementById("Drinking Fountains");
+    const healthCareButton = document.getElementById("Health Care");
     const listtitle = document.getElementById("list-title");
+    listtitle.style.color = "white";
     const getLocationButton = document.getElementById("locationButton");
 
     const clearButton = document.createElement("input");
@@ -176,8 +179,63 @@ function initMap() {
 
         });
 
+    drinkingFountainButton.addEventListener("click",
+        () => {
+            if (firstLocation.value) {
+                deleteMarkers();
 
-    
+                service.nearbySearch(
+                    { location: map.center, radius: 900, keyword: "Drinking Fountain", minPriceLevel: 0, maxPriceLevel: 0 },
+                    (results, status, pagination) => {
+                        if (status !== "OK" || !results) return;
+
+                        addPlaces(results, map);
+                        listtitle.innerHTML = "Drinking Fountains";
+
+
+                        //new stuff
+                        moreButton.disabled = !pagination || !pagination.hasNextPage;
+                        if (pagination && pagination.hasNextPage) {
+                            getNextPage = () => {
+                                // Note: nextPage will call the same handler function as the initial call
+                                pagination.nextPage();
+                            };
+                        }
+                    });
+            } else {
+                alert("Please enter an address or city");
+            }
+
+
+        });
+
+
+    healthCareButton.addEventListener("click",
+        () => {
+            if (firstLocation.value) {
+                deleteMarkers();
+
+                service.nearbySearch(
+                    { location: map.center, radius: 900, keyword: "Health Care", minPriceLevel: 0, maxPriceLevel: 0 },
+                    (results, status, pagination) => {
+                        if (status !== "OK" || !results) return;
+
+                        addPlaces(results, map);
+                        listtitle.innerHTML = "Health Care";
+
+                        //new stuff
+                        moreButton.disabled = !pagination || !pagination.hasNextPage;
+                        if (pagination && pagination.hasNextPage) {
+                            getNextPage = () => {
+                                // Note: nextPage will call the same handler function as the initial call
+                                pagination.nextPage();
+                            };
+                        }
+                    });
+            } else {
+                alert("Please enter an address or city");
+            }
+        });
 
     getLocationButton.addEventListener("click",
         () => {
