@@ -37,6 +37,7 @@ function initMap() {
     const listtitle = document.getElementById("list-title");
     listtitle.style.color = "white";
     const getLocationButton = document.getElementById("locationButton");
+    
 
     const clearButton = document.createElement("input");
 

@@ -34,7 +34,7 @@
                             <tr>
                                 @*Grabs the Event type based on the EventTypes ID*@
                                 <td>@Model.EventsTypes.ElementAt(events.EventTypeId - 1).EventType1</td>
-                                <td>@events.EventName</td>
+                                <td><a asp-area="" asp-controller="Home" asp-action="EventPage" asp-route-id="@events.Id" id="locationName">@events.EventName</a></td>
                                 <td>@events.EventLocation</td>
                                 <td>@events.EventDescription</td>
                                 <td>@DateOnly.FromDateTime(events.EventDate)</td>

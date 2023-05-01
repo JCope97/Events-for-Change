@@ -9,15 +9,15 @@ namespace OtterProductions_CapstoneProject.Models
 {
     public class CityState
     {
-        [Required]
-        public string address { get; set; }
+        //[Required]
+        //public string address { get; set; }
 
         [Required]
         public string city { get; set; }
 
         [Required]
         public string state { get; set; }
-        [Required]
-        public string zip { get; set; }
+        //[Required]
+        //public string zip { get; set; }
     }
 }
