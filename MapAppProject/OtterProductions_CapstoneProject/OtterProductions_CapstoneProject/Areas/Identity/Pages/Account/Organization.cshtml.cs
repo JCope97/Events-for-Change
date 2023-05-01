@@ -22,6 +22,8 @@ using Microsoft.Extensions.Logging;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
+using OtterProductions_CapstoneProject.Utilities;
+using IEmailSender = OtterProductions_CapstoneProject.Utilities.IEmailSender;
 
 namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
 {
@@ -32,6 +34,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
         //private readonly IUserStore<ApplicationUser> _userStore;
         //private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
+        //private readonly IEmailSender _emailSender;
         private readonly IEmailSender _emailSender;
         private readonly AuthenticationDbContext _authDbContext;
         private readonly MapAppDbContext _mapAppDbContext;
@@ -206,10 +209,18 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callback = $"https://otterproductionscapstoneprojectwebapp.azurewebsites.net/Home/VerifyEmail?token=" + token + "&email=" + user.Email + ""; //change https://otterproductionscapstoneprojectwebapp.azurewebsites.net/ to anything of your host eniviro e.o google.com
+                        var mail = new VerifyEmail
+                        {
+                            Email = user.Email,
+                            Link = callback,
+                            Subject = "Verify Email"
+                        };
+                        await _emailSender.SendVerifyEmail(mail);  // send email with send grid
 
-               
-                    // create our own user
-                    Organization ma = new Organization
+                        // create our own user
+                        Organization ma = new Organization
                     {
                         AspnetIdentityId = user.Id,
                         Email = Input.Email,
@@ -244,8 +255,9 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        return RedirectToPage("ConfirmationPage", new { email = Input.Email, returnUrl = returnUrl });
-                    }
+                            return RedirectToAction("MessageVerifyEmail", "Home");
+                            // return RedirectToPage("ConfirmationPage", new { email = Input.Email, returnUrl = returnUrl });
+                        }
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
