@@ -36,7 +36,7 @@ namespace BDD_Tests_OtterProductions.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "MA-US-30-Create-Events-Display-Events", "User story that has list of events displayed after clicking button to create a ne" +
-                    "w event as an organization", ProgrammingLanguage.CSharp, featureTags);
+                    "w event as an organization", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

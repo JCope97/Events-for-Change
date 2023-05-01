@@ -9,6 +9,7 @@ using OtterProductions_CapstoneProject.DAL.Abstract;
 using OtterProductions_CapstoneProject.DAL.Concrete;
 using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
+using OtterProductions_CapstoneProject.Utilities;
 
 namespace OtterProductions_CapstoneProject.Controllers
 {
@@ -19,19 +20,52 @@ namespace OtterProductions_CapstoneProject.Controllers
         private readonly MapAppDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private IBrowseEventRepository _eventRepository;
+        private readonly IEmailSender _emailSender;
+        //private readonly BaseUrlConfiguration _baseUrlConfig;
 
-        public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager)
+        public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _logger = logger;
             _context = ctx;
             _userManager = userManager;
             _eventRepository = new BrowseEventRepository(_context);
+            _emailSender = emailSender;
+           // _baseUrlConfig = baseUrlConfig;
         }
         public IActionResult Index()
         {
             return View();
         }
 
+        public async Task<IActionResult> VerifyEmail(string token, string email)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+            {
+
+                ViewBag.Message = "Token cannot be null";
+                return View();
+            }
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                ViewBag.Message = "Email cannot be null";
+                return View();
+            }
+            var (verified, message) = await _emailSender.VerifyEmail(token, email);
+            if (verified)
+            {
+                ViewBag.Message = "Email was successfully verified";
+                // return Redirect($"{_baseUrlConfig.BaseVeryUrl}");
+                // return Redirect($"{_baseUrlConfig.BaseUrlVerify}");
+                return View();
+            }
+            ViewBag.Message = "Email could not be verified";
+            return View();
+        }
+        public async Task<IActionResult> MessageVerifyEmail()
+        {           
+            ViewBag.Message = "Kindly check your email to verify your  account . if  not you can't access the app.";
+            return View();
+        }
         [HttpPost]
         public IActionResult Index(Location mapLocation)
         {
