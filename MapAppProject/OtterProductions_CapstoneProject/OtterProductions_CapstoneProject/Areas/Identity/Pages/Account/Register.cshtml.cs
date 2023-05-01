@@ -183,7 +183,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                     //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
                     var  token = await _userManager.GenerateEmailConfirmationTokenAsync(user);                    
-                    var callback = $"https://localhost:7196/Home/VerifyEmail?token=" + token + "&email=" + user.Email + ""; //verificate have
+                    var callback = $"https://otterproductionscapstoneprojectwebapp.azurewebsites.net/Home/VerifyEmail?token=" + token + "&email=" + user.Email + ""; //verificate have
                     var mail = new VerifyEmail
                     {
                         Email = user.Email,

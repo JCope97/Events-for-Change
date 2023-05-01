@@ -210,7 +210,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
                         var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        var callback = $"https://localhost:7196/Home/VerifyEmail?token=" + token + "&email=" + user.Email + ""; //change https://otterproductionscapstoneprojectwebapp.azurewebsites.net/ to anything of your host eniviro e.o google.com
+                        var callback = $"https://otterproductionscapstoneprojectwebapp.azurewebsites.net/Home/VerifyEmail?token=" + token + "&email=" + user.Email + ""; //change https://otterproductionscapstoneprojectwebapp.azurewebsites.net/ to anything of your host eniviro e.o google.com
                         var mail = new VerifyEmail
                         {
                             Email = user.Email,

@@ -120,7 +120,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                 var userEmail = await _userManager.FindByEmailAsync(Input.Email);
                 if (!userEmail.EmailConfirmed) {
                     var token = await _userManager.GenerateEmailConfirmationTokenAsync(userEmail);
-                    var callback = $"https://localhost:7196/Home/VerifyEmail?token=" + token + "&email=" + Input.Email + ""; //change https://otterproductionscapstoneprojectwebapp.azurewebsites.net/ to anything of your host eniviro e.o google.com
+                    var callback = $"https://otterproductionscapstoneprojectwebapp.azurewebsites.net/Home/VerifyEmail?token=" + token + "&email=" + Input.Email + ""; //change https://otterproductionscapstoneprojectwebapp.azurewebsites.net/ to anything of your host eniviro e.o google.com
                     var mail = new VerifyEmail
                     {
                         Email = Input.Email,
