@@ -35,7 +35,7 @@ public partial class Organization
 
     public int? OrganizationLoginId { get; set; }
 
-    public string OrganizationPicture { get; set; }
+    public string? OrganizationPicture { get; set; }
 
 
     [InverseProperty("OrganizationNavigation")]
