@@ -13,21 +13,21 @@
     <form asp-controller="Home" asp-action="Browsing" method="post" style="text-align:left; display:inline-block;">
         <div class="form-group">
             <br />
-            <label for="AddressLocation">Enter your address:</label>
+            @*<label for="AddressLocation">Enter your address:</label>
             <input type="text" id="address" name="Address" value="" required>
             <br />
-            <br />
+            <br />*@
             <label for="CityLocation">Enter your city:</label>
             <input type="text" id="city" name="City" value="" required>
             <br />
             <br />
             <label for="StateLocation">Enter your state (Using state abbrivations):</label>
             <input type="text" id="state" name="State" pattern="^[A-Z]{2}$" value="" required>
-            <br />
+            @*<br />
             <br />
             <label for="Zipcode">Enter your zip:</label>
             <input type="text" id="zip" name="Zip" value="" required>
-            <br />
+            <br />*@
         </div>
         <br>
         <div class="mb-3">

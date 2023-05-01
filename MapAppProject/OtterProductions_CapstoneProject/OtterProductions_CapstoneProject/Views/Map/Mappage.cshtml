@@ -10,59 +10,70 @@
 
 
 }
-
-<div>
-    <p>Type in an Address or City</p>
-</div>
-<input id="location" type="text" placeholder="@Model.location" value="@Model.location">
+<body style="background-color: #15202b">
 
 
-<input id="submit" type="button" value="Submit" class="btn btn-primary"></>
-
-<br/>
-<div>
-    <button type="button" class="btn btn-secondary" id="locationButton">Click here to get your location</button>
-</div>
-<br/>
-<div>
-    <button id ="restroom" type="button" class="btn btn-info" value="Public Restroom">Restroom</button>
-
-    <button id="Food Bank" type="button" class="btn btn-success" value="Food Bank">Food Bank</button>
-
-    <button id="Shelter" type="button" class="btn btn-warning" value="Shelter">Shelter</button>
-
-</div>
-
-<br />
-
-<div class="container">
-    
-    <!--The div element for the map -->
-    <div class="row">
-        <div class="col-8">
-
-            <div id="map"></div>
-        </div>
-         <div class="col-4" id="sidebar">
-             <div>
-                 <h2 id="list-title"></h2>
-                 <ul id="places"></ul>
-                 <button id="more" hidden="hidden">Load more results</button>
-             </div>
-                
-            </div>
-        
+    <div>
+        <p style="color: white;margin-left: 150px;">Type in an Address or City</p>
     </div>
-</div>
-@*<!-- 
-The `defer` attribute causes the callback to execute after the full HTML
-document has been parsed. For non-blocking uses, avoiding race conditions,
-and consistent behavior across browsers, consider loading using Promises
-with https://www.npmjs.com/package/@googlemaps/js-api-loader.
--->*@
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCIiPJAz4KApQsWr71OlZXjZczcaRQitk&callback=initMap&libraries=places&v=weekly"
-        defer
+    <input id="location" type="text" placeholder="@Model.location" style="margin-left: 150px;" value="@Model.location">
+    <input id="submit" type="button" value="Submit" class="btn btn-primary" style="margin-right: 10px;"></>
+        <button type="button" class="btn btn-secondary" id="locationButton">Click here to get your location</button>
+    <br />
+    <br />
 
-></script>
+    <div style="display:flex">
+        <div>
+            <button id ="restroom" type="button" class="btn btn-info" value="Public Restroom">Restroom</button>
+            <br />
+            <br />
+            <button id="Food Bank" type="button" class="btn btn-success" value="Food Bank">Food Bank</button>
+            <br />
+            <br />
+            <button id="Shelter" type="button" class="btn btn-warning" value="Shelter">Shelter</button>
+            <br />
+            <br />
+            <button id="Health Care" type="button" class="btn btn-light" value="Health Care">Health Care</button>
+            <br />
+            <br />
+            <button id="Drinking Fountains" type="button" class="btn" style="color:#fff;background-color:#2389da;border-color:#2389da;" value="Drinking Fountains">Drinking Fountains</button>
+        </div>
+        <br />
 
-<script src="~/js/MapScript.js" asp-append-version="true"></script>
+
+
+        <div class="container">
+    
+            <!--The div element for the map -->
+            <div class="row">
+                <div class="col-8" style="padding-right: 0px;">
+
+                    <div id="map"></div>
+                </div>
+                 <div class="col-4" id="sidebar">
+                     <div>
+                        <h2 style="margin-left: 32px;" id="list-title"></h2>
+                         <ul id="places"></ul>
+                        <button id="more" hidden="hidden" style="margin-left: 32px;">Load more results</button>
+                     </div>
+                
+                    </div>
+        
+            </div>
+        </div>
+    </div>
+
+    @*<!-- 
+    The `defer` attribute causes the callback to execute after the full HTML
+    document has been parsed. For non-blocking uses, avoiding race conditions,
+    and consistent behavior across browsers, consider loading using Promises
+    with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->*@
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCIiPJAz4KApQsWr71OlZXjZczcaRQitk&callback=initMap&libraries=places&v=weekly"
+            defer
+
+    ></script>
+
+    <script src="~/js/MapScript.js" asp-append-version="true"></script>
+
+</body>
