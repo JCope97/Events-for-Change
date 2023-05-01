@@ -34,6 +34,7 @@ function initMap() {
     const shelterButton = document.getElementById("Shelter");
     const listtitle = document.getElementById("list-title");
     const getLocationButton = document.getElementById("locationButton");
+    
 
     const clearButton = document.createElement("input");
 

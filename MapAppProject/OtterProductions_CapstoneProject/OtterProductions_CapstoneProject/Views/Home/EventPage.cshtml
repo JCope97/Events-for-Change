@@ -2,6 +2,12 @@
 @{
     ViewData["Title"] = "Event";
 }
+@section AddToHead
+    {
+    <script type="module" src="/js/sharedMap.js"></script>
+
+
+}
 
 
 
@@ -57,8 +63,16 @@
     <div class="row">
         <div class="col-8">
             <h2 id="EventDiscription">@Model.EventDescription </h2></div>
-        <div class="col"><h2 id="Location">@Model.EventLocation</h2></div>
+        <div class="col"><h2 id="eventLocation" value="@Model.EventLocation" onclick="unhideMap()">@Model.EventLocation</h2></div>
     </div>
+    
+    <div class="row">
+        <div class="col">
+
+            <div id="sharedMap" style="display: none"></div>
+        </div>
+    </div>
+    
 
     <div class="row">
 
@@ -81,3 +95,6 @@
     
 </div>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfIlowOJLOtRJduvUraHSk8WOJjUkB3Eo&callback=initMap&libraries=places&v=weekly"
+        defer></script>
+<script src="~/js/sharedMap.js" asp-append-version="true"></script>        
