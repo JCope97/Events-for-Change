@@ -21,12 +21,13 @@ namespace OtterProductions_CapstoneProject.Controllers
     {
         private readonly MapAppDbContext _context;
         private readonly AuthenticationDbContext _authenticationDbContext;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public OrganizationController(MapAppDbContext context, AuthenticationDbContext authenticationDbContext)
+        public OrganizationController(MapAppDbContext context, AuthenticationDbContext authenticationDbContext, SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             _authenticationDbContext = authenticationDbContext;
-
+            _signInManager = signInManager;
         }
 
         // GET: Organization
@@ -112,8 +113,11 @@ namespace OtterProductions_CapstoneProject.Controllers
                 try
                 {
                     var editOrg = _context.Organizations.Where(x => x.Id == organization.Id).FirstOrDefault();
+                    
                     if (editOrg == null)
                         return NotFound();
+
+                    var hasEmailChanged = editOrg.Email != organization.Email;
 
                     editOrg.Address = organization.Address;
                     editOrg.Email = organization.Email;
@@ -141,6 +145,13 @@ namespace OtterProductions_CapstoneProject.Controllers
                         _authenticationDbContext.Users.Update(user);
                        await _authenticationDbContext.SaveChangesAsync();
                     }
+
+                    if (hasEmailChanged)
+                    {
+                        await _signInManager.SignOutAsync();
+                    }
+
+                    return RedirectToAction("Index", "Home");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -153,7 +164,6 @@ namespace OtterProductions_CapstoneProject.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(organization);
         }
