@@ -135,7 +135,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("I am on the \"EventInfo\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 19
- testRunner.And("I click on the \"address\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I click on the address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 20
  testRunner.Then("the map object is unhidden", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

@@ -14,13 +14,14 @@ namespace BDD_Tests_OtterProductions.PageObjects
             _pageName = "EventInfo";
         }
 
-        public IWebElement EventLocation => _webDriver.FindElement(By.Id("Location"));
+        public IWebElement EventLocation => _webDriver.FindElement(By.Id("eventLocation"));
         public IWebElement NavBarHelloLink => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Manage\"]"));
         public IWebElement EventType => _webDriver.FindElement(By.Id("EventType"));
         public IWebElement EventDate => _webDriver.FindElement(By.Id("EventDate"));
         public IWebElement EventDiscription => _webDriver.FindElement(By.Id("EventDiscription"));
         public IWebElement OrganizationName => _webDriver.FindElement(By.Id("OrganizationName"));
         public IWebElement EventName => _webDriver.FindElement(By.Id("EventName"));
+        public IWebElement MapElement => _webDriver.FindElement(By.Id("sharedMap"));
 
 
 
@@ -32,7 +33,11 @@ namespace BDD_Tests_OtterProductions.PageObjects
             return NavBarHelloLink.Text;
         }
 
-        
+        public void ClickAddress()
+        {
+            EventLocation.Click();
+        }
+
 
 
     }

@@ -55,6 +55,23 @@ namespace BDD_Tests_OtterProductions.StepDefinitions
 
         }
 
+        [When(@"I click on the address")]
+        public void WhenIClickOnTheAddress()
+        {
+            _eventPage.ClickAddress();
+            Thread.Sleep(3000);
+        }
 
+        [Then(@"the map object is unhidden")]
+        public void ThenTheMapObjectIsUnhidden()
+        {
+            _eventPage.MapElement.Displayed.Should().Be(true);
+        }
+
+        [Then(@"there is a map object")]
+        public void ThenThereIsAMapObject()
+        {
+            _eventPage.MapElement.Displayed.Should().Be(false);
+        }
     }
 }

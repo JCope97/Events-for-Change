@@ -16,5 +16,5 @@ Scenario: The Map is on the page
 Scenario: Clicking on the address unhides the map
 	Given I am a visitor
 	When I am on the "EventInfo" page
-	And I click on the "address"
+	And I click on the address
 	Then the map object is unhidden
