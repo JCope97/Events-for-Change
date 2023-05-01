@@ -51,5 +51,10 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
             eventsWindow = eventsWindow.ToList();
             return eventsWindow;
         }
+
+        public Event GetEventById(int id)
+        {
+            return FindById(id);
+        }
     }
 }

@@ -51,11 +51,11 @@ namespace OtterProductions_CapstoneProject.Controllers
             return View();
         }
 
-        public IActionResult Event()
-        {
-            IEnumerable<Event> events = _context.Events.ToList();
-            return View(events);
-        }
+        //public IActionResult Event()
+        //{
+        //    IEnumerable<Event> events = _context.Events.ToList();
+        //    return View(events);
+        //}
 
         [HttpGet]
         public IActionResult Browsing()
@@ -87,6 +87,25 @@ namespace OtterProductions_CapstoneProject.Controllers
         public IActionResult BrowsingSearch(){
             CityState locationForVM = new CityState();
             return View(locationForVM);
+        }
+
+        [HttpGet]
+        public IActionResult EventPage(int id)
+        {
+            EventViewModel eventView = new EventViewModel();
+            eventView.EventsTypes = _context.EventTypes.ToList();
+            Event newEvent = new Event();
+            newEvent = _eventRepository.GetEventById(id);
+
+            eventView.Id = newEvent.Id;
+            eventView.EventDate = newEvent.EventDate;
+            eventView.EventDescription = newEvent.EventDescription;
+            eventView.EventLocation = newEvent.EventLocation;
+            eventView.EventName = newEvent.EventName;
+            eventView.EventTypeId = newEvent.EventTypeId;
+            //eventView.OrganizationName = newEvent.OrganizationNavigation.OrganizationName;
+
+            return View(eventView);
         }
 
 
