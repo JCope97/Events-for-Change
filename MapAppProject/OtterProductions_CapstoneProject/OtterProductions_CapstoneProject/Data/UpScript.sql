@@ -42,6 +42,13 @@ CREATE TABLE [UserEventList] (
 [EventID] int NOT NULL
 );
 
+CREATE TABLE [Comment](
+    [ID] int PRIMARY KEY IDENTITY(1,1),
+    [UserComment] NVARCHAR(256),
+    [MapAppUserID] int NOT NULL,
+    
+)
+
 ALTER TABLE [Event] ADD CONSTRAINT [Fk Organization ID]
 FOREIGN KEY ([OrganizationID]) REFERENCES [Organization] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
