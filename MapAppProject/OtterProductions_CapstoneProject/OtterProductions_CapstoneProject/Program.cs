@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OtterProductions_CapstoneProject.Utilities;
 
 namespace OtterProductions_CapstoneProject;
 
@@ -21,7 +22,10 @@ public class Program
 
         builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationOtterProductions_CapstoneProject;Trusted_Connection=True;MultipleActiveResultSets=true"
            ));
-
+        builder.Services.Configure<SendGridParams>(builder.Configuration.GetSection("SendGrid"));
+        //builder.Services.Configure<BaseUrlConfiguration>(builder.Configuration.GetSection("BaseUrlConfiguration"));
+        builder.Services.Configure<EmailConfiguration>(builder.Configuration.GetSection("EmailSettings"));
+        builder.Services.AddScoped<IEmailSender, EmailSender>();
         builder.Services
             .AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
             .AddRoles<IdentityRole>()
@@ -29,10 +33,11 @@ public class Program
 
         builder.Services.Configure<IdentityOptions>(config =>
         {
+            config.SignIn.RequireConfirmedAccount = true;
             config.User.RequireUniqueEmail = true;
             config.SignIn.RequireConfirmedPhoneNumber = false;
             config.SignIn.RequireConfirmedEmail = false;
-            config.SignIn.RequireConfirmedAccount = false;
+           // config.SignIn.RequireConfirmedAccount = false;
         });
 
         // Add services to the container.

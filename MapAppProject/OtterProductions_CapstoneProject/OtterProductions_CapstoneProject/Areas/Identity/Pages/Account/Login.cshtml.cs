@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
+using OtterProductions_CapstoneProject.Models;
+using IEmailSender = OtterProductions_CapstoneProject.Utilities.IEmailSender;
 
 namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
 {
@@ -22,11 +24,15 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
     {
         
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IEmailSender _emailSender;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
+            _emailSender = emailSender;
             _logger = logger;
         }
 
@@ -111,10 +117,24 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                var userEmail = await _userManager.FindByEmailAsync(Input.Email);
+                if (!userEmail.EmailConfirmed) {
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(userEmail);
+                    var callback = $"https://otterproductionscapstoneprojectwebapp.azurewebsites.net/Home/VerifyEmail?token=" + token + "&email=" + Input.Email + ""; //change https://otterproductionscapstoneprojectwebapp.azurewebsites.net/ to anything of your host eniviro e.o google.com
+                    var mail = new VerifyEmail
+                    {
+                        Email = Input.Email,
+                        Link = callback,
+                        Subject = "Verify Email"
+                    };
+                    await _emailSender.SendVerifyEmail(mail);  // send email with send grid 
+                    ViewData["verify"] = "An email verification has been send to your email";
+                    return Page();
+                }
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-         if (result.Succeeded)
+                if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);

@@ -4,6 +4,13 @@
     ViewData["Title"] = "OrganizationDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section AddToHead
+{
+    <script type="module" src="/js/sharedMap.js"></script>
+
+
+}
+
 
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -48,7 +55,9 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" />
+                  
+                <text class="profile-edit-btn">@Html.ActionLink("Edit Profile", "EditOrganization", "Organization", new { ids = User.Identity.Name }, new { @title = "View Profile" }) </text>
+                @*<input type="submit" class="profile-edit-btn" name="btnAddMore"  value="Edit Profile" />*@
             </div>
         </div>
         <div class="row">
@@ -99,12 +108,17 @@
                                 <label>Address</label>
                             </div>
                             <div class="col-md-6">
-                                <p>@Model.Address</p>
+                                <p id="eventLocation" value="@Model.Address" onclick="unhideMap()">@Model.Address</p>
                             </div>
                         </div>
+                        <div id="sharedMap" style="display: none"></div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
 </div>   
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfIlowOJLOtRJduvUraHSk8WOJjUkB3Eo&callback=initMap&libraries=places&v=weekly"
+        defer></script>
+<script src="~/js/sharedMap.js" asp-append-version="true"></script> 
