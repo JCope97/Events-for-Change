@@ -17,6 +17,7 @@ using OtterProductions_CapstoneProject.ViewModel;
 
 namespace OtterProductions_CapstoneProject.Controllers
 {
+
     public class OrganizationController : Controller
     {
         private readonly MapAppDbContext _context;

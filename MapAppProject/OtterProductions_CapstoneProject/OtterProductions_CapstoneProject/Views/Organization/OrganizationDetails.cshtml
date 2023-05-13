@@ -21,104 +21,104 @@
 
 
 
-
-<div class="container emp-profile">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img decoding="async" src=@("~/"+Model.OrganizationPicture) asp-append-version="true"  alt="" />
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="file" />
+<body style="background-color: #15202b">
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img decoding="async" src=@("~/"+Model.OrganizationPicture) asp-append-version="true"  alt="" />
+                        <div style="color: white;" class="file btn btn-lg btn-primary">
+                            Change Photo
+                            <input type="file" name="file" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5>
-                        @Model.OrganizationName
-                    </h5>
-                    <h6>
-                        @Model.OrganizationLocation
-                    </h6>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5 style="color: white;">
+                            @Model.OrganizationName
+                        </h5>
+                        <h6 style="color: white;">
+                            @Model.OrganizationLocation
+                        </h6>
                    
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Organization" asp-action="Events" role="tab" aria-controls="profile" aria-selected="false">Events</a>
-                            @*<a class="nav-link" id="profile-tab" data-toggle="tab" href="Organization/Events" role="tab" aria-controls="profile" aria-selected="false">Events</a>*@
-                        </li>
-                    </ul>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a style="color: white;" class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a style="color: white;" class="nav-link text-white" asp-area="" asp-controller="Organization" asp-action="Events" role="tab" aria-controls="profile" aria-selected="false">Events</a>
+                                @*<a class="nav-link" id="profile-tab" data-toggle="tab" href="Organization/Events" role="tab" aria-controls="profile" aria-selected="false">Events</a>*@
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
+                <div class="col-md-2">
                   
-                <text class="profile-edit-btn">@Html.ActionLink("Edit Profile", "EditOrganization", "Organization", new { ids = User.Identity.Name }, new { @title = "View Profile" }) </text>
-                @*<input type="submit" class="profile-edit-btn" name="btnAddMore"  value="Edit Profile" />*@
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-work">
-                    
+                    <text style="color: white;"  class="profile-edit-btn">@Html.ActionLink("Edit Profile", "EditOrganization", "Organization", new { ids = User.Identity.Name }, new { @title = "View Profile" }) </text>
+                    @*<input type="submit" class="profile-edit-btn" name="btnAddMore"  value="Edit Profile" />*@
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                    
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Name </label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label style="color: white;">Name </label>
+                                </div>
+                                <div style="color: white;" class="col-md-6">
+                                    <p>@Model.OrganizationName</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>@Model.OrganizationName</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label style="color: white;">Email</labe>
+                                </div>
+                                <div class="col-md-6">
+                                    <p style="color: white;">@Model.Email</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label style="color: white;">Description </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p style="color: white;">@Model.OrganizationDescription</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>@Model.Email</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Description </label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>@Model.OrganizationDescription</p>
-                            </div>
-                        </div>
                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Phone</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label style="color: white;">Phone</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p style="color: white;">@Model.PhoneNumber</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p>@Model.PhoneNumber</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label style="color: white;">Address</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p style="color: white;" id="eventLocation" value="@Model.Address" onclick="unhideMap()">@Model.Address</p>
+                                </div>
                             </div>
+                            <div id="sharedMap" style="display: none"></div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Address</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p id="eventLocation" value="@Model.Address" onclick="unhideMap()">@Model.Address</p>
-                            </div>
-                        </div>
-                        <div id="sharedMap" style="display: none"></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
-</div>   
-
+        </form>
+    </div>   
+</body>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfIlowOJLOtRJduvUraHSk8WOJjUkB3Eo&callback=initMap&libraries=places&v=weekly"
         defer></script>
 <script src="~/js/sharedMap.js" asp-append-version="true"></script> 
