@@ -236,7 +236,7 @@ h3 {
     position: relative;
 }
 
-.wrapper, .menu, h5 {
+.wrapper, .navMenu, h5 {
     position: fixed;
     width: 135px;
     height: 100%;
