@@ -4,38 +4,41 @@
 }
 <link href="~/css/events.css" rel="stylesheet" />
 
-<div class="container">
-    <div class="row">
-        <div class="col" style="padding-top: 35px">
-            <form id="createEventForm"  method="post">
+<body style="background-color: #15202b">
+    <br />
+    <div class="container">
+        <div class="row">
+            <br />
+            <div class="col" style="padding-top: 35px">
+                <form id="createEventForm"  method="post">
 
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="form-floating mb-3">
-                    <input asp-for="EventName" class="form-control" autocomplete="event name" aria-required="true" placeholder="Event Name" />
-                    <label asp-for="EventName">Event Name</label>
-                    <span asp-validation-for="EventName" class="text-danger"></span>
-                </div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="EventName" class="form-control" autocomplete="event name" aria-required="true" placeholder="Event Name" />
+                        <label asp-for="EventName" id="eventName" style="color: black;">Event Name</label>
+                        <span asp-validation-for="EventName" class="text-danger"></span>
+                    </div>
 
-                <div class="form-floating mb-3">
-                    <input asp-for="EventLocation" class="form-control" autocomplete="event name" aria-required="true" placeholder="Event Location" />
-                    <label asp-for="EventLocation">Event Location</label>
-                    <span asp-validation-for="EventLocation" class="text-danger"></span>
-                </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="EventLocation" class="form-control" autocomplete="event name" aria-required="true" placeholder="Event Location" />
+                        <label asp-for="EventLocation" id="eventLocation" style="color: black;">Event Location</label>
+                        <span asp-validation-for="EventLocation" class="text-danger"></span>
+                    </div>
 
-                <div class="form-floating mb-3">
-                    <input asp-for="EventDescription" class="form-control" autocomplete="event description" aria-required="true" placeholder="Event Description" />
-                    <label asp-for="EventDescription">Event Description</label>
-                    <span asp-validation-for="EventDescription" class="text-danger"></span>
-                </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="EventDescription" class="form-control" autocomplete="event description" aria-required="true" placeholder="Event Description" />
+                        <label asp-for="EventDescription" id="eventDescription" style="color: black;">Event Description</label>
+                        <span asp-validation-for="EventDescription" class="text-danger"></span>
+                    </div>
 
-                <br />
-                <button id="createEventForm" type="submit" class="w-100 btn btn-lg btn-primary" style="width: 75%; background-color: rgb(0,129,0)">Create Event</button>
-            </form>
+                    <br />
+                    <button id="createEventForm" type="submit" class="w-100 btn btn-lg btn-primary" style="width: 75%; border-color: #78A1BB; background-color:  #78A1BB">Create Event</button>
+                </form>
+            </div>
         </div>
+
     </div>
-
-</div>
-
+</body>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

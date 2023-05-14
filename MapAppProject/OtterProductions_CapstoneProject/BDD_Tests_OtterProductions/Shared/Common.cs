@@ -22,7 +22,11 @@ namespace BDD_Tests_OtterProductions.Shared
             { "Home" , "/" },
             { "Login", "/Identity/Account/Login" },
             { "Register", "/Identity/Account/Register" },
+            { "Registration", "/Identity/Account/Register" },
             { "Map", "/Map/Mappage"},
+            { "Privacy", "/Home/Privacy"},
+            { "FAQ", "/Home/FAQ"},
+            { "Events Search", "/Home/BrowsingSearch"},
             {"EventInfo", "/Home/EventPage/24"}
         };
 

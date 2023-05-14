@@ -1,4 +1,11 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@using OtterProductions_CapstoneProject.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@*Used https://www.youtube.com/watch?v=YesSVqjcDts for reference for the nav bar*@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,46 +22,72 @@
     }
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/Images/logo.png" alt="LOGO" style="width: 90px; height: 60px;" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Map" asp-action="Mappage">Map</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="BrowsingSearch">Local Events</a>
-                        </li>
-                    </ul>
-                </div>
-                <partial name="_LoginPartial" />
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="wrapper">
+        <div id="navMenu" class="navMenu">
+            <ul>
+                <li>
+                    <a class="nav-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/Images/logo.png" alt="LOGO" style="width: 100px; height: 70px;" /></a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-area="" asp-controller="Map" asp-action="Mappage">Map</a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="BrowsingSearch">Local Events</a>
+                </li>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                    </li>
 
-    </div>
+                    <li class="nav-item">
+                        @{
+                            var name = User.Identity.Name;
+                            @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
+                        }
+                    </li>
+                    <li class="nav-item">
+                        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button id="logout" type="submit" class="nav-link btn btn-link border-0">Logout</button>
+                        </form>
+                    </li>
 
-    <footer class="footer" style="background-color: #22303c; color: white">
-        <div class="container">
-            &copy; 2023 - OtterProductions_CapstoneProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> - <a asp-area="" asp-controller="Home" asp-action="FAQ">FAQ</a>
+
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Create an Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                }
+                <li>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </li>
+                <li>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="FAQ">FAQ</a>
+                </li>
+
+            </ul>
         </div>
-    </footer>
+    </div>
+    <div class="container">
+        <div class="main_info">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    
-    
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
