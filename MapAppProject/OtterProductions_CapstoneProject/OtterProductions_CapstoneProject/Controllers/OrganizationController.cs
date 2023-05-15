@@ -286,20 +286,33 @@ namespace OtterProductions_CapstoneProject.Controllers
         public async Task<IActionResult> Events()
         {
 
-            var result = await _context.Events.Where(x => x.OrganizationId == 1).ToListAsync();
+            var result = await _context.Events.Include(x=>x.Organization).Where(x => x.OrganizationId == 1).ToListAsync();
 
             return View(result);
         }
         [HttpGet()]
-        public IActionResult CreateEvent()
+        public async Task<IActionResult> CreateEvent()
         {
+            var items= new  List<SelectListItem>();
+            var  eventType= await _context.EventTypes.ToListAsync();
+            foreach (var eventTypeItem in eventType)
+            {
+                items.Add(new SelectListItem()
+                {
+                    Text  =eventTypeItem.EventType1,
+                    Value=eventTypeItem.Id.ToString(),
+
+                });
+            }
+          
+            ViewBag.EventType= items;
             return View(new Event());
         }
         [HttpPost()]
         public async Task<IActionResult> CreateEvent(Event model)
 
         {
-            model.EventDate = DateTime.Now;
+           // model.EventDate = DateTime.Now;
             model.OrganizationId = 1;
             await _context.Events.AddAsync(model);
             await _context.SaveChangesAsync();
