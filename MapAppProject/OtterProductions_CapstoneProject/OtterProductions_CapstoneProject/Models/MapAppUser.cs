@@ -16,6 +16,21 @@ public partial class MapAppUser
     [StringLength(50)]
     public string? AspnetIdentityId { get; set; }
 
+    [StringLength(50)]
+    public string FirstName { get; set; }
+
+    [StringLength(50)]
+    public string LastName { get; set; }
+
+    [StringLength(50)]
+    public string Email { get; set; }
+
+    [StringLength(50)]
+    public string Username { get; set; }
+
+    [StringLength(50)]
+    public string? PhoneNumber { get; set; }
+
     [InverseProperty("MapAppUser")]
     public virtual ICollection<UserEventList> UserEventLists { get; } = new List<UserEventList>();
 }
