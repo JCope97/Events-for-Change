@@ -359,7 +359,7 @@ a {
 /* Event page */
 
 #hosted, #EventName, #OrganizationName {
-    color: white;
+   /* color: white;*/
 }
 
 #eventDescriptionTitle, #eventDescription, #eventLocationTitle, #eventLocation {
