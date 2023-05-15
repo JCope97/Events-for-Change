@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.DAL.Abstract;
 using OtterProductions_CapstoneProject.DAL.Concrete;
@@ -118,9 +119,32 @@ namespace OtterProductions_CapstoneProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult BrowsingSearch(){
-            CityState locationForVM = new CityState();
-            return View(locationForVM);
+        public async Task<IActionResult> BrowsingSearch(string? name, string? location)
+        {
+            var response = new List<Event>();
+            if(string.IsNullOrEmpty(name) && string.IsNullOrEmpty(location))
+            {
+                response = await _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId == 1).ToListAsync();
+                return View(response);
+            }
+
+            if (!string.IsNullOrEmpty(name) && string.IsNullOrEmpty(location))
+            {
+                response = await _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId == 1 && x.EventName.Contains(name)).ToListAsync();
+                return View(response);
+            }
+            if (string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(location))
+            {
+                response = await _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId == 1 && x.EventLocation.Contains(location)).ToListAsync();
+                return View(response);
+            }
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(location))
+            {
+                response = await _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId == 1 && x.EventLocation.Contains(location) || x.EventName.Contains(name)).ToListAsync();
+                return View(response);
+            }
+
+            return View(response);
         }
 
         [HttpGet]
