@@ -56,5 +56,21 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
         {
             return FindById(id);
         }
+
+        IEnumerable<Event> IBrowseEventRepository.GetAllEventsForUser(string id)
+        {
+            IEnumerable<Event> usersEvents = new List<Event>();
+
+            foreach (var i in _context.UserEventLists)
+            {
+                if (i.MapAppUser.AspnetIdentityId == id)
+                {
+                    usersEvents.Append(i.Event);
+                }
+            
+            }
+
+            return usersEvents;
+        }
     }
 }

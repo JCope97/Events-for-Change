@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.DAL.Abstract;
 using OtterProductions_CapstoneProject.DAL.Concrete;
@@ -21,16 +23,20 @@ namespace OtterProductions_CapstoneProject.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private IBrowseEventRepository _eventRepository;
         private readonly IEmailSender _emailSender;
+        private readonly AuthenticationDbContext _authenticationDbContext;
+
         //private readonly BaseUrlConfiguration _baseUrlConfig;
 
-        public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager, IEmailSender emailSender, AuthenticationDbContext authenticationDbContext)
         {
             _logger = logger;
             _context = ctx;
             _userManager = userManager;
             _eventRepository = new BrowseEventRepository(_context);
             _emailSender = emailSender;
-           // _baseUrlConfig = baseUrlConfig;
+            _authenticationDbContext = authenticationDbContext;
+
+            // _baseUrlConfig = baseUrlConfig;
         }
         public IActionResult Index()
         {
@@ -63,7 +69,7 @@ namespace OtterProductions_CapstoneProject.Controllers
         }
         public async Task<IActionResult> MessageVerifyEmail()
         {           
-            ViewBag.Message = "Kindly check your email to verify your  account . if  not you can't access the app.";
+            ViewBag.Message = "Kindly check your email to verify your account. if  not you can't access the app.";
             return View();
         }
         [HttpPost]
@@ -140,6 +146,23 @@ namespace OtterProductions_CapstoneProject.Controllers
             //eventView.OrganizationName = newEvent.OrganizationNavigation.OrganizationName;
 
             return View(eventView);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult UserPage(string email)
+        {
+
+            var user = _authenticationDbContext.Users.FirstOrDefault(x => x.Email == email);
+            UserViewModel userView = new UserViewModel();
+            IEnumerable<Event> eventList = new List<Event>();
+
+            var id = user.Id;
+            eventList = _eventRepository.GetAllEventsForUser(id);
+
+            userView.EventList = eventList;
+
+            return View(userView);
         }
 
 

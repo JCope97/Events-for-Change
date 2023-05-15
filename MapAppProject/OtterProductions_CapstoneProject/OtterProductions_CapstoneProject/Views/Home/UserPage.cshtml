@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using OtterProductions_CapstoneProject.Areas.Identity.Data
+@model UserViewModel
+@{
+    ViewData["Title"] = "User Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<div>
+    <h1>Hello @UserManager.GetUserName(User)!</h1>
+</div>
+
+<div class="list-group">
+    @if (Model.EventList is null)
+    {
+        <p>There are no Events saved for you yet. Take a look at local events in your area and add some to see them here!</p>
+    }
+    else
+    {
+        foreach (var i in Model.EventList)
+        {
+            <ul class="list-group list-group-horizontal">
+                <a href="#"></a><li class="list-group-item list-group-item-action">@i.EventName</li>
+                <li class="list-group-item">@i.EventLocation</li>
+                <li class="list-group-item">@i.EventDate</li>
+                <li class="list-group-item">@i.EventDescription</li>
+
+            </ul>
+        }
+    }
+    
+
+</div>
