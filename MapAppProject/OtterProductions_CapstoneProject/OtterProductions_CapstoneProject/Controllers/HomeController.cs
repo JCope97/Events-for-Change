@@ -31,7 +31,7 @@ namespace OtterProductions_CapstoneProject.Controllers
             _userManager = userManager;
             _eventRepository = new BrowseEventRepository(_context);
             _emailSender = emailSender;
-           // _baseUrlConfig = baseUrlConfig;
+            // _baseUrlConfig = baseUrlConfig;
         }
         public IActionResult Index()
         {
@@ -63,7 +63,7 @@ namespace OtterProductions_CapstoneProject.Controllers
             return View();
         }
         public async Task<IActionResult> MessageVerifyEmail()
-        {           
+        {
             ViewBag.Message = "Kindly check your email to verify your  account . if  not you can't access the app.";
             return View();
         }
@@ -99,11 +99,11 @@ namespace OtterProductions_CapstoneProject.Controllers
             BrowseViewModel browseView = new BrowseViewModel();
             browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
             browseView.EventsTypes = _context.EventTypes.ToList();
-/*            //Can't add Organizations until later
-            browseView.Organizations = _context.Organizations.ToList();*/
+            /*            //Can't add Organizations until later
+                        browseView.Organizations = _context.Organizations.ToList();*/
 
             return View(browseView);
-            }
+        }
 
         [HttpPost]
         public IActionResult Browsing(CityState locationForVM)
@@ -112,39 +112,64 @@ namespace OtterProductions_CapstoneProject.Controllers
             BrowseViewModel browseView = new BrowseViewModel();
             browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeksAndTheLocation(locationForVM, DateOnly.FromDateTime(DateTime.Now));
             browseView.EventsTypes = _context.EventTypes.ToList();
-/*            //Can't add Organizations until later
-            browseView.Organizations = _context.Organizations.ToList();*/
+            /*            //Can't add Organizations until later
+                        browseView.Organizations = _context.Organizations.ToList();*/
 
             return View(browseView);
         }
 
         [HttpGet]
-        public async Task<IActionResult> BrowsingSearch(string? name, string? location)
+        public IActionResult BrowsingSearch()
         {
-            var response = new List<Event>();
-            if(string.IsNullOrEmpty(name) && string.IsNullOrEmpty(location))
+            CityState locationForVM = new CityState();
+            return View(locationForVM);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Organizations(string? orgName, string? orgLocation)
+        {
+            try
             {
-                response = await _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId == 1).ToListAsync();
-                return View(response);
+                var organizaitons = new List<Organization>();
+                if (string.IsNullOrEmpty(orgName) && string.IsNullOrEmpty(orgLocation))
+                {
+                     organizaitons = _context.Organizations.ToList();
+                    return View(organizaitons);
+                }
+                if (!string.IsNullOrEmpty(orgName) && string.IsNullOrEmpty(orgLocation))
+                {
+                    organizaitons =await _context.Organizations.Where(x=>x.OrganizationName.Contains(orgName)).ToListAsync();
+                    return View(organizaitons);
+                }
+                if (string.IsNullOrEmpty(orgName) && !string.IsNullOrEmpty(orgLocation))
+                {
+                    organizaitons = await _context.Organizations.Where(x => x.OrganizationLocation.Contains(orgLocation)).ToListAsync();
+                    return View(organizaitons);
+                }
+
+                if (!string.IsNullOrEmpty(orgName) && !string.IsNullOrEmpty(orgLocation))
+                {
+                     organizaitons = await _context.Organizations.Where(x => x.OrganizationLocation.Contains(orgLocation) 
+                                                       && x.OrganizationName.Contains(orgName)).ToListAsync();
+                    return View(organizaitons);
+                }
+                return View(organizaitons);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
 
-            if (!string.IsNullOrEmpty(name) && string.IsNullOrEmpty(location))
-            {
-                response = await _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId == 1 && x.EventName.Contains(name)).ToListAsync();
-                return View(response);
-            }
-            if (string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(location))
-            {
-                response = await _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId == 1 && x.EventLocation.Contains(location)).ToListAsync();
-                return View(response);
-            }
-            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(location))
-            {
-                response = await _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId == 1 && x.EventLocation.Contains(location) || x.EventName.Contains(name)).ToListAsync();
-                return View(response);
-            }
+         
+        }
 
-            return View(response);
+
+        [HttpGet]
+        public IActionResult OrginzaitonEvents(int id)
+        {
+            var events= _context.Events.Include(x=>x.Organization).Where(x=>x.OrganizationId.Equals(id)).ToList();
+
+            return View(events);
         }
 
         [HttpGet]

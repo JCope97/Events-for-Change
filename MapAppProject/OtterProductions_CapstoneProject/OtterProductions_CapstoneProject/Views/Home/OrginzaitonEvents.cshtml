@@ -1,0 +1,44 @@
+﻿@model List<OtterProductions_CapstoneProject.Models.Event>
+
+@{
+    ViewData["Title"] = "OrginzaitonEvents";
+}
+
+<h1>OrginzaitonEvents</h1>
+
+
+@if (Model != null)
+{
+    <div class="container">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>@item.EventName</td>
+                        <td>@item.EventLocation</td>
+                        <td>@item.EventDescription </td>
+                        <td>@item.EventDate</td>
+                        <td>@item.Organization.EventType1</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <h1>Event Not available..</h1>
+}
+
