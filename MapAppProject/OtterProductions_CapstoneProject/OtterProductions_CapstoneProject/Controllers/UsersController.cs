@@ -7,6 +7,8 @@ using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
 using OtterProductions_CapstoneProject.ViewModel;
 
+
+
 namespace OtterProductions_CapstoneProject.Controllers
 {
     public class UsersController : Controller
