@@ -155,7 +155,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     PhoneNumber = Input.PhoneNumber,
                     Email = Input.Email,
-                    UserName = Input.Username
+                    UserName = Input.Email
                 };
 
                 //await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -170,7 +170,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     MapAppUser ma = new MapAppUser
                     {
                         AspnetIdentityId = user.Id,
-                        Username = user.UserName,
+                        Username = user.Email,
                         FirstName = user.FirstName,
                         LastName = user.LastName,
                         Email = user.Email,
