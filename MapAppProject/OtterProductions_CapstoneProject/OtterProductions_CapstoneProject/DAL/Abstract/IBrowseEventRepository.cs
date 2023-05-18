@@ -10,6 +10,8 @@ namespace OtterProductions_CapstoneProject.DAL.Abstract
         IEnumerable<Event> GetAllEventsWithinTwoWeeksAndTheLocation(CityState cityStateLocation, DateOnly today);
 
         Event GetEventById(int id);
+        Event GetEventByName(string name);
+
     }
 }
 

@@ -58,6 +58,12 @@ namespace OtterProductions_CapstoneProject.Controllers
         //}
 
         [HttpGet]
+        public IActionResult EventChoice()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Browsing()
         {
             //Creates a viewmodel and grabs the events, eventTypes, and organizations
@@ -108,6 +114,38 @@ namespace OtterProductions_CapstoneProject.Controllers
             return View(eventView);
         }
 
+        [HttpGet]
+        public IActionResult SearchEvent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SearchEvent(string name)
+        {
+            EventViewModel eventView = new EventViewModel();
+            eventView.EventsTypes = _context.EventTypes.ToList();
+            Event newEvent = new Event();
+            newEvent = _eventRepository.GetEventByName(name);
+            //newEvent = _context.Events.Find(name);
+            //newEvent = _context.Events.FindEvent(name);
+            //newEvent = _context.Events.Where(e => e.EventName == name).Select(e => e.EventName);
+
+            if (newEvent == null)
+            {
+                return NotFound();
+            }
+
+            eventView.Id = newEvent.Id;
+            eventView.EventDate = newEvent.EventDate;
+            eventView.EventDescription = newEvent.EventDescription;
+            eventView.EventLocation = newEvent.EventLocation;
+            eventView.EventName = newEvent.EventName;
+            eventView.EventTypeId = newEvent.EventTypeId;
+            //eventView.OrganizationName = newEvent.OrganizationNavigation.OrganizationName;
+
+            return View(eventView);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

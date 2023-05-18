@@ -3,6 +3,7 @@ using OtterProductions_CapstoneProject.Models;
 using OtterProductions_CapstoneProject.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OtterProductions_CapstoneProject.DAL.Concrete
 {
@@ -55,6 +56,26 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
         public Event GetEventById(int id)
         {
             return FindById(id);
+        }
+
+        public IEnumerable<Event> GetEventByName(string name)
+        {
+            // Assuming events is the collection of events you want to search through
+            // Replace "events" with your actual collection name
+            var matchingEvents = _context.Events.Where(e => e.EventName == name).ToList();
+            return matchingEvents;
+          
+/*            IEnumerable<Event> eventsListName = new List<Event>();
+
+            foreach (var AnEvent in _context.Events)
+            {
+                if (DateOnly.FromDateTime(AnEvent.EventDate) >= today && DateOnly.FromDateTime(AnEvent.EventDate) <= endWindow)
+                {
+                    eventsWindow = eventsWindow.Append(AnEvent);
+                }
+            }
+            eventsWindow = eventsWindow.ToList();
+            return eventsWindow;*/
         }
     }
 }
