@@ -110,11 +110,6 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid, Needs to have an email prefix and an email domain, such as example@mail.com")]
             public string Email { get; set; }
 
-            [Required]
-            [Display(Name = "Username")]
-            [DataType(DataType.Text)]
-            [RegularExpression("^[a-zA-Z0-9_\\.-]{8,}$", ErrorMessage = "Username is not valid, Needs to be 8 digits long and be alphanumeric characters only")]
-            public string Username { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -170,7 +165,6 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     MapAppUser ma = new MapAppUser
                     {
                         AspnetIdentityId = user.Id,
-                        Username = user.Email,
                         FirstName = user.FirstName,
                         LastName = user.LastName,
                         Email = user.Email,

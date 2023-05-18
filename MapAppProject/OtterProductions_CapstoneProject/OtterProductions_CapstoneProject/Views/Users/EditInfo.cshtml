@@ -12,7 +12,7 @@
     <br />
     @if (SignInManager.IsSignedIn(User))
      {           
-        <h1 style="color:white;">Hello!</h1>
+        <h1 style="color:white;">Hello @User.Identity.Name!</h1>
      }
 
     <h4 style="color: white;">Edit your account information below as needed</h4>
@@ -22,12 +22,6 @@
             <form asp-action="EditInfo">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
-                <br />
-                <div class="form-group">
-                    <label asp-for="Username" class="control-label" style="color:white;">Username</label>
-                    <input asp-for="Username" class="form-control" />
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>
                 <br />
                 <div class="form-group">
                     <label asp-for="FirstName" class="control-label" style="color:white;">First Name</label>

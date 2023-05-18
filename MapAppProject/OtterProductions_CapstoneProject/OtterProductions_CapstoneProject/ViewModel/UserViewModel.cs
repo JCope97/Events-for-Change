@@ -10,7 +10,7 @@ namespace OtterProductions_CapstoneProject.ViewModel
         public int Id { get; set; }
 
         [StringLength(50)]
-        public string? AspnetIdentityId { get; set; }
+        public string AspnetIdentityId { get; set; }
 
         [StringLength(50)]
         public string? Email { get; set; }

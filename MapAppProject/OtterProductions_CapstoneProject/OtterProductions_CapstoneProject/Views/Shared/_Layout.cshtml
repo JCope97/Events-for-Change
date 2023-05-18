@@ -39,12 +39,10 @@
                 </li>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    @*@if (UserManager.GetUserId() == ???)
-                    {
-                        
-                    }*@
+
                     <li class="nav-item">
-                        Profile (add link)
+                        @*CHANGE LINK to profile page link*@
+                        <a class="nav-link" asp-area="" asp-controller="Users" asp-action="EditInfo">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Users" asp-action="EditInfo">Edit Profile</a>
@@ -61,8 +59,6 @@
                             <button id="logout" type="submit" class="nav-link btn btn-link border-0">Logout</button>
                         </form>
                     </li>
-
-
                 }
                 else
                 {
