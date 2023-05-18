@@ -2,6 +2,6 @@
 {
     public class UserViewModel
     {
-        public IEnumerable<Event> EventList { get; set; }
+        public IEnumerable<EventViewModel> EventList { get; set; }
     }
 }

@@ -69,7 +69,7 @@ namespace OtterProductions_CapstoneProject.Controllers
         }
         public async Task<IActionResult> MessageVerifyEmail()
         {           
-            ViewBag.Message = "Kindly check your email to verify your account. if  not you can't access the app.";
+            ViewBag.Message = "Kindly check your email to verify your account. if not you can't access the app.";
             return View();
         }
         [HttpPost]
@@ -150,17 +150,18 @@ namespace OtterProductions_CapstoneProject.Controllers
 
         [HttpGet]
         [Authorize]
-        public IActionResult UserPage(string email)
+        public IActionResult UserPage()
         {
-
-            var user = _authenticationDbContext.Users.FirstOrDefault(x => x.Email == email);
+            var userId = _userManager.GetUserId(User); //look at this
             UserViewModel userView = new UserViewModel();
-            IEnumerable<Event> eventList = new List<Event>();
+            IEnumerable<EventViewModel> eventList = new List<EventViewModel>();
 
-            var id = user.Id;
-            eventList = _eventRepository.GetAllEventsForUser(id);
+            //var user = _authenticationDbContext.Users.FirstOrDefault(x => x.Email == email);
+
+            eventList = _eventRepository.GetAllEventsForUser(userId);
 
             userView.EventList = eventList;
+
 
             return View(userView);
         }

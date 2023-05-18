@@ -11,7 +11,7 @@ namespace OtterProductions_CapstoneProject.DAL.Abstract
 
         Event GetEventById(int id);
 
-        IEnumerable<Event> GetAllEventsForUser(string id);
+        IEnumerable<EventViewModel> GetAllEventsForUser(string id);
     }
 }
 
