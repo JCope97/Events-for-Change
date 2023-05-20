@@ -1,11 +1,12 @@
-﻿
+﻿@model List<OtterProductions_CapstoneProject.Models.Organization>
 @{
     ViewData["Title"] = "Organizations";
 }
+<link href="~/css/events.css" rel="stylesheet" />
 
 <h1>Organizations</h1>
+<p>The list of Organizations registered in our site</p>
 
-@model List<OtterProductions_CapstoneProject.Models.Organization>
 
 
 <form style="text-align:left; display:inline-block;">
@@ -23,7 +24,7 @@
     </div>
     <br>
     <div class="mb-3">
-        <button id="submit" type="submit" class="btn btn-primary">Submit</button>
+        <button id="submit" type="submit" class="btn btn-primary">Search</button>
     </div>
 </form>
 
@@ -40,7 +41,6 @@
                     <th>Location</th>
                     <th>Description</th>
                     <th>Phone</th>
-                    <th>Address</th>
                     <th>Events</th>
                 </tr>
             </thead>
@@ -53,9 +53,8 @@
                         <td>@item.OrganizationLocation</td>
                         <td>@item.OrganizationDescription</td>
                         <td>@item.PhoneNumber</td>
-                        <td>@item.Address</td>
                         <td>
-                            <a href="@Url.Action("OrginzaitonEvents","Home",new { id=item.Id})">Events</a>
+                            <a href="@Url.Action("OrginzaitonEvents","Home",new { id=item.Id})">Here</a>
                             @*<a class="nav-link" asp-area="" asp-controller="Home" asp-rout-id="@item.Id" asp-action="OrginzaitonEvents">Events</a>*@
                         </td>
                     </tr>

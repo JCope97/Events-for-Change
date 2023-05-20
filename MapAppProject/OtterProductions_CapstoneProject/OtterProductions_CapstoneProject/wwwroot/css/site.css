@@ -217,10 +217,12 @@ h3 {
 .vert-nav, .navbar-nav {
     background-color: #22303c;
     width: 100px;
+    display: flex;
 }
 
 .navbar-text, .nav-link, .nav-item {
     color: white;
+    display:flex;
 }
 
 .body {
@@ -229,6 +231,7 @@ h3 {
 
 .nav-link:hover {
     color: #8899a6;
+    display: flex;
 }
 
 .wrapper {
