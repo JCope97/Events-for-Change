@@ -12,11 +12,11 @@
             <form asp-action="EditOrganization">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
-                <input type="hidden" asp-for="AspnetIdentityId" /> 
-                <input type="hidden" asp-for="OrganizationPicture" /> 
+                <input type="hidden" asp-for="AspnetIdentityId" />
+                <input type="hidden" asp-for="OrganizationPicture" />
                 <input type="hidden" asp-for="ImageUrl" />
                 <input type="hidden" asp-for="OldEmail" />
-        
+
                 <div class="form-group">
                     <label asp-for="Email" id="orgEmail" class="control-label"></label>
                     <input asp-for="Email" class="form-control" />
@@ -47,7 +47,7 @@
                     <input asp-for="PhoneNumber" class="form-control" />
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
-           
+
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" style="width: 75%; background-color: #78A1BB;" />
                 </div>
@@ -56,11 +56,8 @@
     </div>
 </body>
 
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-
-

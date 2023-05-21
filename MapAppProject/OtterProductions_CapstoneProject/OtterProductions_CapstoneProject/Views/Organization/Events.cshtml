@@ -5,7 +5,10 @@
 }
 
 <link href="~/css/events.css" rel="stylesheet" />
-<a class="nav-link" asp-area="" asp-controller="Organization" asp-action="CreateEvent" role="tab" aria-controls="profile" aria-selected="false">Add New Event</a>
+@*<a class="nav-link" asp-area="" asp-controller="Organization" asp-action="CreateEvent" role="tab" aria-controls="profile" aria-selected="false">Add New Event</a>*@
+<h1>Organizations Profile Page</h1>
+<a class="search-button btn btn-primary dark-background" asp-area="" asp-controller="Organization" asp-action="CreateEvent" role="tab" aria-controls="profile" aria-selected="false">Add New Event</a>
+
 
 @if (Model != null)
 {

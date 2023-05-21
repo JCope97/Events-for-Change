@@ -290,7 +290,9 @@ namespace OtterProductions_CapstoneProject.Controllers
 
             return View(result);
         }
+        [Authorize(Roles = "Organization")]
         [HttpGet()]
+        
         public async Task<IActionResult> CreateEvent()
         {
             var items= new  List<SelectListItem>();

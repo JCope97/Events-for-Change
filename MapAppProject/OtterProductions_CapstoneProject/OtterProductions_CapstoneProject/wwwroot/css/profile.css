@@ -2,6 +2,7 @@
 body {
     background-color: #15202b
 }
+
 h2 {
     color: white;
 }
@@ -140,4 +141,22 @@ h2 {
     font-weight: 600;
     color: white;
 }
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    .search-button.dark-background {
+        color: #fff;
+    }
+
+    .search-button:hover {
+        background-color: #2980b9;
+    }
 
