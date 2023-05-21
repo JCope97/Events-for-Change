@@ -24,7 +24,7 @@
             <form asp-action="EditInfo" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 
-                <br />
+               @* <br />
                 <div class="form-group">
                     <label asp-for="FirstName" class="control-label" style="color:white;">First Name</label>
                     <input asp-for="FirstName" class="form-control" />
@@ -35,7 +35,7 @@
                     <label asp-for="LastName" class="control-label" style="color:white;">Last Name</label>
                     <input asp-for="LastName" class="form-control" />
                     <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
+                </div>*@
                 <br />
                 <div class="form-group">
                     <label asp-for="Email" class="control-label" style="color:white;">Email</label>
@@ -49,9 +49,11 @@
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
                 <br />
+                <br />
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" style="background-color: #78A1BB; border-color: #78A1BB" />
                 </div>
+                
             </form>
         </div>
     </div>
