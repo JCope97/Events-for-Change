@@ -11,6 +11,7 @@ using OtterProductions_CapstoneProject.ViewModel;
 using System.Data;
 using System.Diagnostics;
 using System.Security.Claims;
+using static System.Net.WebRequestMethods;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OtterProductions_CapstoneProject.Controllers
@@ -43,7 +44,7 @@ namespace OtterProductions_CapstoneProject.Controllers
         }
 
         // Used https://www.geeksforgeeks.org/basic-crud-create-read-update-delete-in-asp-net-mvc-using-c-sharp-and-entity-framework/
-        // as reference for post method 
+        // as reference for post method (edited as needed)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditInfo(string id, string email, string phoneNumber)
@@ -55,6 +56,8 @@ namespace OtterProductions_CapstoneProject.Controllers
             var userInfo = _userManager.GetUserAsync(User);
             var data2 = _context.MapAppUsers.Where(x => x.AspnetIdentityId == userId).SingleOrDefault();
 
+            //Used code from https://www.yogihosting.com/aspnet-core-identity-create-read-update-delete-users/ for updating below
+            //Edited the provided code from above for my situation
             if (user != null)
             {
                 if (!string.IsNullOrEmpty(email))
