@@ -24,10 +24,11 @@ namespace OtterProductions_CapstoneProject.Controllers
         private IBrowseEventRepository _eventRepository;
         private readonly IEmailSender _emailSender;
         private readonly AuthenticationDbContext _authenticationDbContext;
+        private readonly IEventUserConnectionRepository _eventUserConnectionRepository;
 
         //private readonly BaseUrlConfiguration _baseUrlConfig;
 
-        public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager, IEmailSender emailSender, AuthenticationDbContext authenticationDbContext)
+        public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager, IEmailSender emailSender, AuthenticationDbContext authenticationDbContext, IEventUserConnectionRepository eventUserConnectionRepository)
         {
             _logger = logger;
             _context = ctx;
@@ -35,6 +36,7 @@ namespace OtterProductions_CapstoneProject.Controllers
             _eventRepository = new BrowseEventRepository(_context);
             _emailSender = emailSender;
             _authenticationDbContext = authenticationDbContext;
+            _eventUserConnectionRepository = eventUserConnectionRepository;
 
             // _baseUrlConfig = baseUrlConfig;
         }
@@ -155,17 +157,53 @@ namespace OtterProductions_CapstoneProject.Controllers
             var userId = _userManager.GetUserId(User); //look at this
             UserViewModel userView = new UserViewModel();
             IEnumerable<EventViewModel> eventList = new List<EventViewModel>();
+            //List<EventViewModel> eventViewModels = new List<EventViewModel>();
 
             //var user = _authenticationDbContext.Users.FirstOrDefault(x => x.Email == email);
 
             eventList = _eventRepository.GetAllEventsForUser(userId);
 
-            userView.EventList = eventList;
+            if (eventList.Any())
+            {
+                userView.EventList = eventList;
+
+            }
+            else
+            {
+                userView.EventList = null;
+            }
 
 
             return View(userView);
         }
 
+        [HttpPost]
+        [Authorize]
+        public IActionResult UserPage(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var aspUserId = _userManager.GetUserId(User);
+                var mapAppUser = _context.MapAppUsers.Where(u => u.AspnetIdentityId == aspUserId).FirstOrDefault();
+                var mapAppUserId = mapAppUser.Id;
+                UserEventList userEventList = new UserEventList();
+                int mainEventId = id;
+
+                userEventList.MapAppUserId = mapAppUserId;
+                userEventList.EventId = mainEventId;
+;
+
+                _eventUserConnectionRepository.AddOrUpdate(userEventList);
+
+                return RedirectToAction("UserPage");
+            }
+           
+
+            
+
+
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

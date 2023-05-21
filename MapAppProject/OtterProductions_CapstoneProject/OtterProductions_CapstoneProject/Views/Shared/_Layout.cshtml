@@ -21,7 +21,7 @@
         @RenderSection("AddToHead", required: false)
     }
 </head>
-<body>
+<body style="background-color: #15202b">
     <div class="wrapper">
         <div id="navMenu" class="navMenu">
             <ul>
@@ -45,8 +45,12 @@
 
                     <li class="nav-item">
                         @{
-                            var name = User.Identity.Name;
-                            @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
+                            //var userRole = UserManager.GetUsersInRoleAsync("");
+                            //var name = User.Identity.Name;
+                        //    @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
+                        //
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="UserPage">Profile</a>
+
                         }
                     </li>
                     <li class="nav-item">
