@@ -3,6 +3,7 @@ using OtterProductions_CapstoneProject.Models;
 using OtterProductions_CapstoneProject.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OtterProductions_CapstoneProject.DAL.Concrete
 {
@@ -36,7 +37,6 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
             //We are going to grab all events within the city and state radius and within the two week span
             DateOnly endWindow = today.AddDays(14);
             IEnumerable<Event> eventsWindow = new List<Event>();
-
             foreach (var AnEvent in _context.Events)
             {
                 if (DateOnly.FromDateTime(AnEvent.EventDate) >= today && DateOnly.FromDateTime(AnEvent.EventDate) <= endWindow)
@@ -47,7 +47,6 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
                     }
                 }
             }
-  
             eventsWindow = eventsWindow.ToList();
             return eventsWindow;
         }
@@ -142,6 +141,25 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
 
 
             //return usersEvents;
+        }
+
+        public IEnumerable<Event> GetAllEventsWithinTwoWeeksWithSameName(string eventName, DateOnly today)
+        {
+            //We are going to grab all events with the same name and within the two week span
+            DateOnly endWindow = today.AddDays(14);
+            IEnumerable<Event> eventsWindow = new List<Event>();
+            foreach (var AnEvent in _context.Events)
+            {
+                if (DateOnly.FromDateTime(AnEvent.EventDate) >= today && DateOnly.FromDateTime(AnEvent.EventDate) <= endWindow)
+                {
+                    if (AnEvent.EventName.Contains(eventName))
+                    {
+                        eventsWindow = eventsWindow.Append(AnEvent);
+                    }
+                }
+            }
+            eventsWindow = eventsWindow.ToList();
+            return eventsWindow;
         }
     }
 }

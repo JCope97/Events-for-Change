@@ -5,38 +5,51 @@
     ViewData["Title"] = "Browsing Search Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <body style="background-color: #15202b">
-    <div class="text-center">
-        <br />
-        <h1 id="titleBrowsing" class="display-4">Event Finder</h1>
-        <p id="infoBrowsing">Enter your location and we can find local events in your city</p>
+    <div class="text-center" style="color: white">
+    <h1 class="display-4">Event Location Finder</h1>
+    <p>Enter your location and we can find local events in your city</p>
+    <hr />
+
+    <form asp-controller="Home" asp-action="Browsing" method="post" style="text-align:left; display:inline-block;">
+        <div class="form-group">
+            <br />
+            <label for="CityLocation">Enter your city:</label>
+            <input type="text" id="city" name="City" value="" required>
+            <br />
+            <br />
+            <label for="StateLocation">Enter your state (Using state abbrivations):</label>
+            <input type="text" id="state" name="State" pattern="^[A-Z]{2}$" value="" required>
+        </div>
+        <br>
+        <div class="mb-3">
+            <button id="EventByLocation" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    </div>
+
+    <br />
+    <hr />
+    <hr />
+    <hr />
+    <br />
+
+    <div class="text-center" style="color: white">
+        <h1 class="display-4">Event Name Finder</h1>
+        <p>Enter the name of the event you're looking for and we can find all events with the matching name</p>
         <hr />
 
-        <form asp-controller="Home" asp-action="Browsing" method="post" style="text-align:left; display:inline-block;">
+        <form asp-controller="Home" asp-action="SearchEvent" method="post" style="text-align:left; display:inline-block;">
             <div class="form-group">
                 <br />
-                @*<label for="AddressLocation">Enter your address:</label>
-                <input type="text" id="address" name="Address" value="" required>
+                <label for="name">Enter the name of the event:</label>
+                <input id="EventNameInput" type="text" name="name" required>
                 <br />
-                <br />*@
-                <label for="CityLocation" id="cityBrowsingText">Enter your city:</label>
-                <input type="text" id="cityBrowsing" name="City" value="" required>
-                <br />
-                <br />
-                <label for="StateLocation" id="stateBrowsingText">Enter your state (Using state abbreviations):</label>
-                <input type="text" id="stateBrowsing" name="State" pattern="^[A-Z]{2}$" value="" required>
-                @*<br />
-                <br />
-                <label for="Zipcode">Enter your zip:</label>
-                <input type="text" id="zip" name="Zip" value="" required>
-                <br />*@
             </div>
             <br>
             <div class="mb-3">
-                <button id="submitBrowsing" type="submit" class="btn btn-primary">Submit</button>
+                <button id="EventByName" type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
-
     </div>
-</body>       
+</body>

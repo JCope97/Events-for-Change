@@ -30,6 +30,8 @@ namespace BDD_Tests_OtterProductions.Shared
             {"EventInfo", "/Home/EventPage/24"},
             {"EditInfo", "/Users/EditInfo" },
             {"EditLogin", "/Identity/Account/Login?ReturnUrl=%2FUsers%2FEditInfo" }
+            {"EventInfo", "/Home/EventPage/24"},
+            { "SearchEvent", "/Home/BrowsingSearch"},
         };
 
         public static string PathFor(string pathName) => Paths[pathName];
