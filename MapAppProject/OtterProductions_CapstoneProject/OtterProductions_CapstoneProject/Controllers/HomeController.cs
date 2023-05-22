@@ -106,6 +106,12 @@ namespace OtterProductions_CapstoneProject.Controllers
         //}
 
         [HttpGet]
+        public IActionResult EventChoice()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Browsing()
         {
             //Creates a viewmodel and grabs the events, eventTypes, and organizations
@@ -279,6 +285,20 @@ namespace OtterProductions_CapstoneProject.Controllers
 
 
             return View();
+        }
+        [HttpGet]
+        public IActionResult SearchEvent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SearchEvent(string name)
+        {
+            BrowseViewModel searchView = new BrowseViewModel();
+            searchView.Events = _eventRepository.GetAllEventsWithinTwoWeeksWithSameName(name, DateOnly.FromDateTime(DateTime.Now));
+            searchView.EventsTypes = _context.EventTypes.ToList();
+            return View(searchView);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,8 +1,7 @@
-﻿﻿
-@model OtterProductions_CapstoneProject.Models.BrowseViewModel
+﻿@model OtterProductions_CapstoneProject.Models.BrowseViewModel
 
 @{
-    ViewData["Title"] = "Browsing Page";
+    ViewData["Title"] = "Search Event Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <body style="background-color: #15202b">
@@ -15,7 +14,7 @@
         <p>There aren't any events in your area</p>
     }else
     {
-            <table class="table table-sm" id="logTable" style="color: white">
+            <table class="table table-sm" id="eventLogTable" style="color: white">
                 <thead>
                     <tr>
                         <th scope="col">Event Type</th>
