@@ -42,22 +42,23 @@
                         <h6 style="color: white;">
                             @Model.OrganizationLocation
                         </h6>
-                   
+
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a style="color: white;" class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                <a class="search-button btn btn-sm btn-primary dark-background" asp-area="" asp-controller="Organization" asp-action="OrganizationDetails" role="tab" aria-controls="profile" aria-selected="true">About</a>
                             </li>
-                            <li class="nav-item">
-                                <a style="color: white;" class="text-white" asp-area="" asp-controller="Organization" asp-action="Events" role="tab" aria-controls="profile" aria-selected="false">Events</a>
-                                @*<a class="nav-link" id="profile-tab" data-toggle="tab" href="Organization/Events" role="tab" aria-controls="profile" aria-selected="false">Events</a>*@
+                            <li class="nav-item" style="margin-left: 6px;">
+                                <a class="search-button btn btn-sm btn-primary dark-background" asp-area="" asp-controller="Organization" asp-action="Events" role="tab" aria-controls="profile" aria-selected="false">Events</a>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-2">
                   
-                    <text style="color: white;"  class="profile-edit-btn">@Html.ActionLink("Edit Profile", "EditOrganization", "Organization", new { ids = User.Identity.Name }, new { @title = "View Profile" }) </text>
-                    @*<input type="submit" class="profile-edit-btn" name="btnAddMore"  value="Edit Profile" />*@
+             @*       <text style="" class="search-button btn btn-primary dark-background">@Html.ActionLink("Edit Profile", "EditOrganization", "Organization", new { ids = User.Identity.Name }, new { @title = "View Profile" }) </text>
+                    <a class="search-button btn btn-primary dark-background" asp-area="" asp-controller="Organization" asp-action="EditOrganization" role="tab" aria-controls="profile" aria-selected="false">Edit Profile</a>*@
+                    <a class="search-button btn btn-sm btn-primary dark-background" href="@Url.Action("EditOrganization", "Organization", new { ids = User.Identity.Name })" title="View Profile">Edit Profile</a>
+              
                 </div>
             </div>
             <div class="row">
@@ -80,7 +81,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label style="color: white;">Email</labe>
+                                    <label style="color: white;">Email</label>
                                 </div>
                                 <div class="col-md-6">
                                     <p style="color: white;">@Model.Email</p>
@@ -105,10 +106,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label style="color: white;">Address</label>
+                                    <label style="color: white;">Location</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p style="color: white;" id="eventLocation" value="@Model.Address" onclick="unhideMap()">@Model.Address</p>
+                                    <p style="color: white;" id="eventLocation" value="@Model.OrganizationLocation" onclick="unhideMap()">@Model.OrganizationLocation</p>
                                 </div>
                             </div>
                             <div id="sharedMap" style="display: none"></div>

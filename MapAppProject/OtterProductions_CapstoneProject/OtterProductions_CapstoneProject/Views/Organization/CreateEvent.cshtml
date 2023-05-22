@@ -3,7 +3,6 @@
     ViewData["Title"] = "CreateEvent";
 }
 <link href="~/css/events.css" rel="stylesheet" />
-
 <body style="background-color: #15202b">
     <br />
     <div class="container">
@@ -30,11 +29,7 @@
                         <label asp-for="EventDescription" id="eventDescription" style="color: black;">Event Description</label>
                         <span asp-validation-for="EventDescription" class="text-danger"></span>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input asp-for="EventDescription" class="form-control" autocomplete="event description" aria-required="true" placeholder="Event Description" />
-                        <label asp-for="EventDescription" id="eventDescription" style="color: black;">Event Description</label>
-                        <span asp-validation-for="EventDescription" class="text-danger"></span>
-                    </div>
+                    
                     <div class="form-floating mb-3">
                         <input asp-for="EventDate" class="form-control" aria-required="true" placeholder="Event Date" style="color:black;" />
                         <label asp-for="EventDate" id="eventDescription" style="color: black;">Event Date</label>
@@ -42,7 +37,7 @@
                     </div>
                     <div class="form-floating mb-3">
                         @Html.DropDownList("EventTypeId", (IEnumerable<SelectListItem>)ViewBag.EventType)
-                        <label asp-for="EventTypeId" id="EventTypeId" style="color: black;">Event Type </label>
+                       @* <label asp-for="EventTypeId" id="EventTypeId" style="color: black;">Event Type </label>*@
                         <span asp-validation-for="EventTypeId" class="text-danger"></span>
                     </div>
 

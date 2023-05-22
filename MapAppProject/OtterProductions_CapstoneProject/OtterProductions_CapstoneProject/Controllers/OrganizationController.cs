@@ -288,9 +288,15 @@ namespace OtterProductions_CapstoneProject.Controllers
 
             var result = await _context.Events.Include(x=>x.Organization).Where(x => x.OrganizationId == 1).ToListAsync();
 
+            var eventType = await _context.EventTypes.ToListAsync();
+         
+            ViewBag.EventType = eventType;
+
             return View(result);
         }
+        [Authorize(Roles = "Organization")]
         [HttpGet()]
+        
         public async Task<IActionResult> CreateEvent()
         {
             var items= new  List<SelectListItem>();

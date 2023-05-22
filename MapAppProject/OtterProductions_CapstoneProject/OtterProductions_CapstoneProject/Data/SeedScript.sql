@@ -9,15 +9,15 @@ INSERT INTO [EventType](EventType)
     ('Clothing');
 
 
-INSERT INTO [Organization](OrganizationLoginID, OrganizationDescription, OrganizationLocation)
+INSERT INTO [Organization](OrganizationLoginID, OrganizationName, OrganizationDescription, OrganizationLocation)
     VALUES
-    (1, 'Food Bank Organization', 'Monmouth OR'),
-    (2, 'Hunger Fighters', 'Salem OR'),
-    (3, 'Mini-Shelters', 'Portland OR'),
-    (4, 'Mission Save the World', 'Corvallis OR'),
-    (5, 'College Helpers', 'Salem OR'),
-    (6, 'Food Bank Organization', 'Monmouth OR'),
-    (7, 'Monmouth Thrift Store', 'Monmouth OR');
+    (1, 'Food Bank Organization', 'We are a Food Bank Organization', 'Monmouth OR'),
+    (2, 'Hunger Fighters', 'We Fight Hunger' , 'Salem OR'),
+    (3, 'Mini-Shelters','We Help Shelter Those In Need', 'Portland OR'),
+    (4, 'Mission Save the World','We are on a Mission To Save The World', 'Corvallis OR'),
+    (5, 'College Helpers','We Help College Students', 'Salem OR'),
+    (6, 'Food Bank Organization','We are a Food Bank Organization', 'Monmouth OR'),
+    (7, 'Monmouth Thrift Store','We Have Clothing', 'Monmouth OR');
 
 
 
