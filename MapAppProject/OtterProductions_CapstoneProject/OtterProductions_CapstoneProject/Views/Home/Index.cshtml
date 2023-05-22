@@ -8,46 +8,55 @@
     <script type="module" src="/js/HomePage.js"></script>
 }
 
-<div class="text-center">
-    <img src="Images/logo.png" alt="LOGO" id="homepageLogo"/>
-    <h1 class="display-4">Welcome To Otter Productions Capstone Project</h1>
+<body style="background-color: #15202b">
+    <div class="text-center">
+        <img src="Images/logo.png" alt="LOGO" id="homepageLogo"/>
+        <h1 id="homeHeader" class="display-4">Welcome to the Map App!</h1>
     
-</div>
-<br/>
-<div class="row">
-    <div class="col">
-        <form asp-action="Index" method="post">
+    </div>
+    <br/>
+    <div>
+        <p id="homeInfo">Enter your address below to begin!</p>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form asp-action="Index" method="post">
             
-            <div asp-validation-summary="All"></div>
+                <div asp-validation-summary="All"></div>
 
                 
-            <div class="input-group-text">
+                <div class="input-group-text">
 
-                <label asp-for="location" class="control-label" >Address or City</label>
-                <input asp-for="location" class="form-control" id="address" required />
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+                    <label asp-for="location" class="control-label" >Address or City</label>
+                    <input asp-for="location" class="form-control" id="address" required />
+                    <button type="submit" id="homeSubmit" class="btn btn-primary">Submit</button>
+                </div> 
                         
 
             
-        </form>
-        <br/>
-        <button type="button" class="btn btn-secondary" id="locationButton">Click here to get your location</button>
+            </form>
+            <br/>
+            <button type="button" class="btn btn-secondary" id="locationButton">Click here to get your location</button>
+        </div>
     </div>
-</div>
-<br/>
+    <br/>
 
-<div class="text-center">
-    <p>For the general public who need to access information about local places of necessity such as food banks, shelters, or thrift stores,
-        the Map App (name pending) is a web application that will provide a point of access to various events in the user's local area and to other places
-        with items of necessity that aid people facing various difficulties such as food insecurity, drug addiction, or homelessness. The website will manage the location of these places and events,
-        keep track and display user information and interests, and allow organizations to add information about their business or events they are holding. This website will help provide a way to view and
-        keep track of information about places with items of necessities which could help the general public in learning about businesses near them, allow people to gain access to necessities, and help organizations
-        expand and get word out. Unlike various applications and websites that display information about all kinds of events such as Facebook or Ticketmaster, our website will focus on giving people more access to places of need,
-        show events with free or discounted items of necessity, and work to improve users' lives by solving problems related to common struggles.</p>
-</div>
+<div id="homePageInfo" class="text-center">
+    <p style="text-align:left">The Map App will:</p>
+    <ul>
+        <li style="text-align:left">
+            Provide a point of access to various events in the user's local area and to other places
+            with items of necessity that aid people facing various difficulties such as food insecurity, drug addiction, or homelessness.
+        </li>
+        <li style="text-align:left">
+            Provide a way to view and keep track of information about places with items of necessities which could help the general public in learning about businesses near them, allow people to gain access to necessities, and help organizations
+            expand and get word out.
+        </li>
+    </ul>
+<br />
+<br />
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCIiPJAz4KApQsWr71OlZXjZczcaRQitk&callback=initialize&libraries=places&v=weekly"
-        defer
-></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfIlowOJLOtRJduvUraHSk8WOJjUkB3Eo&callback=initialize&libraries=places&v=weekly"
+        defer></script>
 <script src="~/js/HomePage.js" asp-append-version="true"></script>
+</body>

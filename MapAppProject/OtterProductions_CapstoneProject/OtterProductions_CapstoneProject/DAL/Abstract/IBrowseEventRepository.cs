@@ -11,6 +11,8 @@ namespace OtterProductions_CapstoneProject.DAL.Abstract
 
         Event GetEventById(int id);
 
+        IEnumerable<EventViewModel> GetAllEventsForUser(string id);
+
         IEnumerable<Event> GetAllEventsWithinTwoWeeksWithSameName(string eventName, DateOnly today);
     }
 }

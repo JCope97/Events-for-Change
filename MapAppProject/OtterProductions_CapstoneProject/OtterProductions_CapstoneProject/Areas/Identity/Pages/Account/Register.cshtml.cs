@@ -16,9 +16,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using NuGet.Common;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
+using OtterProductions_CapstoneProject.Utilities;
+using IEmailSender = OtterProductions_CapstoneProject.Utilities.IEmailSender;
 
 namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
 {
@@ -26,6 +29,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly BaseUrlConfiguration _baseUrlConfig;
         //private readonly IUserStore<ApplicationUser> _userStore;
         //private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
@@ -37,13 +41,14 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             //IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender,
+            IEmailSender emailSender, 
             MapAppDbContext context)
 
         {
             _userManager = userManager;
             //_userStore = userStore;
             //_emailStore = GetEmailStore();
+           // _baseUrlConfig = baseUrlConfig;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
@@ -105,6 +110,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid, Needs to have an email prefix and an email domain, such as example@mail.com")]
             public string Email { get; set; }
 
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -144,7 +150,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     PhoneNumber = Input.PhoneNumber,
                     Email = Input.Email,
-                    UserName = Input.Email,
+                    UserName = Input.Email
                 };
 
                 //await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -158,7 +164,11 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     // create our own user
                     MapAppUser ma = new MapAppUser
                     {
-                        AspnetIdentityId = user.Id
+                        AspnetIdentityId = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        PhoneNumber = user.PhoneNumber
                     };
                     await _mapAppDbContext.MapAppUsers.AddAsync(ma);
                     await _mapAppDbContext.SaveChangesAsync();
@@ -177,6 +187,15 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
 
                     //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                     //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    var  token = await _userManager.GenerateEmailConfirmationTokenAsync(user);                    
+                    var callback = $"https://otterproductionscapstoneprojectwebapp.azurewebsites.net/Home/VerifyEmail?token=" + token + "&email=" + user.Email + ""; //verificate have
+                    var mail = new VerifyEmail
+                    {
+                        Email = user.Email,
+                        Link = callback,
+                        Subject = "Verify Email"
+                    };
+                    await _emailSender.SendVerifyEmail(mail);  // send email with send grid
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

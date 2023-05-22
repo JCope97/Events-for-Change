@@ -1,4 +1,9 @@
-﻿@model EventViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using OtterProductions_CapstoneProject.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@model EventViewModel
 @{
     ViewData["Title"] = "Event";
 }
@@ -10,91 +15,117 @@
 }
 
 
+<body style="background-color: #15202b">
+    <br />
+    <div class="container">
+        <div class="row">
 
-<div class="container">
-    <div class="row">
-
-        <div class="col">
-
-            
-        </div>
-        <div class="col">
-
-            <div class="text-center">
-                <h1 id="EventName">@Model.EventName</h1>
-            </div>
-        </div>
-        <div class="col"></div>
-    </div>
-    <div class="row">
-
-        <div class="col">
+            <div class="col">
 
             
-        </div>
-        <div class="col">
-
-            <div class="text-center">
-                <h2>Hosted by</h2>
             </div>
-        </div>
-        <div class="col"></div>
-    </div>
-    <div class="row">
+            <div class="col">
 
-        <div class="col">
+                <div class="text-center">
+                    <h1 id="EventName">@Model.EventName</h1>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+
+            <div class="col">
 
             
-        </div>
-        <div class="col">
+            </div>
+            <div class="col">
 
-            <div class="text-center">
-                <h3 id="OrganizationName">This Will be the Organization Name@*@Model.OrganizationName*@</h3>
+                <div class="text-center">
+                    <h2 id="hosted" style="color:white ">Hosted by</h2>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+
+            <div class="col">
+
+            
+            </div>
+            <div class="col">
+
+                <div class="text-center">
+                    <h3 id="OrganizationName">This will be the Organization Name@*@Model.OrganizationName*@</h3>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    
+        <div class="row">
+            <div class="col-8">
+                <h2 id="eventDescriptionTitle">Description:</h2></div>
+            <div class="col"> <h2 id="eventLocationTitle">Location:</h2></div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <h2 id="eventDescription">@Model.EventDescription </h2></div>
+            <div class="col"><h2 id="eventLocation" value="@Model.EventLocation" onclick="unhideMap()">@Model.EventLocation</h2></div>
+        </div>
+    
+        <div class="row">
+            <div class="col">
+
+                <div id="sharedMap" style="display: none"></div>
             </div>
         </div>
-        <div class="col"></div>
-    </div>
     
-    <div class="row">
-        <div class="col-8">
-            <h2>Description:</h2></div>
-        <div class="col"> <h2>Location:</h2></div>
-    </div>
-    <div class="row">
-        <div class="col-8">
-            <h2 id="EventDiscription">@Model.EventDescription </h2></div>
-        <div class="col"><h2 id="eventLocation" value="@Model.EventLocation" onclick="unhideMap()">@Model.EventLocation</h2></div>
-    </div>
-    
-    <div class="row">
-        <div class="col">
+            <br />
 
-            <div id="sharedMap" style="display: none"></div>
+
+        <div class="row">
+
+            <div class="col">
+                <h2 id="eventDateTitle" >Date:</h2></div>
+            <div class="col"></div>
+            <div class="col">
+                <h2 id="eventTypeTitle">Type of Event:</h2></div>
         </div>
-    </div>
-    
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col">
-            <h2>Date:</h2></div>
-        <div class="col"></div>
-        <div class="col">
-            <h2>Type of Event</h2></div>
-    </div>
-
-    <div class="row">
-
-        <div class="col">
-            <h2 id="EventDate">@Model.EventDate</h2></div>
-        <div class="col"></div>
+            <div class="col">
+                <h2 id="EventDate">@Model.EventDate</h2></div>
+            <div class="col"></div>
         
-        <div class="col"><h2 id="EventType">@Model.EventsTypes.ElementAt(Model.EventTypeId - 1).EventType1</h2></div>
-    </div>
+            <div class="col"><h2 id="EventType">@Model.EventsTypes.ElementAt(Model.EventTypeId - 1).EventType1</h2></div>
+        </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="row">
+
+            <div class="col">
+                
+            </div>
+            <div class="col"></div>
+
+            <div class="col">
+                <form asp-controller="Home" asp-action="UserPage" method="post">
+                    <div class="form-group">
+                        <input hidden="hidden" asp-for="Id" type="text" id="eventId" name="id" value="@Model.Id">
+                                            
+                    </div>
+
+                    <input type="submit" id="submitBrowsing" value="Save Event"/>
+                </form>
+            </div>
+        </div>
+
+        }
+        
 
     
-</div>
-
+    </div>
+</body>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfIlowOJLOtRJduvUraHSk8WOJjUkB3Eo&callback=initMap&libraries=places&v=weekly"
         defer></script>
 <script src="~/js/sharedMap.js" asp-append-version="true"></script>        

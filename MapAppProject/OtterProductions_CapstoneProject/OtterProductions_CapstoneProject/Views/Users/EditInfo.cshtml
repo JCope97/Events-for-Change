@@ -1,0 +1,66 @@
+﻿@model OtterProductions_CapstoneProject.Models.MapAppUser
+@using Microsoft.AspNetCore.Identity
+@using OtterProductions_CapstoneProject.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "EditInfo";
+}
+
+<body style="background-color: #15202b;">
+    <br />
+    <br />
+    @if (SignInManager.IsSignedIn(User))
+     {           
+        <h1 style="color:white;">Hello!</h1>
+     }
+
+    <h4 class="editInfoExplanation" id="editInfoExplanation"style="color: white;">Edit your account information below as needed</h4>
+   
+    <div>@ViewBag.error</div>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditInfo" class="editInfoForm" id="editInfoForm" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+               @* <br />
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label" style="color:white;">First Name</label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label" style="color:white;">Last Name</label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>*@
+                <br />
+                <div class="form-group">
+                    <label asp-for="Email" id="emailLabel" class="control-label" style="color:white;">Email</label>
+                    <input asp-for="Email" id="emailInput" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" id="numberLabel" class="control-label" style="color:white;">Phone Number</label>
+                    <input asp-for="PhoneNumber" id="numberInput" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Save" class="editButton" id="editButton" style="background-color: #78A1BB; border-color: #78A1BB" />
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+</body>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

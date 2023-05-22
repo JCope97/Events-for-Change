@@ -11,7 +11,7 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "JavaScript_Tests", "JavaScr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDD_Tests_OtterProductions", "BDD_Tests_OtterProductions\BDD_Tests_OtterProductions.csproj", "{C89ECAEB-BF7B-42AF-912C-17A01DB30E38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtterProduction+test", "OtterProduction+test\OtterProduction+test.csproj", "{A40E87AF-17B8-488B-A2A5-ADA6362CA376}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtterProduction+test", "OtterProduction+test\OtterProduction+test.csproj", "{A40E87AF-17B8-488B-A2A5-ADA6362CA376}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
