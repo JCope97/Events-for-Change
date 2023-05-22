@@ -1,36 +1,37 @@
 ﻿@model List<OtterProductions_CapstoneProject.Models.Event>
 
 @{
-    ViewData["Title"] = "Events";
+    ViewData["Title"] = "OrganizationEvents";
+    var organizationName = ViewBag.OrganizationName; // Retrieve organization name from ViewBag or data source
 }
 
 <link href="~/css/events.css" rel="stylesheet" />
-<a class="nav-link" asp-area="" asp-controller="Organization" asp-action="CreateEvent" role="tab" aria-controls="profile" aria-selected="false">Add New Event</a>
+
+<h1>Events by <span class="organization-name">@organizationName</span></h1>
+<p>List of events from <span class="organization-name">@organizationName</span></p>
 
 @if (Model != null)
 {
     <div class="container">
-
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Event Name</th>
                     <th>Location</th>
                     <th>Description</th>
-                    <th>Event Type</th>
                     <th>Date</th>
+                    <th>Type</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-
                     <tr>
                         <td>@item.EventName</td>
                         <td>@item.EventLocation</td>
                         <td>@item.EventDescription</td>
-                        <td>@item.Organization.EventType1</td>
                         <td>@item.EventDate</td>
+                        <td>@item.Organization.EventType1</td>
                     </tr>
                 }
             </tbody>
@@ -41,7 +42,3 @@ else
 {
     <h1>Event Not available..</h1>
 }
-
-
-
-
