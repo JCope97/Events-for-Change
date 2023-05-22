@@ -37,6 +37,10 @@ namespace OtterProductions_CapstoneProject.Controllers
         {
             return View();
         }
+        private Organization GetOrganizationById(int id)
+        {
+            return _context.Organizations.FirstOrDefault(x => x.Id == id);
+        }
 
         public async Task<IActionResult> VerifyEmail(string token, string email)
         {
@@ -164,10 +168,23 @@ namespace OtterProductions_CapstoneProject.Controllers
         }
 
 
+        //[HttpGet]
+        //public IActionResult OrginzaitonEvents(int id)
+        //{
+        //    var events= _context.Events.Include(x=>x.Organization).Where(x=>x.OrganizationId.Equals(id)).ToList();
+        //    return View(events);
+        //}
         [HttpGet]
         public IActionResult OrginzaitonEvents(int id)
         {
-            var events= _context.Events.Include(x=>x.Organization).Where(x=>x.OrganizationId.Equals(id)).ToList();
+            var organization = GetOrganizationById(id);
+            if (organization == null)
+            {
+                return NotFound(); // Handle the case when the organization is not found
+            }
+    
+            ViewBag.OrganizationName = organization.OrganizationName;
+            var events = _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId.Equals(id)).ToList();
 
             return View(events);
         }

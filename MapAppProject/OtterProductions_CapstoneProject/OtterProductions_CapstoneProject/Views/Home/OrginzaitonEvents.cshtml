@@ -6,7 +6,7 @@
 <link href="~/css/events.css" rel="stylesheet" />
 
 <h1>Organization Events</h1>
-<p>List of events from this Organization</p>
+<p>List of events from <span class="organization-name">@ViewBag.OrganizationName</span></p>
 
 
 @if (Model != null)
@@ -16,6 +16,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+          
                     <th>Event Name</th>
                     <th>Location</th>
                     <th>Description</th>
