@@ -37,7 +37,6 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
             //We are going to grab all events within the city and state radius and within the two week span
             DateOnly endWindow = today.AddDays(14);
             IEnumerable<Event> eventsWindow = new List<Event>();
-
             foreach (var AnEvent in _context.Events)
             {
                 if (DateOnly.FromDateTime(AnEvent.EventDate) >= today && DateOnly.FromDateTime(AnEvent.EventDate) <= endWindow)
@@ -48,7 +47,6 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
                     }
                 }
             }
-  
             eventsWindow = eventsWindow.ToList();
             return eventsWindow;
         }
@@ -58,24 +56,23 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
             return FindById(id);
         }
 
-        public IEnumerable<Event> GetEventByName(string name)
+        public IEnumerable<Event> GetAllEventsWithinTwoWeeksWithSameName(string eventName, DateOnly today)
         {
-            // Assuming events is the collection of events you want to search through
-            // Replace "events" with your actual collection name
-            var matchingEvents = _context.Events.Where(e => e.EventName == name).ToList();
-            return matchingEvents;
-          
-/*            IEnumerable<Event> eventsListName = new List<Event>();
-
+            //We are going to grab all events with the same name and within the two week span
+            DateOnly endWindow = today.AddDays(14);
+            IEnumerable<Event> eventsWindow = new List<Event>();
             foreach (var AnEvent in _context.Events)
             {
                 if (DateOnly.FromDateTime(AnEvent.EventDate) >= today && DateOnly.FromDateTime(AnEvent.EventDate) <= endWindow)
                 {
-                    eventsWindow = eventsWindow.Append(AnEvent);
+                    if (AnEvent.EventName.Contains(eventName))
+                    {
+                        eventsWindow = eventsWindow.Append(AnEvent);
+                    }
                 }
             }
             eventsWindow = eventsWindow.ToList();
-            return eventsWindow;*/
+            return eventsWindow;
         }
     }
 }

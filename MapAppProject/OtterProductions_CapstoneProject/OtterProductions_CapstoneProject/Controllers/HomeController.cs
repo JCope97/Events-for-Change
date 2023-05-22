@@ -123,28 +123,10 @@ namespace OtterProductions_CapstoneProject.Controllers
         [HttpPost]
         public IActionResult SearchEvent(string name)
         {
-            EventViewModel eventView = new EventViewModel();
-            eventView.EventsTypes = _context.EventTypes.ToList();
-            Event newEvent = new Event();
-            newEvent = _eventRepository.GetEventByName(name);
-            //newEvent = _context.Events.Find(name);
-            //newEvent = _context.Events.FindEvent(name);
-            //newEvent = _context.Events.Where(e => e.EventName == name).Select(e => e.EventName);
-
-            if (newEvent == null)
-            {
-                return NotFound();
-            }
-
-            eventView.Id = newEvent.Id;
-            eventView.EventDate = newEvent.EventDate;
-            eventView.EventDescription = newEvent.EventDescription;
-            eventView.EventLocation = newEvent.EventLocation;
-            eventView.EventName = newEvent.EventName;
-            eventView.EventTypeId = newEvent.EventTypeId;
-            //eventView.OrganizationName = newEvent.OrganizationNavigation.OrganizationName;
-
-            return View(eventView);
+            BrowseViewModel searchView = new BrowseViewModel();
+            searchView.Events = _eventRepository.GetAllEventsWithinTwoWeeksWithSameName(name, DateOnly.FromDateTime(DateTime.Now));
+            searchView.EventsTypes = _context.EventTypes.ToList();
+            return View(searchView);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
