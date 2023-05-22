@@ -212,10 +212,6 @@ namespace OtterProductions_CapstoneProject.Controllers
 
                 return RedirectToAction("UserPage");
             }
-           
-
-            
-
 
             return View();
         }
