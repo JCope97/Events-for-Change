@@ -1,76 +1,42 @@
-﻿ @model List<OtterProductions_CapstoneProject.Models.Event>
-
+﻿﻿
+@model OtterProductions_CapstoneProject.Models.CityState
 
 @{
     ViewData["Title"] = "Browsing Search Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link href="~/css/events.css" rel="stylesheet" />
+
 <body style="background-color: #15202b">
     <div class="text-center">
         <br />
         <h1 id="titleBrowsing" class="display-4">Event Finder</h1>
         <p id="infoBrowsing">Enter your location and we can find local events in your city</p>
         <hr />
-        <div class="row">
-            <div class="col-md-12">
-                <div class="input-group" id="adv-search">
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label for="contain" style="color:white">Filter Event Name:</label>
-                            <input class="form-control me-sm-2" type="search" placeholder="Name" id="name" name="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="contain" style="color:white">Location Name:</label>
-                            <input class="form-control me-sm-2" type="search" placeholder="LocationName" id="location" name="location">
-                        </div>
-                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span>Search</button>
-                    </form>
-                </div>
+
+        <form asp-controller="Home" asp-action="Browsing" method="post" style="text-align:left; display:inline-block;">
+            <div class="form-group">
+                <br />
+                @*<label for="AddressLocation">Enter your address:</label>
+                <input type="text" id="address" name="Address" value="" required>
+                <br />
+                <br />*@
+                <label for="CityLocation" id="cityBrowsingText">Enter your city:</label>
+                <input type="text" id="cityBrowsing" name="City" value="" required>
+                <br />
+                <br />
+                <label for="StateLocation" id="stateBrowsingText">Enter your state (Using state abbreviations):</label>
+                <input type="text" id="stateBrowsing" name="State" pattern="^[A-Z]{2}$" value="" required>
+                @*<br />
+                <br />
+                <label for="Zipcode">Enter your zip:</label>
+                <input type="text" id="zip" name="Zip" value="" required>
+                <br />*@
             </div>
-        </div>
+            <br>
+            <div class="mb-3">
+                <button id="submitBrowsing" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
 
-    
     </div>
-
-
-@if (Model != null)
-{
-    <div class="container">
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Event Name</th>
-                    <th>Location</th>
-                    <th>Description</th>
-                    <th>Event Type</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-
-                    <tr>
-                        <td>@item.EventName</td>
-                        <td>@item.EventLocation</td>
-                        <td>@item.EventDescription</td>
-                        <td>@item.Organization.EventType1</td>
-                        <td>@item.EventDate</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
-else
-{
-    <h1>Event Not available..</h1>
-}
-
-
-
-
-
 </body>       

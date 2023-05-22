@@ -14,6 +14,7 @@ using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
 using OtterProductions_CapstoneProject.Utilities;
 
+
 namespace OtterProductions_CapstoneProject.Controllers
 {
 
@@ -31,9 +32,9 @@ namespace OtterProductions_CapstoneProject.Controllers
 
         public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager, IEmailSender emailSender, AuthenticationDbContext authenticationDbContext, IEventUserConnectionRepository eventUserConnectionRepository)
         {
-            _logger = logger;
+          //  _logger = logger;
             _context = ctx;
-            _userManager = userManager;
+           // _userManager = userManager;
             _eventRepository = new BrowseEventRepository(_context);
             _emailSender = emailSender;
             _authenticationDbContext = authenticationDbContext;
@@ -44,6 +45,10 @@ namespace OtterProductions_CapstoneProject.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        private Organization GetOrganizationById(int id)
+        {
+            return _context.Organizations.FirstOrDefault(x => x.Id == id);
         }
 
         public async Task<IActionResult> VerifyEmail(string token, string email)
@@ -107,11 +112,11 @@ namespace OtterProductions_CapstoneProject.Controllers
             BrowseViewModel browseView = new BrowseViewModel();
             browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeks(DateOnly.FromDateTime(DateTime.Now));
             browseView.EventsTypes = _context.EventTypes.ToList();
-/*            //Can't add Organizations until later
-            browseView.Organizations = _context.Organizations.ToList();*/
+            /*            //Can't add Organizations until later
+                        browseView.Organizations = _context.Organizations.ToList();*/
 
             return View(browseView);
-            }
+        }
 
         [HttpPost]
         public IActionResult Browsing(CityState locationForVM)
@@ -120,8 +125,8 @@ namespace OtterProductions_CapstoneProject.Controllers
             BrowseViewModel browseView = new BrowseViewModel();
             browseView.Events = _eventRepository.GetAllEventsWithinTwoWeeksAndTheLocation(locationForVM, DateOnly.FromDateTime(DateTime.Now));
             browseView.EventsTypes = _context.EventTypes.ToList();
-/*            //Can't add Organizations until later
-            browseView.Organizations = _context.Organizations.ToList();*/
+            /*            //Can't add Organizations until later
+                        browseView.Organizations = _context.Organizations.ToList();*/
 
             return View(browseView);
         }
