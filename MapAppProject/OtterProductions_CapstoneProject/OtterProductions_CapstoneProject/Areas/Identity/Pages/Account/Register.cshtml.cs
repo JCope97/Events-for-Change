@@ -110,6 +110,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
             [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail is not valid, Needs to have an email prefix and an email domain, such as example@mail.com")]
             public string Email { get; set; }
 
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -149,7 +150,7 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     PhoneNumber = Input.PhoneNumber,
                     Email = Input.Email,
-                    UserName = Input.Email,
+                    UserName = Input.Email
                 };
 
                 //await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -163,7 +164,11 @@ namespace OtterProductions_CapstoneProject.Areas.Identity.Pages.Account
                     // create our own user
                     MapAppUser ma = new MapAppUser
                     {
-                        AspnetIdentityId = user.Id
+                        AspnetIdentityId = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        PhoneNumber = user.PhoneNumber
                     };
                     await _mapAppDbContext.MapAppUsers.AddAsync(ma);
                     await _mapAppDbContext.SaveChangesAsync();

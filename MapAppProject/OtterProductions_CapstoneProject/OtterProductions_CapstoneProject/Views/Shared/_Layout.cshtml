@@ -24,7 +24,7 @@
 <body style="background-color: #15202b">
     <div class="wrapper">
         <div id="navMenu" class="navMenu">
-            <ul>
+            <ul id="navBarText">
                 <li>
                     <a class="nav-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/Images/logo.png" alt="LOGO" style="width: 100px; height: 70px;" /></a>
                 </li>
@@ -42,9 +42,16 @@
                 </li>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                   
 
                     <li class="nav-item">
+                        @*CHANGE LINK to profile page link*@
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="UserPage">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Users" asp-action="EditInfo">Edit Profile</a>
+                    </li>
+                    @*This is for organization, not average user
+                        <li class="nav-item">
                         @{
                             IList<ApplicationUser> usersInRole = await UserManager.GetUsersInRoleAsync("User");
                             string userID = UserManager.GetUserId(User);
@@ -67,14 +74,12 @@
                                 @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
                             }
                         }
-                    </li>
+                    </li>*@
                     <li class="nav-item">
                         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                             <button id="logout" type="submit" class="nav-link btn btn-link border-0">Logout</button>
                         </form>
                     </li>
-
-
                 }
                 else
                 {
