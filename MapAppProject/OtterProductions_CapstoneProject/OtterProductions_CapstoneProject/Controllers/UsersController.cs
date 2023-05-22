@@ -97,7 +97,6 @@ namespace OtterProductions_CapstoneProject.Controllers
                 //var updateEmail = await _userManager.ChangeEmailAsync(await userInfo, user.Email, tokenEmail);
                 var change = _context.SaveChanges();
 
-                
                 return RedirectToAction("Index", "/Home");
             }
             else
