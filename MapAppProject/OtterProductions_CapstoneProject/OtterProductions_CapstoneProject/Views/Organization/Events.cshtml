@@ -2,18 +2,22 @@
 
 @{
     ViewData["Title"] = "Events";
+    var eventTypes = (List<EventType>)ViewBag.EventType;
 }
 
 <link href="~/css/events.css" rel="stylesheet" />
-@*<a class="nav-link" asp-area="" asp-controller="Organization" asp-action="CreateEvent" role="tab" aria-controls="profile" aria-selected="false">Add New Event</a>*@
+<link href="~/css/profile.css" rel="stylesheet" />
 <h1>Organizations Profile Page</h1>
-<a class="search-button btn btn-primary dark-background" asp-area="" asp-controller="Organization" asp-action="CreateEvent" role="tab" aria-controls="profile" aria-selected="false">Add New Event</a>
 
+<div class="container">
+    <div class="event-actions">
+        <a class="search-button btn btn-sm btn-primary dark-background" asp-area="" asp-controller="Organization" asp-action="CreateEvent" role="tab" aria-controls="profile" aria-selected="false">Add New Event</a>
+    </div>
+</div>
 
-@if (Model != null)
-{
-    <div class="container">
-
+<div>
+    @if (Model != null && Model.Count > 0)
+    {
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -27,24 +31,23 @@
             <tbody>
                 @foreach (var item in Model)
                 {
+                    var eventType = eventTypes.FirstOrDefault(x => x.Id == item.EventTypeId);
+                    var evetTypeName = eventType != null ? eventType.EventType1 : "";
 
                     <tr>
                         <td>@item.EventName</td>
                         <td>@item.EventLocation</td>
                         <td>@item.EventDescription</td>
-                        <td>@item.Organization.EventType1</td>
+                        <td>@evetTypeName</td>
                         <td>@item.EventDate</td>
                     </tr>
                 }
             </tbody>
         </table>
-    </div>
-}
-else
-{
-    <h1>Event Not available..</h1>
-}
-
-
-
-
+    }
+    else
+    {
+        <h3>No events available.</h3>
+    }
+</div>
+``

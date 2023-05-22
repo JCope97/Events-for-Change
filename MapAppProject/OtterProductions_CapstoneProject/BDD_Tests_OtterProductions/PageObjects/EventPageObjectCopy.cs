@@ -6,13 +6,15 @@ using System.Collections.Generic;
 
 namespace BDD_Tests_OtterProductions.PageObjects
 {
-    public class EventPagesObject
+    public class EventPageObject : PageObject
     {
         private readonly IWebDriver _driver;
 
-        public EventPagesObject(IWebDriver driver)
+        public EventPageObject(IWebDriver driver) : base(driver)
         {
+            // Set the page name
             _driver = driver;
+            _pageName = "Events";
         }
 
         public IWebElement AddNewEventButton => _driver.FindElement(By.CssSelector("a.search-button.btn.btn-sm.btn-primary.dark-background"));

@@ -39,8 +39,7 @@
                 </li>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                   
-                    <li class="nav-item">
+                    <div class="nav-item">
                         @{
                             IList<ApplicationUser> usersInRole = await UserManager.GetUsersInRoleAsync("User");
                             string userID = UserManager.GetUserId(User);
@@ -60,18 +59,16 @@
                             if (!isUserFound)
                             {
                                 var name = User.Identity.Name;
-                                @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
+                                <a href="@Url.Action("OrganizationDetails", "Organization", new { id = name })" class="nav-link btn btn-link border-0" title="View Profile">Profile</a>
                             }
                         }
-                    </li>
-                    <li class="nav-item">
                         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                             <button id="logout" type="submit" class="nav-link btn btn-link border-0">Logout</button>
                         </form>
-                    </li>
-
-
+                    </div>
                 }
+
+
                 else
                 {
                     <li class="nav-item">
