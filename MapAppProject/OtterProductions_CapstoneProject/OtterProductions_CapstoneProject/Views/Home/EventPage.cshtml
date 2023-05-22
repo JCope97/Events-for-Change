@@ -1,4 +1,9 @@
-﻿@model EventViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using OtterProductions_CapstoneProject.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@model EventViewModel
 @{
     ViewData["Title"] = "Event";
 }
@@ -94,6 +99,29 @@
         
             <div class="col"><h2 id="EventType">@Model.EventsTypes.ElementAt(Model.EventTypeId - 1).EventType1</h2></div>
         </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="row">
+
+            <div class="col">
+                
+            </div>
+            <div class="col"></div>
+
+            <div class="col">
+                <form asp-controller="Home" asp-action="UserPage" method="post">
+                    <div class="form-group">
+                        <input hidden="hidden" asp-for="Id" type="text" id="eventId" name="id" value="@Model.Id">
+                                            
+                    </div>
+
+                    <input type="submit" id="submitBrowsing" value="Save Event"/>
+                </form>
+            </div>
+        </div>
+
+        }
+        
 
     
     </div>
