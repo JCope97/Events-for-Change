@@ -244,14 +244,14 @@ namespace BDD_Tests_OtterProductions.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Once I successfully submit the form and go back to the Edit Info page, then I see" +
-            " my updated info")]
-        public void OnceISuccessfullySubmitTheFormAndGoBackToTheEditInfoPageThenISeeMyUpdatedInfo()
+        [NUnit.Framework.DescriptionAttribute("Once I successfully submit the form then I can log in using my newlu updated info" +
+            "rmation")]
+        public void OnceISuccessfullySubmitTheFormThenICanLogInUsingMyNewluUpdatedInformation()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Once I successfully submit the form and go back to the Edit Info page, then I see" +
-                    " my updated info", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Once I successfully submit the form then I can log in using my newlu updated info" +
+                    "rmation", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 38
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -278,10 +278,16 @@ namespace BDD_Tests_OtterProductions.Features
             testRunner.And("I click the submit button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 44
-        testRunner.When("I navigate back to the \"EditInfo\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+            testRunner.And("I logout", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 45
-        testRunner.Then("I can see my updated information in the form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.When("I login with my new email", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 46
+            testRunner.And("I click login", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 47
+        testRunner.Then("I am redirected to the \"Home\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

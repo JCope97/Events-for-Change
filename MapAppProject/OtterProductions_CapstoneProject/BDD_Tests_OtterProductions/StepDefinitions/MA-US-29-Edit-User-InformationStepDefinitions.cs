@@ -11,6 +11,7 @@ using FluentAssertions;
 
 namespace BDD_Tests_OtterProductions.StepDefinitions
 {
+#nullable disable
     public class TestUser3
     {
         public string UserName { get; set; }
@@ -54,7 +55,7 @@ namespace BDD_Tests_OtterProductions.StepDefinitions
             //    LastName = "Doe",
             //    Email = "johndoe@email.com",
             //    PhoneNumber = "1234567890",
-            //    Password = "Pass1234*",//Configuration["userEditPassword"]
+            //    Password = "Pass1234*",//Configuration["userEditPassword"],
             //    NewEmail = "thejohndoe@email.com",
             //    NewNumber = "1111122222"
 
@@ -67,7 +68,7 @@ namespace BDD_Tests_OtterProductions.StepDefinitions
                 LastName = "Doe",
                 Email = "thejohndoe@email.com", //"johndoe@email.com",
                 PhoneNumber = "1111122222", //"1234567890",
-                Password = "Pass1234*",//Configuration["userEditPassword"]
+                Password = Configuration["userEditPassword"]
                 NewEmail = "johndoe@email.com",
                 NewNumber = "1111111111"
 
@@ -103,7 +104,7 @@ namespace BDD_Tests_OtterProductions.StepDefinitions
             _MA29Page.SubmitButton.Should().NotBeNull();
             _MA29Page.SubmitButton.Displayed.Should().BeTrue();
 
-            Assert.That(_MA29Page.SubmitButton.GetAttribute("class"), Does.Contain("editInfoButton"));
+            Assert.That(_MA29Page.SubmitButton.GetAttribute("class"), Does.Contain("editButton"));
         }
 
         [Then(@"the page presents an explanation message")]
@@ -174,10 +175,30 @@ namespace BDD_Tests_OtterProductions.StepDefinitions
             _MA29Page.GoTo(pageName);
         }
 
-        [Then(@"I can see my updated information in the form")]
-        public void ThenICanSeeMyUpdatedInformationInTheForm()
+        [Given(@"I logout")]
+        public void GivenILogout()
         {
-            _scenarioContext.Pending();
+            _MA29Page.LogOut();
+        }
+
+        [When(@"I login with my new email")]
+        public void WhenILoginWithMyNewEmail()
+        {
+            // Go to the login page
+            _loginPage.GoTo();
+            //Thread.Sleep(3000);
+            // Now (attempt to) log them in.  Assumes previous steps defined the user
+            TestUser3 u = (TestUser3)_scenarioContext["CurrentUser"];
+            _loginPage.EnterEmail(u.NewEmail);
+            _loginPage.EnterPassword(u.Password);
+            _loginPage.Login();
+        }
+
+
+        [When(@"I click login")]
+        public void WhenIClickLogin()
+        {
+            _MA29Page.LogIn();
         }
 
     }

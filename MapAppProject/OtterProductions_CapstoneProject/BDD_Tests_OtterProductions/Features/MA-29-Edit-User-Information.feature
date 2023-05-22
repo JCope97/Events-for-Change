@@ -35,12 +35,14 @@ Feature: MA-29-Edit-User-Information
             And I click submit
         Then I am redirected to the "Home" page
 
-    Scenario: Once I successfully submit the form and go back to the Edit Info page, then I see my updated info
+    Scenario: Once I successfully submit the form then I can log in using my newlu updated information
         Given I am a user that is registered 
             And I login
             And I am on the "EditInfo" page
             And I fill out the form
             And I click the submit button
-        When I navigate back to the "EditInfo" page
-        Then I can see my updated information in the form
+            And I logout
+        When I login with my new email
+            And I click login
+        Then I am redirected to the "Home" page
 
