@@ -23,6 +23,9 @@
                         <form id="account" method="post">
                                 <hi style="color:red" > @ViewData["verify"]
                                 </hi>
+                                <hi style="color:red">
+                                    @ViewData["noAccount"]
+                                </hi>
                             <br />
                             <hr />
                             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
