@@ -17,18 +17,18 @@ namespace OtterProductions_CapstoneProject.Controllers
 
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
         private readonly MapAppDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
+       // private readonly UserManager<ApplicationUser> _userManager;
         private IBrowseEventRepository _eventRepository;
         private readonly IEmailSender _emailSender;
         //private readonly BaseUrlConfiguration _baseUrlConfig;
 
-        public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public HomeController( MapAppDbContext ctx, /*UserManager<ApplicationUser> userManager,*/ IEmailSender emailSender)
         {
-            _logger = logger;
+          //  _logger = logger;
             _context = ctx;
-            _userManager = userManager;
+           // _userManager = userManager;
             _eventRepository = new BrowseEventRepository(_context);
             _emailSender = emailSender;
             // _baseUrlConfig = baseUrlConfig;

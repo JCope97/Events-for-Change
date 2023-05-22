@@ -20,8 +20,10 @@ public class Program
 
         builder.Services.AddDbContext<AuthenticationDbContext>(options => options.UseSqlServer(connectionString));
 
-        builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationOtterProductions_CapstoneProject;Trusted_Connection=True;MultipleActiveResultSets=true"
-           ));
+        // builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationOtterProductions_CapstoneProject;Trusted_Connection=True;MultipleActiveResultSets=true"
+        //   ));
+
+        builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MapAppConnection")));
         builder.Services.Configure<SendGridParams>(builder.Configuration.GetSection("SendGrid"));
         //builder.Services.Configure<BaseUrlConfiguration>(builder.Configuration.GetSection("BaseUrlConfiguration"));
         builder.Services.Configure<EmailConfiguration>(builder.Configuration.GetSection("EmailSettings"));
@@ -37,7 +39,7 @@ public class Program
             config.User.RequireUniqueEmail = true;
             config.SignIn.RequireConfirmedPhoneNumber = false;
             config.SignIn.RequireConfirmedEmail = false;
-           // config.SignIn.RequireConfirmedAccount = false;
+            // config.SignIn.RequireConfirmedAccount = false;
         });
 
         // Add services to the container.
@@ -61,7 +63,7 @@ public class Program
 
         app.UseRouting();
 
-        app.UseAuthentication();    
+        app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllerRoute(
             name: "default",
@@ -71,3 +73,4 @@ public class Program
         app.Run();
     }
 }
+

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BDD_Tests_OtterProductions"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtterProduction+test", "OtterProduction+test\OtterProduction+test.csproj", "{A40E87AF-17B8-488B-A2A5-ADA6362CA376}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearctTestWork", "SearctTestWork\SearctTestWork.csproj", "{AB57AEA0-8A3F-460D-A464-0F1E2BA3DFC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{A40E87AF-17B8-488B-A2A5-ADA6362CA376}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A40E87AF-17B8-488B-A2A5-ADA6362CA376}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A40E87AF-17B8-488B-A2A5-ADA6362CA376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB57AEA0-8A3F-460D-A464-0F1E2BA3DFC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB57AEA0-8A3F-460D-A464-0F1E2BA3DFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB57AEA0-8A3F-460D-A464-0F1E2BA3DFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB57AEA0-8A3F-460D-A464-0F1E2BA3DFC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
