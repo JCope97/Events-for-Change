@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OtterProductions_CapstoneProject.Utilities;
+using OtterProductions_CapstoneProject.DAL.Abstract;
+using OtterProductions_CapstoneProject.DAL.Concrete;
+
 
 namespace OtterProductions_CapstoneProject;
 
@@ -17,13 +20,24 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         var connectionString = builder.Configuration.GetConnectionString("AuthenticationConnection") ?? throw new InvalidOperationException("Connection string 'AuthenticationConnection' not found.");
+        var mapConnectionString = builder.Configuration.GetConnectionString("MapAppConnection") ?? throw new InvalidOperationException("Connection string 'MapAppConnection' not found.");
 
-        builder.Services.AddDbContext<AuthenticationDbContext>(options => options.UseSqlServer(connectionString));
+        builder.Services.AddDbContext<AuthenticationDbContext>(options => options
+            .UseSqlServer(connectionString));
 
-        // builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationOtterProductions_CapstoneProject;Trusted_Connection=True;MultipleActiveResultSets=true"
-        //   ));
+        //builder.Services.AddDbContext<MapAppDbContext>(options => options
+        //.UseLazyLoadingProxies()
+        //.UseSqlServer(mapConnectionString)
+        //);
 
-        builder.Services.AddDbContext<MapAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MapAppConnection")));
+        builder.Services.AddDbContext<MapAppDbContext>(options => options
+        .UseLazyLoadingProxies()
+        .UseSqlServer(builder.Configuration.GetConnectionString("MapAppConnection")));
+
+        builder.Services.AddScoped<DbContext, MapAppDbContext>();
+        builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        builder.Services.AddScoped<IBrowseEventRepository, BrowseEventRepository>();
+        builder.Services.AddScoped<IEventUserConnectionRepository, EventUserConnectionRepository>();
         builder.Services.Configure<SendGridParams>(builder.Configuration.GetSection("SendGrid"));
         //builder.Services.Configure<BaseUrlConfiguration>(builder.Configuration.GetSection("BaseUrlConfiguration"));
         builder.Services.Configure<EmailConfiguration>(builder.Configuration.GetSection("EmailSettings"));

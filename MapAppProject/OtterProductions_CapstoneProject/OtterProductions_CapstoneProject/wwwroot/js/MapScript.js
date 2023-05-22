@@ -27,7 +27,7 @@ function initMap() {
 
     const inputText = document.getElementById("location");
 
-    const submitButton = document.getElementById("submit");
+    const submitButton = document.getElementById("submitButton");
 
     const restroomButton = document.getElementById("restroom");
     const foodBankButton = document.getElementById("Food Bank");
