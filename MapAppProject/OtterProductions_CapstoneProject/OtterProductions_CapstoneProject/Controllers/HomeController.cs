@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Build.Framework;
+using Microsoft.EntityFrameworkCore;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.DAL.Abstract;
 using OtterProductions_CapstoneProject.DAL.Concrete;
@@ -32,9 +32,9 @@ namespace OtterProductions_CapstoneProject.Controllers
 
         public HomeController(ILogger<HomeController> logger, MapAppDbContext ctx, UserManager<ApplicationUser> userManager, IEmailSender emailSender, AuthenticationDbContext authenticationDbContext, IEventUserConnectionRepository eventUserConnectionRepository)
         {
-          //  _logger = logger;
+            //  _logger = logger;
             _context = ctx;
-           // _userManager = userManager;
+            // _userManager = userManager;
             _eventRepository = new BrowseEventRepository(_context);
             _emailSender = emailSender;
             _authenticationDbContext = authenticationDbContext;
@@ -76,7 +76,7 @@ namespace OtterProductions_CapstoneProject.Controllers
             return View();
         }
         public async Task<IActionResult> MessageVerifyEmail()
-        {           
+        {
             ViewBag.Message = "Kindly check your email to verify your account. if not you can't access the app.";
             return View();
         }
@@ -132,9 +132,70 @@ namespace OtterProductions_CapstoneProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult BrowsingSearch(){
+        public IActionResult BrowsingSearch()
+        {
             CityState locationForVM = new CityState();
             return View(locationForVM);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Organizations(string? orgName, string? orgLocation)
+        {
+            try
+            {
+                var organizaitons = new List<Organization>();
+                if (string.IsNullOrEmpty(orgName) && string.IsNullOrEmpty(orgLocation))
+                {
+                    organizaitons = _context.Organizations.ToList();
+                    return View(organizaitons);
+                }
+                if (!string.IsNullOrEmpty(orgName) && string.IsNullOrEmpty(orgLocation))
+                {
+                    organizaitons = await _context.Organizations.Where(x => x.OrganizationName.Contains(orgName)).ToListAsync();
+                    return View(organizaitons);
+                }
+                if (string.IsNullOrEmpty(orgName) && !string.IsNullOrEmpty(orgLocation))
+                {
+                    organizaitons = await _context.Organizations.Where(x => x.OrganizationLocation.Contains(orgLocation)).ToListAsync();
+                    return View(organizaitons);
+                }
+
+                if (!string.IsNullOrEmpty(orgName) && !string.IsNullOrEmpty(orgLocation))
+                {
+                    organizaitons = await _context.Organizations.Where(x => x.OrganizationLocation.Contains(orgLocation)
+                                                      && x.OrganizationName.Contains(orgName)).ToListAsync();
+                    return View(organizaitons);
+                }
+                return View(organizaitons);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
+
+
+        //[HttpGet]
+        //public IActionResult OrginzaitonEvents(int id)
+        //{
+        //    var events= _context.Events.Include(x=>x.Organization).Where(x=>x.OrganizationId.Equals(id)).ToList();
+        //    return View(events);
+        //}
+        [HttpGet]
+        public IActionResult OrginzaitonEvents(int id)
+        {
+            var organization = GetOrganizationById(id);
+            if (organization == null)
+            {
+                return NotFound(); // Handle the case when the organization is not found
+            }
+
+            ViewBag.OrganizationName = organization.OrganizationName;
+            var events = _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId.Equals(id)).ToList();
+
+            return View(events);
         }
 
         [HttpGet]
@@ -200,9 +261,9 @@ namespace OtterProductions_CapstoneProject.Controllers
                 var curentUserEvents = _context.UserEventLists.Where(u => u.MapAppUser.Id == mapAppUser.Id).ToList();
 
 
-                foreach(var ue in curentUserEvents)
+                foreach (var ue in curentUserEvents)
                 {
-                    if(ue.EventId== mainEventId)
+                    if (ue.EventId == mainEventId)
                     {
                         return RedirectToAction("UserPage");
                     }
@@ -212,6 +273,10 @@ namespace OtterProductions_CapstoneProject.Controllers
 
                 return RedirectToAction("UserPage");
             }
+
+
+
+
 
             return View();
         }
