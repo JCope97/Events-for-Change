@@ -68,7 +68,7 @@ namespace BDD_Tests_OtterProductions.StepDefinitions
                 LastName = "Doe",
                 Email = "thejohndoe@email.com", //"johndoe@email.com",
                 PhoneNumber = "1111122222", //"1234567890",
-                Password = Configuration["userEditPassword"]
+                Password = Configuration["userEditPassword"],
                 NewEmail = "johndoe@email.com",
                 NewNumber = "1111111111"
 
