@@ -20,14 +20,19 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         var connectionString = builder.Configuration.GetConnectionString("AuthenticationConnection") ?? throw new InvalidOperationException("Connection string 'AuthenticationConnection' not found.");
+        var mapConnectionString = builder.Configuration.GetConnectionString("MapAppConnection") ?? throw new InvalidOperationException("Connection string 'MapAppConnection' not found.");
 
         builder.Services.AddDbContext<AuthenticationDbContext>(options => options
             .UseSqlServer(connectionString));
 
+        //builder.Services.AddDbContext<MapAppDbContext>(options => options
+        //.UseLazyLoadingProxies()
+        //.UseSqlServer(mapConnectionString)
+        //);
+
         builder.Services.AddDbContext<MapAppDbContext>(options => options
         .UseLazyLoadingProxies()
-        .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ApplicationOtterProductions_CapstoneProject;Trusted_Connection=True;MultipleActiveResultSets=true"
-           ));
+        .UseSqlServer(builder.Configuration.GetConnectionString("MapAppConnection")));
 
         builder.Services.AddScoped<DbContext, MapAppDbContext>();
         builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

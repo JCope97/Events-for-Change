@@ -45,11 +45,28 @@
 
                     <li class="nav-item">
                         @{
+                            IList<ApplicationUser> usersInRole = await UserManager.GetUsersInRoleAsync("User");
+                            string userID = UserManager.GetUserName(User);
+
+                      
+                                foreach(var u in usersInRole)
+                                {
+                                    if(u.Email == userID)
+                                    {
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="UserPage">Profile</a>
+                                    }
+                                    else
+                                    {
+                                    var name = User.Identity.Name;
+                                    @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
+                                }
+                                }
+                                
                             //var userRole = UserManager.GetUsersInRoleAsync("");
                             //var name = User.Identity.Name;
                         //    @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
                         //
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="UserPage">Profile</a>
+                            
 
                         }
                     </li>
