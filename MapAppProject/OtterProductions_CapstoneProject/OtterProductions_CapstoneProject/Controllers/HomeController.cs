@@ -186,7 +186,7 @@ namespace OtterProductions_CapstoneProject.Controllers
         //[HttpGet]
         //public IActionResult OrginzaitonEvents(int id)
         //{
-        //    var events= _context.Events.Include(x=>x.Organization).Where(x=>x.OrganizationId.Equals(id)).ToList();
+        //    var events = _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId.Equals(id)).ToList();
         //    return View(events);
         //}
         [HttpGet]
@@ -199,7 +199,7 @@ namespace OtterProductions_CapstoneProject.Controllers
             }
 
             ViewBag.OrganizationName = organization.OrganizationName;
-            var events = _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId.Equals(id)).ToList();
+            var events = _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId == id).ToList();
 
             return View(events);
         }
