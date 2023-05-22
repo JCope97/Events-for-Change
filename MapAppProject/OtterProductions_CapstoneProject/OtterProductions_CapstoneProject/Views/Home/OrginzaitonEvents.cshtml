@@ -1,22 +1,21 @@
 ﻿@model List<OtterProductions_CapstoneProject.Models.Event>
 
 @{
-    ViewData["Title"] = "OrginzaitonEvents";
+    ViewData["Title"] = "OrganizationEvents";
+    var organizationName = ViewBag.OrganizationName; // Retrieve organization name from ViewBag or data source
 }
+
 <link href="~/css/events.css" rel="stylesheet" />
 
-<h1>Organization Events</h1>
-<p>List of events from <span class="organization-name">@ViewBag.OrganizationName</span></p>
-
+<h1>Events by <span class="organization-name">@organizationName</span></h1>
+<p>List of events from <span class="organization-name">@organizationName</span></p>
 
 @if (Model != null)
 {
     <div class="container">
-
         <table class="table table-striped">
             <thead>
                 <tr>
-          
                     <th>Event Name</th>
                     <th>Location</th>
                     <th>Description</th>
@@ -27,11 +26,10 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-
                     <tr>
                         <td>@item.EventName</td>
                         <td>@item.EventLocation</td>
-                        <td>@item.EventDescription </td>
+                        <td>@item.EventDescription</td>
                         <td>@item.EventDate</td>
                         <td>@item.Organization.EventType1</td>
                     </tr>
@@ -44,4 +42,3 @@ else
 {
     <h1>Event Not available..</h1>
 }
-

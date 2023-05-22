@@ -38,7 +38,7 @@
                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="BrowsingSearch">Local Events</a>
                 </li>
                 <li>
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Organizations">Organizations</a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Organizations">Explore Organizations</a>
                 </li>
                 @if (SignInManager.IsSignedIn(User))
                 {
@@ -47,10 +47,7 @@
                     </li>
 
                     <li class="nav-item">
-                        @{
-                            var name = User.Identity.Name;
-                            @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
-                        }
+                        <a class="nav-link organizations-link" asp-area="" asp-controller="Home" asp-action="Organizations">Organizations</a>
                     </li>
                     <li class="nav-item">
                         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
