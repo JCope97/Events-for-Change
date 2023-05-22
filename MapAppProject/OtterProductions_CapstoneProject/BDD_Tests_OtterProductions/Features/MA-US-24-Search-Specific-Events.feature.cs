@@ -133,7 +133,7 @@ testRunner.Given("I am a visitor", ((string)(null)), ((TechTalk.SpecFlow.Table)(
 testRunner.When("I am on the \"SearchEvent\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 17
-testRunner.And("I type in \"Free Dinner\" in the name form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I type \"Free Dinner\" in the name form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 18
 testRunner.Then("it will populate all events with the title \"Free Dinner\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

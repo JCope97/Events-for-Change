@@ -14,5 +14,5 @@ Then I can see an option to search by location or by the event name
 Scenario: I can search for a specific event and get the results for it
 Given I am a visitor
 When I am on the "SearchEvent" page
-And I type in "Free Dinner" in the name form
+And I type "Free Dinner" in the name form
 Then it will populate all events with the title "Free Dinner"

@@ -27,19 +27,19 @@ namespace BDD_Tests_OtterProductions.StepDefinitions
             _SearchEventPage = new SearchEventPageObject(browserDriver.Current);
         }
 
-        [Given(@"I am a visitor")]
+/*        [Given(@"I am a visitor")]
         public void GivenIAmAVisitor()
         {
             //Nothing
-        }
+        }*/
 
-        [When(@"I am on the ""([^""]*)"" page")]
+/*        [When(@"I am on the ""([^""]*)"" page")]
         public void WhenIAmOnThePage(string pageName)
         {
             _SearchEventPage.GoTo(pageName);
-        }
+        }*/
 
-        [When(@"I type in ""([^""]*)"" in the name form")]
+        [When(@"I type ""([^""]*)"" in the name form")]
         public void WhenITypeInput(string eventInput)
         {
             _SearchEventPage.EnterEventInput(eventInput);
