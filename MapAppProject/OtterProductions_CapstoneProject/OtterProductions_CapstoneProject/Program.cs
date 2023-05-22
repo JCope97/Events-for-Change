@@ -53,7 +53,7 @@ public class Program
             config.User.RequireUniqueEmail = true;
             config.SignIn.RequireConfirmedPhoneNumber = false;
             config.SignIn.RequireConfirmedEmail = false;
-           // config.SignIn.RequireConfirmedAccount = false;
+            // config.SignIn.RequireConfirmedAccount = false;
         });
 
         // Add services to the container.
@@ -77,7 +77,7 @@ public class Program
 
         app.UseRouting();
 
-        app.UseAuthentication();    
+        app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllerRoute(
             name: "default",
@@ -87,3 +87,4 @@ public class Program
         app.Run();
     }
 }
+
