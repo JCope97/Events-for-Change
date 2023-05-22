@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
+using Microsoft.EntityFrameworkCore;
 using OtterProductions_CapstoneProject.Areas.Identity.Data;
 using OtterProductions_CapstoneProject.DAL.Abstract;
 using OtterProductions_CapstoneProject.DAL.Concrete;
@@ -13,14 +14,15 @@ using OtterProductions_CapstoneProject.Data;
 using OtterProductions_CapstoneProject.Models;
 using OtterProductions_CapstoneProject.Utilities;
 
+
 namespace OtterProductions_CapstoneProject.Controllers
 {
 
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> _logger;
         private readonly MapAppDbContext _context;
-       // private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private IBrowseEventRepository _eventRepository;
         private readonly IEmailSender _emailSender;
         private readonly AuthenticationDbContext _authenticationDbContext;

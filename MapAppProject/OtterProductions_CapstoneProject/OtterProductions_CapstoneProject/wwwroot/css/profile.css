@@ -1,10 +1,11 @@
-﻿
-body {
+﻿body {
     background-color: #15202b
 }
+
 h2 {
     color: white;
 }
+
 .control-label {
     color: white;
 }
@@ -14,11 +15,13 @@ h2 {
 }
 
 .nav-item {
-    color:white;
+    color: white;
 }
+
 .nav-link {
     color: white;
 }
+
 .emp-profile {
     padding: 3%;
     margin-top: 3%;
@@ -86,8 +89,9 @@ h2 {
     }
 
 .profile-head h5 {
-    color:white;
+    color: white;
 }
+
 .profile-head h6 {
     color: white;
 }
@@ -95,21 +99,19 @@ h2 {
 
 .profile-head .nav-tabs {
     margin-bottom: 5%;
-    
 }
 
-.profile-head .nav-tabs .nav-link {
-    font-weight: 600;
-    border: none;
-    display: flex;
- }
+    .profile-head .nav-tabs .nav-link {
+        font-weight: 600;
+        border: none;
+        display: flex;
+    }
 
-.profile-head .nav-tabs .nav-link.active {
-    border: none;
-    border-bottom: 2px solid #0062cc;
-    display: flex;
-
- }
+        .profile-head .nav-tabs .nav-link.active {
+            border: none;
+            border-bottom: 2px solid #0062cc;
+            display: flex;
+        }
 
 .profile-work {
     padding: 14%;
@@ -138,8 +140,7 @@ h2 {
     font-weight: 600;
 }
 
-.profile-tab  {
+.profile-tab {
     font-weight: 600;
     color: white;
 }
-
