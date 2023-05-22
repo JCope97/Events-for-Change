@@ -191,7 +191,16 @@ namespace OtterProductions_CapstoneProject.Controllers
 
                 userEventList.MapAppUserId = mapAppUserId;
                 userEventList.EventId = mainEventId;
-;
+                var curentUserEvents = _context.UserEventLists.Where(u => u.MapAppUser.Id == mapAppUser.Id).ToList();
+
+
+                foreach(var ue in curentUserEvents)
+                {
+                    if(ue.EventId== mainEventId)
+                    {
+                        return RedirectToAction("UserPage");
+                    }
+                }
 
                 _eventUserConnectionRepository.AddOrUpdate(userEventList);
 

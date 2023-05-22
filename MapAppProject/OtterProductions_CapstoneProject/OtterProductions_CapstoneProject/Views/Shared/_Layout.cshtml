@@ -46,28 +46,25 @@
                     <li class="nav-item">
                         @{
                             IList<ApplicationUser> usersInRole = await UserManager.GetUsersInRoleAsync("User");
-                            string userID = UserManager.GetUserName(User);
+                            string userID = UserManager.GetUserId(User);
 
-                      
-                                foreach(var u in usersInRole)
+                            bool isUserFound = false;
+
+                            foreach (var u in usersInRole)
+                            {
+                                if (u.Id == userID)
                                 {
-                                    if(u.Email == userID)
-                                    {
                                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="UserPage">Profile</a>
-                                    }
-                                    else
-                                    {
-                                    var name = User.Identity.Name;
-                                    @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
+                                    isUserFound = true;
+                                    break;
                                 }
-                                }
-                                
-                            //var userRole = UserManager.GetUsersInRoleAsync("");
-                            //var name = User.Identity.Name;
-                        //    @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
-                        //
-                            
+                            }
 
+                            if (!isUserFound)
+                            {
+                                var name = User.Identity.Name;
+                                @Html.ActionLink("Profile", "OrganizationDetails", "Organization", new { id = name }, new { @title = "View Profile", @class="nav-link btn btn-link border-0" })
+                            }
                         }
                     </li>
                     <li class="nav-item">
