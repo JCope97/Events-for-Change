@@ -34,7 +34,7 @@ namespace OtterProductions_CapstoneProject.Controllers
         {
             //  _logger = logger;
             _context = ctx;
-            // _userManager = userManager;
+            _userManager = userManager;
             _eventRepository = new BrowseEventRepository(_context);
             _emailSender = emailSender;
             _authenticationDbContext = authenticationDbContext;
