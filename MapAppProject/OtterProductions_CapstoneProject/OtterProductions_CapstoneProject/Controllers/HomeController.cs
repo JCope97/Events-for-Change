@@ -190,16 +190,19 @@ namespace OtterProductions_CapstoneProject.Controllers
         //    return View(events);
         //}
         [HttpGet]
-        public IActionResult OrginzaitonEvents(int id)
+        public async Task<IActionResult> OrginzaitonEvents(int id)
         {
             var organization = GetOrganizationById(id);
             if (organization == null)
             {
                 return NotFound(); // Handle the case when the organization is not found
             }
+            var eventType = await _context.EventTypes.ToListAsync();
 
+            ViewBag.EventType = eventType;
             ViewBag.OrganizationName = organization.OrganizationName;
-            var events = _context.Events.Include(x => x.Organization).Where(x => x.OrganizationId == id).ToList();
+            var events = _context.Events.Where(x => x.OrganizationId.Equals(id)).ToList();
+
 
             return View(events);
         }
@@ -212,6 +215,9 @@ namespace OtterProductions_CapstoneProject.Controllers
             Event newEvent = new Event();
             newEvent = _eventRepository.GetEventById(id);
 
+            var org = _context.Organizations.FirstOrDefault(x => x.Id.Equals(newEvent.OrganizationId));
+
+            eventView.OrganizationName = org.OrganizationName;
             eventView.Id = newEvent.Id;
             eventView.EventDate = newEvent.EventDate;
             eventView.EventDescription = newEvent.EventDescription;
@@ -219,7 +225,6 @@ namespace OtterProductions_CapstoneProject.Controllers
             eventView.EventName = newEvent.EventName;
             eventView.EventTypeId = newEvent.EventTypeId;
             //eventView.OrganizationName = newEvent.OrganizationNavigation.OrganizationName;
-
             return View(eventView);
         }
 
