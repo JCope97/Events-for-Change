@@ -4,6 +4,7 @@ using OtterProductions_CapstoneProject.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace OtterProductions_CapstoneProject.DAL.Concrete
 {
@@ -53,7 +54,7 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
 
         public Event GetEventById(int id)
         {
-            return FindById(id);
+            return _context.Events.FirstOrDefault(e => e.Id == id);
         }
 
         public IEnumerable<EventViewModel> GetAllEventsForUser(string id)

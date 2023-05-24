@@ -1,14 +1,14 @@
 ﻿@model List<OtterProductions_CapstoneProject.Models.Event>
 
 @{
+    var eventTypes = (List<EventType>)ViewBag.EventType;
     ViewData["Title"] = "OrganizationEvents";
     var organizationName = ViewBag.OrganizationName; // Retrieve organization name from ViewBag or data source
 }
 
 <link href="~/css/events.css" rel="stylesheet" />
 
-<h1>Events by <span class="organization-name">@organizationName</span></h1>
-<p>List of events from <span class="organization-name">@organizationName</span></p>
+<h1><span class="organization-name">@organizationName</span> Events</h1>
 
 @if (Model != null)
 {
@@ -26,12 +26,14 @@
             <tbody>
                 @foreach (var item in Model)
                 {
+                    var eventType = eventTypes.FirstOrDefault(x => x.Id == item.EventTypeId);
+                    var evetTypeName = eventType != null ? eventType.EventType1 : "";
                     <tr>
                         <td>@item.EventName</td>
                         <td>@item.EventLocation</td>
                         <td>@item.EventDescription</td>
                         <td>@item.EventDate</td>
-                        <td>@item.Organization.EventType1</td>
+                        <td>@evetTypeName</td>
                     </tr>
                 }
             </tbody>

@@ -6,6 +6,7 @@
 @model EventViewModel
 @{
     ViewData["Title"] = "Event";
+    var organizationName = ViewBag.OrganizationName;
 }
 @section AddToHead
     {
@@ -13,6 +14,7 @@
 
 
 }
+<link href="~/css/profile.css" rel="stylesheet" />
 
 
 <body style="background-color: #15202b">
@@ -55,7 +57,9 @@
             <div class="col">
 
                 <div class="text-center">
-                    <h3 id="OrganizationName">This will be the Organization Name@*@Model.OrganizationName*@</h3>
+
+                    @*<h1><span class="organization-name">@organizationName</span> Events</h1>*@
+                    <h1 id="OrganizationName">@Model.OrganizationName</h1>
                 </div>
             </div>
             <div class="col"></div>
