@@ -112,6 +112,27 @@ footer {
     width: 100%; /*The width is the width of the web page */
 }
 
+#mapAddressInput {
+    color: white;
+}
+
+#submitButton, #locationButton {
+    background-color: #78A1BB;
+    border-color: #78A1BB;
+    align-self: center;
+}
+
+    #submitButton:hover {
+        color: #283044;
+        border-color: #283044;
+        border-width: medium;
+    }
+
+    #locationButton:hover {
+        color: #283044;
+        border-color: #283044;
+        border-width: medium;
+    }
 
 #sidebar {
     /*display: flex;
@@ -140,10 +161,6 @@ footer {
     background-color: #fcfcfc;
 }
 
-
-
-
-
 .thead, .tbody {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
@@ -163,13 +180,14 @@ footer {
 
 }
 
-#passwordLogin:focus {
-    background-color: lightblue;
-}
+    #passwordLogin:focus {
+        background-color: #78A1BB;
+        
+    }
 
 
 #cardBody {
-    background-color: lightblue;
+    
 }
 
 .buttonLogin {
@@ -194,14 +212,33 @@ h3 {
 /*User Registration*/
 
 
+
+/* EventChoice Page */
+
+/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 300px;
+}
+
+
 /*nav bar*/
 
-.navbar {
+.vert-nav, .navbar-nav {
     background-color: #22303c;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
+
+
 
 .navbar-text, .nav-link, .nav-item {
     color: white;
+    display:flex;
 }
 
 .body {
@@ -210,6 +247,51 @@ h3 {
 
 .nav-link:hover {
     color: #8899a6;
+    display: flex;
+}
+
+.navMenu ul li .organizations-link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;  Adjust the maximum width as needed 
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    z-index: 1;
+    width: 500px;  Adjust the width as needed 
+    display: flex;
+    justify-content: flex-end;
+
+}
+/*.navMenu {
+    width: 100%;
+    overflow-x: auto;
+}*/
+.wrapper {
+    display: flex;
+    position: fixed;
+    width: 200px; /* Adjust the width as needed */
+    height: 100%;
+    background: #22303c;
+    padding: 25px 0;
+    
+}
+
+.wrapper, .navMenu, h5 {
+    position: fixed;
+    width: 180px;
+    height: 100%;
+    background: #22303c;
+    padding: 25px 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.main_info {
+    margin-left: 110px;
 }
 
 /* links */
@@ -223,5 +305,121 @@ a {
     }
 
 #locationName {
-    color: black
+    color: white;
+}
+
+
+
+/* home page */
+
+#homePageInfo, #homeHeader {
+    color: white;
+}
+
+#locationButton, #homeSubmit {
+    background-color: #78A1BB;
+    border-color: #78A1BB;
+    align-self: center;
+}
+
+    #locationButton:hover {
+        color: #283044;
+        border-color: #283044;
+        border-width: medium;
+    }
+
+    #homeSubmit:hover {
+        color: #283044;
+        border-color: #283044;
+        border-width: medium;
+    }
+
+#homeInfo {
+    color: white;
+    text-align: left;
+    font-size: medium;
+}
+
+/* browsing search */
+#addressBrowsing, #cityBrowsing, #stateBrowsing, #zipBrowsing {
+    color: black;
+}
+
+#addressBrowsingText, #cityBrowsingText, #stateBrowsingText, #zipBrowsingText, #infoBrowsing, #titleBrowsing {
+    color: white;
+}
+
+#submitBrowsing {
+    background-color: #78A1BB;
+    border-color: #78A1BB;
+    align-self: center;
+}
+
+    #submitBrowsing:hover {
+        color: #283044;
+        border-color: #283044;
+        border-width: medium;
+    }
+
+/* browsing */
+
+#logTable, #browsingTitle {
+    color: white;
+}
+
+
+/* user register */
+
+#registerInfo, #registerInfo1, #registerInfo2, #registerInfo3 {
+    color: white;
+}
+
+#welcomeMessageRegister, #agreeTerms {
+    color: white;
+}
+
+#registerSubmit {
+    background-color: #78A1BB;
+    border-color: #78A1BB;
+    align-self: center;
+    width: 75%;
+}
+
+    #registerSubmit:hover {
+        color: #283044;
+        border-color: #283044;
+        border-width: medium;
+        width: 75%;
+    }
+
+/* Organization register */
+
+#haveAccount, #userRegister {
+    color: #78A1BB;
+}
+
+/* Event page */
+
+#hosted, #EventName, #OrganizationName {
+   /* color: white;*/
+}
+
+#eventDescriptionTitle, #eventDescription, #eventLocationTitle, #eventLocation {
+    color: white;
+}
+
+#eventDateTitle, #EventDate, #eventTypeTitle, #EventType {
+    color: white;
+}
+
+#eventName {
+    color: white;
+}
+/* Organization Details */
+
+
+/* Edit Org */
+
+#orgEmail, #orgName, #orgDescription, #orgLocation, #orgAddress, #orgPhone {
+    color: white;
 }

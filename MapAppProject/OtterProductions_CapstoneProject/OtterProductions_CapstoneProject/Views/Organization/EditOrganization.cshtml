@@ -4,62 +4,60 @@
     ViewData["Title"] = "Edit";
 }
 <link href="~/css/profile.css" rel="stylesheet" />
-<h2> Edit Organization</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditOrganization">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="AspnetIdentityId" /> 
-            <input type="hidden" asp-for="OrganizationPicture" /> 
-            <input type="hidden" asp-for="ImageUrl" />
-            <input type="hidden" asp-for="OldEmail" />
-        
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+<body style="background-color: #15202b">
+    <div class="container text-center">
+        <!-- Added container and text-center classes -->
+        <h2>Edit Organization</h2>
+        <hr />
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center">
+                <form asp-action="EditOrganization">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="AspnetIdentityId" />
+                    <input type="hidden" asp-for="OrganizationPicture" />
+                    <input type="hidden" asp-for="ImageUrl" />
+                    <input type="hidden" asp-for="OldEmail" />
+
+                    <div class="form-group">
+                        <label asp-for="Email" id="orgEmail" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OrganizationName" id="orgName" class="control-label">Name</label>
+                        <input asp-for="OrganizationName" class="form-control" />
+                        <span asp-validation-for="OrganizationName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OrganizationDescription" id="orgDescription" class="control-label">Description</label>
+                        <input asp-for="OrganizationDescription" class="form-control" />
+                        <span asp-validation-for="OrganizationDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OrganizationLocation" id="orgLocation" class="control-label">Location</label>
+                        <input asp-for="OrganizationLocation" class="form-control" />
+                        <span asp-validation-for="OrganizationLocation" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" id="orgPhone" class="control-label">Phone Number</label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-sm btn-primary" style="width: 75%;" />
+
+
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="OrganizationName" class="control-label"></label>
-                <input asp-for="OrganizationName" class="form-control" />
-                <span asp-validation-for="OrganizationName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrganizationDescription" class="control-label"></label>
-                <input asp-for="OrganizationDescription" class="form-control" />
-                <span asp-validation-for="OrganizationDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrganizationLocation" class="control-label"></label>
-                <input asp-for="OrganizationLocation" class="form-control" />
-                <span asp-validation-for="OrganizationLocation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-           
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-
+</body>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-
-

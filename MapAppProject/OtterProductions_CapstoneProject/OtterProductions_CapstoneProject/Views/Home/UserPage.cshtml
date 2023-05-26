@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using OtterProductions_CapstoneProject.Areas.Identity.Data
+@model UserViewModel
+@{
+    ViewData["Title"] = "User Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/profile.css" rel="stylesheet" />
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<br />
+<br />
+<div>
+    <h1 id="EventName">Hello @UserManager.GetUserName(User)!</h1>
+</div>
+
+<br />
+<br />
+
+<div class="list-group">
+    @if (Model.EventList is null)
+    {
+        <div class="noEventsProfile" style="color:white;">There are no Events saved for you yet. Take a look at local events in your area and add some to see them here!</div>
+    }
+    else
+    {
+
+
+        <h2 id="browsingTitle">Saved Events</h2>
+        <table class="table table-sm" id="logTable">
+            <thead>
+                <tr>
+                    <th scope="col">Event Name</th>
+                    <th scope="col">Event Location</th>
+                    <th scope="col">Event Date</th>
+                    <th scope="col">Event Description</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+                @foreach (var i in Model.EventList)
+                {
+                    <tr>
+
+                        <td><a asp-area="" asp-controller="Home" asp-action="EventPage" asp-route-id="@i.Id" id="locationName">@i.EventName</a></td>
+                    <td>@i.EventLocation</td>
+                    <td> @i.EventDate</td>
+                    <td>@i.EventDescription</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+@*        foreach (var e in Model.EventList)
+        {
+            <ul class="list-group list-group-horizontal">
+                <a href="#"></a><li class="list-group-item list-group-item-action">@i.EventName</li>
+                <li class="list-group-item">@i.EventLocation</li>
+                <li class="list-group-item">@i.EventDate</li>
+                <li class="list-group-item">@i.EventDescription</li>
+
+            </ul>
+        }*@
+    }
+    
+
+</div>

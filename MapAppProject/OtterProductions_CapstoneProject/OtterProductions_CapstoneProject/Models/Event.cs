@@ -29,7 +29,6 @@ public partial class Event
 
 
     [StringLength(50)]
-    [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
     public string EventLocation { get; set; } = null!;
 
     [Column("EventTypeID")]

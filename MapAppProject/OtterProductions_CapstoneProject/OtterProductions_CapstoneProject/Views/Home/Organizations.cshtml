@@ -1,0 +1,69 @@
+﻿@model List<OtterProductions_CapstoneProject.Models.Organization>
+@{
+    ViewData["Title"] = "Organizations";
+}
+<link href="~/css/events.css" rel="stylesheet" />
+
+<h1>Organizations</h1>
+<p>The list of Organizations registered in our site</p>
+
+
+
+<form style="text-align:left; display:inline-block;">
+    <div class="form-group">
+        <br />
+       
+        <label for="Organziation" id="Organziation" style="color:white">Organziation Name:</label>
+        <input type="text" id="orgName" name="orgName" style="color:black">
+        <br />
+        <br />
+
+        <label for="Organziation" id="Organziation" style="color:white">Organziation Location:</label>
+        <input type="text" id="orgName" name="orgLocation" style="color:black">
+      
+    </div>
+    <br>
+    <div class="mb-3">
+        <button id="submit" type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<link href="~/css/events.css" rel="stylesheet" />
+
+@if (Model != null)
+{
+    <div class="container">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Organization Name</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Phone</th>
+                    <th>Events</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>@item.OrganizationName</td>
+                        <td>@item.OrganizationLocation</td>
+                        <td>@item.OrganizationDescription</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>
+                            <a href="@Url.Action("OrginzaitonEvents","Home",new { id=item.Id})">Here</a>
+                            @*<a class="nav-link" asp-area="" asp-controller="Home" asp-rout-id="@item.Id" asp-action="OrginzaitonEvents">Events</a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <h1>Event Not available..</h1>
+}

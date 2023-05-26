@@ -1,0 +1,46 @@
+﻿@model List<OtterProductions_CapstoneProject.Models.Event>
+
+@{
+    var eventTypes = (List<EventType>)ViewBag.EventType;
+    ViewData["Title"] = "OrganizationEvents";
+    var organizationName = ViewBag.OrganizationName; // Retrieve organization name from ViewBag or data source
+}
+
+<link href="~/css/events.css" rel="stylesheet" />
+
+<h1><span class="organization-name">@organizationName</span> Events</h1>
+
+@if (Model != null)
+{
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var eventType = eventTypes.FirstOrDefault(x => x.Id == item.EventTypeId);
+                    var evetTypeName = eventType != null ? eventType.EventType1 : "";
+                    <tr>
+                        <td>@item.EventName</td>
+                        <td>@item.EventLocation</td>
+                        <td>@item.EventDescription</td>
+                        <td>@item.EventDate</td>
+                        <td>@evetTypeName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <h1>Event Not available..</h1>
+}

@@ -1,0 +1,71 @@
+﻿@model OtterProductions_CapstoneProject.Models.BrowseViewModel
+
+@{
+    ViewData["Title"] = "Search Event Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body style="background-color: #15202b">
+    <div style="color: white">
+    <h4 class="text-center">Upcoming Events in the next two weeks:</h4>
+    <br />
+
+    @if(Model.Events.Count() == 0)
+    {
+        <p>There aren't any events in your area</p>
+    }else
+    {
+            <table class="table table-sm" id="eventLogTable" style="color: white">
+                <thead>
+                    <tr>
+                        <th scope="col">Event Type</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Date</th>
+@*                      @if (Model.Organizations != null)
+                        {
+                            <th scope="col">Organization</th>
+                        }*@
+                    </tr>
+                </thead>
+                <tbody>
+                        @foreach (var events in Model.Events)
+                        {
+                            <tr>
+                                @*Grabs the Event type based on the EventTypes ID*@
+                                <td>@Model.EventsTypes.ElementAt(events.EventTypeId - 1).EventType1</td>
+                            <td><a asp-area="" asp-controller="Home" asp-action="EventPage" asp-route-id="@events.Id" id="locationName" style="color: white">@events.EventName</a></td>
+                                <td>@events.EventLocation</td>
+                                <td>@events.EventDescription</td>
+                                <td>@DateOnly.FromDateTime(events.EventDate)</td>
+                                @*Grabs the organization info based on the event Organizations ID*@
+@*                                @if (Model.Organizations != null)
+                                {
+                                    @if (events.OrganizationId == Model.Organizations.ElementAt(events.OrganizationId - 1).OrganizationLoginId)
+                                    {
+                                        <td>@Model.Organizations.ElementAt(events.OrganizationId - 1).OrganizationDescription</td>
+                                    }
+                                }*@
+                            </tr>
+                        }
+                </tbody>
+        </table>
+    }
+</div>
+</body>
+@section Scripts
+    {
+    <script src="~/js/fancyTable.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#logTable").fancyTable({
+                sortColumn: 0,
+                sortOrder: 'descending',
+                pagination: true,
+                perPage: 10,
+                globalSearch: true,
+                inputPlaceholder: 'Input a location...'
+            });
+        });
+    </script>
+}

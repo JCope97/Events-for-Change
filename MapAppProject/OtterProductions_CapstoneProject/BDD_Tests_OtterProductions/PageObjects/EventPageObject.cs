@@ -1,44 +1,57 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using BDD_Tests_OtterProductions.Shared;
-using System.Collections.ObjectModel;
-using BDD_Tests_OtterProductions.PageObjects;
+using OtterProductions_CapstoneProject.Models;
+using System;
+using System.Collections.Generic;
 
 namespace BDD_Tests_OtterProductions.PageObjects
 {
-    public class EventPageObject : PageObject
+    public class EventPagesObject
     {
-        public EventPageObject(IWebDriver webDriver) : base(webDriver)
+        private readonly IWebDriver _driver;
+
+        public EventPagesObject(IWebDriver driver)
         {
-            // using a named page (in Common.cs)
-            _pageName = "EventInfo";
+            _driver = driver;
         }
 
-        public IWebElement EventLocation => _webDriver.FindElement(By.Id("eventLocation"));
-        public IWebElement NavBarHelloLink => _webDriver.FindElement(By.CssSelector("a[href=\"/Identity/Account/Manage\"]"));
-        public IWebElement EventType => _webDriver.FindElement(By.Id("EventType"));
-        public IWebElement EventDate => _webDriver.FindElement(By.Id("EventDate"));
-        public IWebElement EventDiscription => _webDriver.FindElement(By.Id("EventDiscription"));
-        public IWebElement OrganizationName => _webDriver.FindElement(By.Id("OrganizationName"));
-        public IWebElement EventName => _webDriver.FindElement(By.Id("EventName"));
-        public IWebElement MapElement => _webDriver.FindElement(By.Id("sharedMap"));
+        public IWebElement AddNewEventButton => _driver.FindElement(By.CssSelector("a.search-button.btn.btn-sm.btn-primary.dark-background"));
 
-
-
-
-
-
-        public string NavbarWelcomeText()
+        public List<Event> GetEvents()
         {
-            return NavBarHelloLink.Text;
+            List<Event> events = new List<Event>();
+
+            IReadOnlyCollection<IWebElement> eventRows = _driver.FindElements(By.CssSelector("table.table.table-striped tbody tr"));
+
+            foreach (var row in eventRows)
+            {
+                IWebElement eventNameElement = row.FindElement(By.CssSelector("td:nth-child(1)"));
+                IWebElement eventLocationElement = row.FindElement(By.CssSelector("td:nth-child(2)"));
+                IWebElement eventDescriptionElement = row.FindElement(By.CssSelector("td:nth-child(3)"));
+                IWebElement eventTypeElement = row.FindElement(By.CssSelector("td:nth-child(4)"));
+                IWebElement eventDateElement = row.FindElement(By.CssSelector("td:nth-child(5)"));
+
+                string eventTypeText = eventTypeElement.Text;
+                int eventTypeId = int.Parse(eventTypeElement.GetAttribute("data-event-type-id"));
+
+                Event ev = new Event
+                {
+                    EventName = eventNameElement.Text,
+                    EventLocation = eventLocationElement.Text,
+                    EventDescription = eventDescriptionElement.Text,
+                    EventDate = DateTime.Parse(eventDateElement.Text),
+                    EventTypeId = eventTypeId // Assuming EventTypeId is an int property in the Event model
+                };
+
+                events.Add(ev);
+            }
+
+            return events;
         }
 
-        public void ClickAddress()
+        public void ClickAddNewEventButton()
         {
-            EventLocation.Click();
+            AddNewEventButton.Click();
         }
-
-
-
     }
 }

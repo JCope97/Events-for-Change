@@ -2,6 +2,14 @@
     background-color: #15202b
 }
 
+h1, h2 {
+    color:white;
+    text-align: center;
+}
+p {
+    color:white;
+    text-align:center;
+}
 .pb-3{
     background-color: #22303c;
 }
@@ -11,7 +19,32 @@
 
 .nav-link {
     color: white;
+
 }
 .form-floating mb-3 {
     background-color: black;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+    .search-button.dark-background {
+        color: #fff;
+    }
+
+    .search-button:hover {
+        background-color: #2980b9;
+    }
+
+
+.organization-name {
+   color:white;
+  
 }

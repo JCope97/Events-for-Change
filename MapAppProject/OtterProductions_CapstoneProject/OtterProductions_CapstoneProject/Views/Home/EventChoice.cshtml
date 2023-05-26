@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Event Choice";
+}
+
+<body style="background-color: #15202b">
+    <div style="display:border-box">
+        <div class="column" style="color: white;">
+            <h1>Search Event by Location</h1>
+            <p>
+                Use your state and city to find events near you!
+            </p>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="BrowsingSearch">Search by Location</a>
+        </div>
+
+        <div class="column" style="color: white;">
+            <h1>Search Event by Name</h1>
+            <p>
+                If you know the name of the event you want, then you can search up it's name here
+            </p>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="SearchEvent">Search by Name</a>
+        </div>
+    </div>
+</body>

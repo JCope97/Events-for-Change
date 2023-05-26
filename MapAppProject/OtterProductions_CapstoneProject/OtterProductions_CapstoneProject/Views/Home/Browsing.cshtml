@@ -1,11 +1,12 @@
-﻿@model OtterProductions_CapstoneProject.Models.BrowseViewModel
+﻿﻿
+@model OtterProductions_CapstoneProject.Models.BrowseViewModel
 
 @{
     ViewData["Title"] = "Browsing Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div>
+<body style="background-color: #15202b">
+    <div style="color: white">
     <h4 class="text-center">Upcoming Events in the next two weeks:</h4>
     <br />
 
@@ -14,7 +15,7 @@
         <p>There aren't any events in your area</p>
     }else
     {
-        <table class="table table-sm" id="logTable">
+            <table class="table table-sm" id="logTable" style="color: white">
                 <thead>
                     <tr>
                         <th scope="col">Event Type</th>
@@ -34,7 +35,7 @@
                             <tr>
                                 @*Grabs the Event type based on the EventTypes ID*@
                                 <td>@Model.EventsTypes.ElementAt(events.EventTypeId - 1).EventType1</td>
-                                <td><a asp-area="" asp-controller="Home" asp-action="EventPage" asp-route-id="@events.Id" id="locationName">@events.EventName</a></td>
+                            <td><a asp-area="" asp-controller="Home" asp-action="EventPage" asp-route-id="@events.Id" id="locationName" style="color: white">@events.EventName</a></td>
                                 <td>@events.EventLocation</td>
                                 <td>@events.EventDescription</td>
                                 <td>@DateOnly.FromDateTime(events.EventDate)</td>
@@ -52,7 +53,7 @@
         </table>
     }
 </div>
-
+</body>
 @section Scripts
     {
     <script src="~/js/fancyTable.min.js"></script>

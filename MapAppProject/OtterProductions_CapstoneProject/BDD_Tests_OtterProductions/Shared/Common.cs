@@ -22,8 +22,16 @@ namespace BDD_Tests_OtterProductions.Shared
             { "Home" , "/" },
             { "Login", "/Identity/Account/Login" },
             { "Register", "/Identity/Account/Register" },
+            { "Registration", "/Identity/Account/Register" },
             { "Map", "/Map/Mappage"},
-            {"EventInfo", "/Home/EventPage/24"}
+            { "Privacy", "/Home/Privacy"},
+            { "FAQ", "/Home/FAQ"},
+            { "Events Search", "/Home/BrowsingSearch"},
+            {"EventInfo", "/Home/EventPage/24"},
+            {"EditInfo", "/Users/EditInfo" },
+            {"EditLogin", "/Identity/Account/Login?ReturnUrl=%2FUsers%2FEditInfo" }
+            {"EventInfo", "/Home/EventPage/24"},
+            { "SearchEvent", "/Home/BrowsingSearch"},
         };
 
         public static string PathFor(string pathName) => Paths[pathName];

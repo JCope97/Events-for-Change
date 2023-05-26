@@ -3,6 +3,8 @@ using OtterProductions_CapstoneProject.Models;
 using OtterProductions_CapstoneProject.Data;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace OtterProductions_CapstoneProject.DAL.Concrete
 {
@@ -36,7 +38,6 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
             //We are going to grab all events within the city and state radius and within the two week span
             DateOnly endWindow = today.AddDays(14);
             IEnumerable<Event> eventsWindow = new List<Event>();
-
             foreach (var AnEvent in _context.Events)
             {
                 if (DateOnly.FromDateTime(AnEvent.EventDate) >= today && DateOnly.FromDateTime(AnEvent.EventDate) <= endWindow)
@@ -47,14 +48,119 @@ namespace OtterProductions_CapstoneProject.DAL.Concrete
                     }
                 }
             }
-  
             eventsWindow = eventsWindow.ToList();
             return eventsWindow;
         }
 
         public Event GetEventById(int id)
         {
-            return FindById(id);
+            return _context.Events.FirstOrDefault(e => e.Id == id);
+        }
+
+        public IEnumerable<EventViewModel> GetAllEventsForUser(string id)
+        {
+
+            List<EventViewModel> eventViewModels = new List<EventViewModel>();
+            var events = GetAll().ToList();
+
+            foreach (var e in events) 
+            {
+                foreach(var evn in e.UserEventLists)
+                {
+                    if(evn.MapAppUser.AspnetIdentityId == id)
+                    {
+                        EventViewModel eventViewModel = new EventViewModel();
+
+                        eventViewModel.Id = e.Id;
+                        eventViewModel.EventDate = e.EventDate;
+                        eventViewModel.EventDescription = e.EventDescription;
+                        eventViewModel.EventLocation = e.EventLocation;
+                        eventViewModel.EventName = e.EventName;
+                        eventViewModels.Add(eventViewModel);
+                    }
+                }
+            }
+
+
+            return eventViewModels;
+
+            //UserViewModel userViewModel = null;
+            //List<EventViewModel> usersEvents = new List<EventViewModel>();
+            //var user = _context.MapAppUsers.Where(u => u.AspnetIdentityId== id).FirstOrDefault();
+            //var userEventConnection = _context.UserEventLists;
+            //var events = _context.Events;
+
+            //EventViewModel eventViewModel = new EventViewModel();
+           
+
+            ////foreach (var e in events)
+            ////{
+            ////    foreach (var uec in userEventConnection)
+            ////    {
+            ////        if (uec.Id == e.Id)
+            ////        {
+            ////            eventViewModel.EventDate = e.EventDate;
+            ////            eventViewModel.EventDescription = e.EventDescription;
+            ////            eventViewModel.EventName = e.EventName;
+            ////            eventViewModel.EventLocation = e.EventLocation;
+
+            ////            usersEvents.Append(eventViewModel);
+            ////        }
+            ////    }
+            ////}
+
+            ////userViewModel.EventList = usersEvents;
+            ////foreach (var user in _context.MapAppUsers)
+            ////{
+            ////    if (user.AspnetIdentityId == id)
+            ////    {
+            ////        userId = user.Id;
+            ////        foreach (var i in _context.UserEventLists)
+            ////        {
+            ////            if (i.MapAppUser.AspnetIdentityId == id)
+            ////            {
+            ////                usersEvents.Append(i.Event);
+            ////            }
+
+            ////        }
+            ////    }
+            ////    else
+            ////    {
+            ////        return usersEvents;
+            ////    }
+            ////}
+
+            //foreach (var e in user.UserEventLists)
+            //{
+            //    eventViewModel.EventDate = e.Event.EventDate;
+            //    eventViewModel.EventDescription = e.Event.EventDescription;
+            //    eventViewModel.EventName = e.Event.EventName;
+            //    eventViewModel.EventLocation = e.Event.EventLocation;
+            //    usersEvents.Add(eventViewModel);
+            //}
+            
+
+
+            //return usersEvents;
+        }
+
+        public IEnumerable<Event> GetAllEventsWithinTwoWeeksWithSameName(string eventName, DateOnly today)
+        {
+            //We are going to grab all events with the same name and within the two week span
+            DateOnly endWindow = today.AddDays(14);
+            IEnumerable<Event> eventsWindow = new List<Event>();
+            foreach (var AnEvent in _context.Events)
+            {
+                if (DateOnly.FromDateTime(AnEvent.EventDate) >= today && DateOnly.FromDateTime(AnEvent.EventDate) <= endWindow)
+                {
+                    if (AnEvent.EventName.Contains(eventName))
+                    {
+                        eventsWindow = eventsWindow.Append(AnEvent);
+                    }
+                }
+            }
+            eventsWindow = eventsWindow.ToList();
+            return eventsWindow;
         }
     }
 }

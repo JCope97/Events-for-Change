@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +18,7 @@ using OtterProductions_CapstoneProject.ViewModel;
 
 namespace OtterProductions_CapstoneProject.Controllers
 {
+
     public class OrganizationController : Controller
     {
         private readonly MapAppDbContext _context;
@@ -113,7 +115,7 @@ namespace OtterProductions_CapstoneProject.Controllers
                 try
                 {
                     var editOrg = _context.Organizations.Where(x => x.Id == organization.Id).FirstOrDefault();
-                    
+
                     if (editOrg == null)
                         return NotFound();
 
@@ -134,8 +136,8 @@ namespace OtterProductions_CapstoneProject.Controllers
                     _context.Update(editOrg);
                     await _context.SaveChangesAsync();
 
-                   var user= _authenticationDbContext.Users.FirstOrDefault(x=>x.Email == organization.OldEmail);
-                    if(user!=null)
+                    var user = _authenticationDbContext.Users.FirstOrDefault(x => x.Email == organization.OldEmail);
+                    if (user != null)
                     {
                         user.PhoneNumber = organization.PhoneNumber;
                         user.Email = organization.Email;
@@ -143,7 +145,7 @@ namespace OtterProductions_CapstoneProject.Controllers
                         user.NormalizedEmail = organization.Email.ToUpper();
                         user.NormalizedUserName = organization.Email.ToUpper();
                         _authenticationDbContext.Users.Update(user);
-                       await _authenticationDbContext.SaveChangesAsync();
+                        await _authenticationDbContext.SaveChangesAsync();
                     }
 
                     if (hasEmailChanged)
@@ -284,25 +286,58 @@ namespace OtterProductions_CapstoneProject.Controllers
         // GET: Organization/Events
         public async Task<IActionResult> Events()
         {
+            var result = new List<Event>();
 
-            var result = await _context.Events.Where(x => x.OrganizationId == 1).ToListAsync();
+            var user = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (user !=null)
+            {
+                var org = _context.Organizations.First(x => x.AspnetIdentityId.Equals(user));
+                if (org != null)
+                {
+                    result = await _context.Events.Where(x => x.OrganizationId.Equals(org.Id)).ToListAsync();
+                }
+            }
+            var eventType = await _context.EventTypes.ToListAsync();
+
+            ViewBag.EventType = eventType;
 
             return View(result);
         }
+        [Authorize(Roles = "Organization")]
         [HttpGet()]
-        public IActionResult CreateEvent()
+
+        public async Task<IActionResult> CreateEvent()
         {
+            var items = new List<SelectListItem>();
+            var eventType = await _context.EventTypes.ToListAsync();
+            foreach (var eventTypeItem in eventType)
+            {
+                items.Add(new SelectListItem()
+                {
+                    Text = eventTypeItem.EventType1,
+                    Value = eventTypeItem.Id.ToString(),
+
+                });
+            }
+
+            ViewBag.EventType = items;
             return View(new Event());
         }
         [HttpPost()]
         public async Task<IActionResult> CreateEvent(Event model)
-
         {
-            model.EventDate = DateTime.Now;
-            model.OrganizationId = 1;
-            await _context.Events.AddAsync(model);
-            await _context.SaveChangesAsync();
 
+            var user = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (user !=null)
+            {
+                var org = _context.Organizations.First(x => x.AspnetIdentityId.Equals(user));
+                if (org != null)
+                {
+                    model.OrganizationId = org.Id;
+                    await _context.Events.AddAsync(model);
+                    await _context.SaveChangesAsync();
+                }
+            }
             return RedirectToAction("Events");
         }
     }

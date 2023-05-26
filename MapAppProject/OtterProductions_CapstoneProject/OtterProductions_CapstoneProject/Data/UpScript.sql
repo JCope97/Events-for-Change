@@ -33,13 +33,25 @@ CREATE TABLE [EventType] (
 
 CREATE TABLE [MapAppUser] (
 [ID] int PRIMARY KEY IDENTITY(1, 1),
-[AspnetIdentityId] nvarchar(50)
+[AspnetIdentityId] nvarchar(50),
+[FirstName] nvarchar(50),
+[LastName] nvarchar(50),
+[Email] nvarchar(50),
+[PhoneNumber] nvarchar(10)
 );
 
 CREATE TABLE [UserEventList] (
 [ID] int PRIMARY KEY IDENTITY(1, 1),
 [MapAppUserID] int NOT NULL,
 [EventID] int NOT NULL
+);
+
+CREATE TABLE [Comment](
+    [ID] int PRIMARY KEY IDENTITY(1,1),
+    [UserComment] NVARCHAR(256),
+    [MapAppUserID] int NOT NULL,
+    [EventID] int NOT NULL
+    
 );
 
 ALTER TABLE [Event] ADD CONSTRAINT [Fk Organization ID]
@@ -59,3 +71,9 @@ FOREIGN KEY ([MapAppUserID]) REFERENCES [MapAppUser] ([ID]) ON DELETE NO ACTION 
 
 ALTER TABLE [UserEventList] ADD CONSTRAINT [Fk Event ID]
 FOREIGN KEY ([EventID]) REFERENCES [Event] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION; 
+
+ALTER TABLE [Comment] ADD CONSTRAINT [Fk MapAppUserComment ID]
+FOREIGN KEY ([MapAppUserID]) REFERENCES [MapAppUser] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE [Comment] ADD CONSTRAINT [Fk EventComment ID]
+FOREIGN KEY ([EventID]) REFERENCES [Event] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
